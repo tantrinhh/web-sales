@@ -1,1 +1,51 @@
-export {};
+import React from "react";
+import Logo from "../../assets/Logo.png";
+import { BiUserPlus } from "react-icons/bi";
+import { FiSearch } from "react-icons/fi";
+import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+
+const Header = () => {
+  return (
+    <>
+      <div className=" bg-[#FFFFFF]  ">
+        <div className=" justify-between h-[100px] flex items-center  ml-[4%] mr-[5%]">
+          <div className="flex">
+            <div className="mt-1">
+              <img src={Logo} alt="" />
+            </div>
+            <div className=" ml-1 font-bold text-[34px] leading-10">
+              Furniro
+            </div>
+          </div>
+          <div>
+            <ul className="list-none flex gap-x-10 justify-between font-medium text-lg leading-6">
+              <li>Home</li>
+              <li>Shop</li>
+              <li>About</li>
+              <li>Contact</li>
+            </ul>
+          </div>
+          <div className="flex gap-x-8">
+            <div>
+              <BiUserPlus style={{ width: "23px", height: "23px" }} />
+            </div>
+            <div>
+              <FiSearch style={{ width: "23px", height: "23px" }} />
+            </div>
+            <div>
+              <AiOutlineHeart style={{ width: "23px", height: "23px" }} />
+            </div>
+            <div>
+              <AiOutlineShoppingCart
+                style={{ width: "23px", height: "23px" }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Header;
