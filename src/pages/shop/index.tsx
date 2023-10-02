@@ -4,7 +4,7 @@ import Main from "../../Components/Shop/Main";
 import Header from "../../Components/Layout/Header";
 import Footer from "../../Components/Layout/Footer";
 
-const Shop = () => {
+const index = () => {
   return (
     <>
     <Header/>
@@ -15,4 +15,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default index;
