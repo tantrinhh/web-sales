@@ -15,7 +15,7 @@ const Sub_Shop = () => {
               {" "}
               <AiOutlineRight style={{ width: "12px", height: "12px" }} />
             </div>
-            <button className=" font-light">Shop</button>
+            <button className=" font-light text-[16px]">Shop</button>
           </div>
         </div>
       </div>
