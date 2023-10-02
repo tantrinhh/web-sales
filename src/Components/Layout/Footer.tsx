@@ -1,12 +1,14 @@
 import React from "react";
+import Top_Footer from "./Top_Footer";
 
 const Footer = () => {
   return (
     <>
       <div>
+        <Top_Footer />
         <div>
-          <div className="border-t  border-[#D9D9D9] my-4"></div>
-          <div className="mx-20">
+          <div className="border-t  border-[#D9D9D9] "></div>
+          <div className="mx-20 mt-14 my-10">
             <div className="flex justify-between">
               <div className=" flex flex-col gap-y-8">
                 <div className="text-[#000000] text-2xl font-bold leading-9">
