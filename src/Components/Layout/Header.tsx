@@ -24,7 +24,7 @@ const Header = () => {
               <Link to="/">Home</Link>
               <Link to="/shop">Shop</Link>
               <li>About</li>
-              <li>Contact</li>
+              <Link to="/contact">Contact</Link>
             </ul>
           </div>
           <div className="flex gap-x-8">
