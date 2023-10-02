@@ -127,11 +127,10 @@ const HomePage = () => {
           })}
         </div>
       </div>
-      <div className="border-solid border-2 border-[#B88E2F] mt-5 w-[245px] h-[48px] mx-[41%]">
-        <p className="text-center text-[#B88E2F] text-[16px] mt-2 font-bold">
+        <button className="w-[245px] h-[48px] text-[#B88E2F] text-[16px] mt-10 font-bold border-solid border-2 border-[#B88E2F] mx-[41%]">
           Show More
-        </p>
-      </div>
+        </button>
+      
     </>
   );
 };

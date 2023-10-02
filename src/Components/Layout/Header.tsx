@@ -4,6 +4,7 @@ import { BiUserPlus } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -20,8 +21,8 @@ const Header = () => {
           </div>
           <div>
             <ul className="list-none flex gap-x-10 justify-between font-medium text-lg leading-6">
-              <li>Home</li>
-              <li>Shop</li>
+              <Link to="/">Home</Link>
+              <Link to="/shop">Shop</Link>
               <li>About</li>
               <li>Contact</li>
             </ul>
