@@ -1,7 +1,7 @@
-import React from "react";
+import LayoutPage from "../Layout/Layout_Page";
 
 const Cart = () => {
-  return <div>Cart</div>;
+  return <></>;
 };
 
 export default Cart;

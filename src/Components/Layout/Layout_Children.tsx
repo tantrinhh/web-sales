@@ -1,7 +1,7 @@
 import Header from "./Header";
 import Footer from "./Footer";
 
-const LayoutPage = ({ children }: any) => {
+const LayoutChildren = ({ children }: any) => {
   return (
     <>
       <Header />
@@ -12,4 +12,4 @@ const LayoutPage = ({ children }: any) => {
   );
 };
 
-export default LayoutPage;
+export default LayoutChildren;

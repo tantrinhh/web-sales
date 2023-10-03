@@ -23,7 +23,8 @@ const Header = () => {
             <ul className="list-none flex gap-x-10 justify-between font-medium text-lg leading-6">
               <Link to="/">Home</Link>
               <Link to="/shop">Shop</Link>
-              <li>About</li>
+              <Link to="/blog">Blog</Link>
+
               <Link to="/contact">Contact</Link>
             </ul>
           </div>
@@ -38,9 +39,12 @@ const Header = () => {
               <AiOutlineHeart style={{ width: "23px", height: "23px" }} />
             </div>
             <div>
-              <AiOutlineShoppingCart
-                style={{ width: "23px", height: "23px" }}
-              />
+              <Link to="/cart">
+                {" "}
+                <AiOutlineShoppingCart
+                  style={{ width: "23px", height: "23px" }}
+                />
+              </Link>
             </div>
           </div>
         </div>
