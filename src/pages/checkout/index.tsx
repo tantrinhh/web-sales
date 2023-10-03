@@ -1,7 +1,12 @@
 import React from "react";
+import LayoutPage from "../../Components/Layout/Layout_Page";
 
-const index = () => {
-  return <div>index</div>;
+const Checkout = () => {
+  return (
+    <>
+      <LayoutPage></LayoutPage>
+    </>
+  );
 };
 
-export default index;
+export default Checkout;

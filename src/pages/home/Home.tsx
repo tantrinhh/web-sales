@@ -1,16 +1,14 @@
-import React from "react";
-import Header from "../../Components/Layout/Header";
 import HomePage from "../../Components/Home/HomePage";
-import Footer from "../../Components/Layout/Footer";
+import LayoutChildren from "../../Components/Layout/Layout_Children";
 
 const Home = () => {
   return (
     <>
-    <Header/>
-    <HomePage/>
-    <Footer/>
+      <LayoutChildren>
+        <HomePage />
+      </LayoutChildren>
     </>
-  )
+  );
 };
 
 export default Home;

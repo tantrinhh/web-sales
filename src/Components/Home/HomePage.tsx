@@ -110,7 +110,7 @@ const HomePage = () => {
       {/* Our product */}
       <div className="mt-20 container">
         <h1 className="text-center text-[40px] font-bold mb-5">Our Products</h1>
-        <div className="grid grid-cols-4 gap-5 ">
+        <div className="grid grid-cols-4 gap-y-14 ">
           {product.map((products) => {
             return (
               <div>
@@ -127,10 +127,9 @@ const HomePage = () => {
           })}
         </div>
       </div>
-        <button className="w-[245px] h-[48px] text-[#B88E2F] text-[16px] mt-10 font-bold border-solid border-2 border-[#B88E2F] mx-[41%]">
-          Show More
-        </button>
-      
+      <button className="w-[245px] h-[48px] text-[#B88E2F] text-[16px] mt-10 font-bold border-solid border-2 border-[#B88E2F] mx-[41%]">
+        Show More
+      </button>
     </>
   );
 };
