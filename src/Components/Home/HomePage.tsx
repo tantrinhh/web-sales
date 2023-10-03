@@ -11,6 +11,24 @@ import Grifo from "../../assets/home/Grifo.png";
 import Muggo from "../../assets/home/Muggo.png";
 import Pingky from "../../assets/home/Pingky.png";
 import Potty from "../../assets/home/Potty.png";
+import Rectangle36 from "../../assets/home/Rectangle36.png";
+
+import Rectangle37 from "../../assets/home/Rectangle37.png";
+
+import Rectangle38 from "../../assets/home/Rectangle38.png";
+
+import Rectangle39 from "../../assets/home/Rectangle39.png";
+
+import Rectangle40 from "../../assets/home/Rectangle40.png";
+
+import Rectangle41 from "../../assets/home/Rectangle41.png";
+
+import Rectangle43 from "../../assets/home/Rectangle43.png";
+
+import Rectangle44 from "../../assets/home/Rectangle44.png";
+
+import Rectangle45 from "../../assets/home/Rectangle45.png";
+
 const HomePage = () => {
   const product = [
     {
@@ -130,6 +148,49 @@ const HomePage = () => {
       <button className="w-[245px] h-[48px] text-[#B88E2F] text-[16px] mt-10 font-bold border-solid border-2 border-[#B88E2F] mx-[41%]">
         Show More
       </button>
+      <div className="flex gap-x-7 justify-between">
+        <div className="flex flex-col gap-7">
+          <div className="flex gap-7">
+            <div>
+              <img src={Rectangle36} alt="" />
+            </div>
+            <div className=" flex items-end">
+              <img src={Rectangle38} alt="" />
+            </div>
+          </div>
+          <div className="flex gap-7">
+            <div>
+              <img src={Rectangle37} alt="" />
+            </div>
+            <div>
+              <img src={Rectangle39} alt="" />
+            </div>
+          </div>
+        </div>
+        <div className=" flex items-center">
+          <div className="">
+            <img src={Rectangle40} alt="" />
+          </div>
+        </div>
+        <div className="flex flex-col gap-7">
+          <div className="flex gap-7">
+            <div className=" flex items-end">
+              <img src={Rectangle43} alt="" />
+            </div>
+            <div>
+              <img src={Rectangle45} alt="" />
+            </div>
+          </div>
+          <div className="flex gap-7">
+            <div>
+              <img src={Rectangle41} alt="" />
+            </div>
+            <div>
+              <img src={Rectangle44} alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
