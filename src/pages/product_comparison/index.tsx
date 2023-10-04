@@ -1,14 +1,13 @@
-import React from "react";
-import Header from "../../Components/Layout/Header";
+
 import ProductComparison from "../../Components/Product_Comparison/ProductComparison";
-import Footer from "../../Components/Layout/Footer";
+import LayoutPage from "../../Components/Layout/Layout_Page";
 
 const Product_comparison = () => {
   return (
     <>
-      <Header />
-      <ProductComparison />
-      <Footer />
+    <LayoutPage>
+      <ProductComparison/>
+    </LayoutPage>
     </>
   );
 };
