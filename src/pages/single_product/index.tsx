@@ -1,7 +1,11 @@
-import React from "react";
+import LayoutChildren from "../../Components/Layout/Layout_Children";
 
-const index = () => {
-  return <div>index</div>;
+const Single_product = () => {
+  return (
+    <>
+      <LayoutChildren></LayoutChildren>
+    </>
+  );
 };
 
-export default index;
+export default Single_product;

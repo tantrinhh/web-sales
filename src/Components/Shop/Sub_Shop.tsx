@@ -1,6 +1,5 @@
 import Rectangle1 from "../../assets/shop/Rectangle1.png";
 import Logo from "../../assets/Logo.png";
-
 import { AiOutlineRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
 const Sub_Shop = () => {
