@@ -3,7 +3,7 @@ import Sub_Contact from "../../Components/Contact/Sub_Contact";
 import Main from "../../Components/Contact/Main";
 import LayoutPage from "../../Components/Layout/Layout_Page";
 
-const Contact = () => {
+const index = () => {
   return (
     <>
       <LayoutPage>
@@ -14,4 +14,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default index;

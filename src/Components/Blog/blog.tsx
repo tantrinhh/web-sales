@@ -74,6 +74,42 @@ const Blog = () => {
       title: "Handmade pieces that took time to make",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus mauris vitae ultricies leo integer malesuada nunc. In nulla posuere sollicitudin aliquam ultrices. Morbi blandit cursus risus at ultrices mi tempus imperdiet. Libero enim sed faucibus turpis in. Cursus mattis molestie a iaculis at erat. Nibh cras pulvinar mattis nunc sed blandit libero. Pellentesque elit ullamcorper dignissim cras tincidunt. Pharetra et ultrices neque ornare aenean euismod elementum.",
       read: "Read more"
+    },
+    {
+      image: going,
+      icon1: admin,
+      name1: "Admin",
+      icon2: calendar,
+      name2: "14 Oct 2022",
+      icon3: tag,
+      name3: "Wood",
+      title: "Going all-in with millennial design",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus mauris vitae ultricies leo integer malesuada nunc. In nulla posuere sollicitudin aliquam ultrices. Morbi blandit cursus risus at ultrices mi tempus imperdiet. Libero enim sed faucibus turpis in. Cursus mattis molestie a iaculis at erat. Nibh cras pulvinar mattis nunc sed blandit libero. Pellentesque elit ullamcorper dignissim cras tincidunt. Pharetra et ultrices neque ornare aenean euismod elementum.",
+      read: "Read more"
+    },
+    {
+      image: exploring,
+      icon1: admin,
+      name1: "Admin",
+      icon2: calendar,
+      name2: "14 Oct 2022",
+      icon3: tag,
+      name3: "Handmade",
+      title: "Exploring new ways of decorating",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus mauris vitae ultricies leo integer malesuada nunc. In nulla posuere sollicitudin aliquam ultrices. Morbi blandit cursus risus at ultrices mi tempus imperdiet. Libero enim sed faucibus turpis in. Cursus mattis molestie a iaculis at erat. Nibh cras pulvinar mattis nunc sed blandit libero. Pellentesque elit ullamcorper dignissim cras tincidunt. Pharetra et ultrices neque ornare aenean euismod elementum.",
+      read: "Read more"
+    },
+    {
+      image: handmade,
+      icon1: admin,
+      name1: "Admin",
+      icon2: calendar,
+      name2: "14 Oct 2022",
+      icon3: tag,
+      name3: "Wood",
+      title: "Handmade pieces that took time to make",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus mauris vitae ultricies leo integer malesuada nunc. In nulla posuere sollicitudin aliquam ultrices. Morbi blandit cursus risus at ultrices mi tempus imperdiet. Libero enim sed faucibus turpis in. Cursus mattis molestie a iaculis at erat. Nibh cras pulvinar mattis nunc sed blandit libero. Pellentesque elit ullamcorper dignissim cras tincidunt. Pharetra et ultrices neque ornare aenean euismod elementum.",
+      read: "Read more"
     }
   ]
   const [blogPerPage, setBlogPerPage] = useState<number | string>(3); // Số sản phẩm trên mỗi trang
@@ -107,7 +143,7 @@ const Blog = () => {
   };
   return (
     <>
-    <div className="grid grid-cols-3 container">
+    <div className="grid grid-cols-3 container mt-24">
       <div className="col-span-2">
         {currentblogs.map((blog, index) =>{
           return(

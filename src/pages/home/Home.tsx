@@ -1,7 +1,7 @@
 import HomePage from "../../Components/Home/HomePage";
 import LayoutChildren from "../../Components/Layout/Layout_Children";
 
-const Home = () => {
+const index = () => {
   return (
     <>
       <LayoutChildren>
@@ -11,4 +11,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default index;
