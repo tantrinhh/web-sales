@@ -187,7 +187,9 @@ const HomePage = () => {
       <button className="w-[245px] h-[48px] text-[#B88E2F] text-[16px] mt-10 font-bold border-solid border-2 border-[#B88E2F] mx-[41%]">
         Show More
       </button>
-      <div className="flex gap-x-7 justify-between">
+      <p className="text-center text-[20px] leading-7 font-semibold mt-20">Share your setup with</p>
+      <h1 className="text-center text-[40px] leading-10 font-bold">#FuniroFurniture</h1>
+      <div className="flex gap-x-7 justify-between mb-20">
         <div className="flex flex-col gap-7">
           <div className="flex gap-7">
             <div>
