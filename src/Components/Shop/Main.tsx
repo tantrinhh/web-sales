@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import Vector1 from "../../assets/shop/Vector1.png";
 import Vector2 from "../../assets/shop/Vector2.png";
 import Vector3 from "../../assets/shop/Vector3.png";
@@ -253,6 +252,20 @@ const Main = () => {
         >
           Next
         </button>
+      </div>
+      <div className="max-w-[400px]">
+        {" "}
+        <div className="relative ">
+          <a className="absolute inset-0 z-10 bg-white text-center flex flex-col items-center justify-center opacity-0 hover:opacity-100 bg-opacity-10 duration-300">
+            <h1 className="tracking-wider">Title</h1>
+            <p className="mx-auto">Description</p>
+          </a>
+          <a href="#" className="relative">
+            <div className="h-48 flex flex-wrap content-center">
+              <img src={image3} alt="" />
+            </div>
+          </a>
+        </div>
       </div>
     </>
   );
