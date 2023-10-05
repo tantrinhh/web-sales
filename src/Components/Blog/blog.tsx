@@ -118,20 +118,23 @@ const Blog = () => {
       read: "Read more",
     },
   ];
-  const [blogPerPage, setBlogPerPage] = useState<number | string>(3); // Số sản phẩm trên mỗi trang
+  const productPerPage = 4; // Số sản phẩm trên mỗi trang
   const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
-  const totalPages = Math.ceil(blogs.length / (+blogPerPage || 1));
 
-  // Cập nhật indexOfLastblog và indexOfFirstblog
-  const blogPerPageNumber = +blogPerPage || 1; // Chuyển đổi blogPerPage thành số và mặc định là 1 nếu không hợp lệ
-  const indexOfLastblog = currentPage * blogPerPageNumber;
-  const indexOfFirstblog = indexOfLastblog - blogPerPageNumber;
-  const currentblogs = blogs.slice(indexOfFirstblog, indexOfLastblog);
+  // Tính toán số trang
+  const totalPages = Math.ceil(blogs.length / productPerPage);
+
+  // Slice danh sách sản phẩm cho trang hiện tại
+  const indexOfLastProduct = currentPage * productPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productPerPage;
+  const currentblogs = blogs.slice(indexOfFirstProduct, indexOfLastProduct);
 
   // Xử lý khi người dùng chuyển trang
   const handlePageChange = (page: any) => {
-    setCurrentPage(page.selected + 1);
+    setCurrentPage(page);
   };
+
+  // Xử lý nút "Next"
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
@@ -148,43 +151,35 @@ const Blog = () => {
     <>
       <div className="grid grid-cols-3 container mt-24">
         <div className="col-span-2">
-          {currentblogs.map((blog, index) => {
-            return (
-              <>
-                <img src={blog.image} alt={`Blog ${index}`} />
-                <div className="grid grid-cols-2">
-                  <div className="col-span-1 mt-5">
-                    <div className="flex gap-10">
-                      <div className="flex">
-                        <img src={blog.icon1} alt="" />
-                        <p className="text-[#9F9F9F] text-[16px]">
-                          {blog.name1}
-                        </p>
-                      </div>
-                      <div className="flex">
-                        <img src={blog.icon2} alt="" />
-                        <p className="text-[#9F9F9F] text-[16px]">
-                          {blog.name2}
-                        </p>
-                      </div>
-                      <div className="flex">
-                        <img src={blog.icon3} alt="" />
-                        <p className="text-[#9F9F9F] text-[16px]">
-                          {blog.name3}
-                        </p>
-                      </div>
+          {currentblogs.map((blog, index) => (
+            <div key={index}>
+              <img src={blog.image} alt={`Blog ${index}`} />
+              <div className="grid grid-cols-2">
+                <div className="col-span-1 mt-5">
+                  <div className="flex gap-10">
+                    <div className="flex">
+                      <img src={blog.icon1} alt="" />
+                      <p className="text-[#9F9F9F] text-[16px]">{blog.name1}</p>
+                    </div>
+                    <div className="flex">
+                      <img src={blog.icon2} alt="" />
+                      <p className="text-[#9F9F9F] text-[16px]">{blog.name2}</p>
+                    </div>
+                    <div className="flex">
+                      <img src={blog.icon3} alt="" />
+                      <p className="text-[#9F9F9F] text-[16px]">{blog.name3}</p>
                     </div>
                   </div>
                 </div>
-                <h1 className="text-[30px] mt-3">{blog.title}</h1>
-                <p className="text-[#9F9F9F] w-[817px] mt-3">{blog.content}</p>
-                <p className="text-[16px] mt-5 ">{blog.read}</p>
-                <div className="w-20 mb-16 mt-3">
-                  <div className=" border-b border-[#000000] w-16 mx-auto"></div>
-                </div>
-              </>
-            );
-          })}
+              </div>
+              <h1 className="text-[30px] mt-3">{blog.title}</h1>
+              <p className="text-[#9F9F9F] w-[817px] mt-3">{blog.content}</p>
+              <p className="text-[16px] mt-5 ">{blog.read}</p>
+              <div className="w-20 mb-16 mt-3">
+                <div className=" border-b border-[#000000] w-16 mx-auto"></div>
+              </div>
+            </div>
+          ))}
         </div>
         <div className="col-span-1 space-y-7">
           <div className="max-w-md mx-auto">
@@ -256,7 +251,7 @@ const Blog = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-6 mb-20">
         <button
           onClick={handlePrevPage}
           className={`px-4 py-2 mx-2 rounded-lg ${
