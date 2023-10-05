@@ -20,12 +20,19 @@ import Rectangle41 from "../../assets/home/Rectangle41.png";
 import Rectangle43 from "../../assets/home/Rectangle43.png";
 import Rectangle44 from "../../assets/home/Rectangle44.png";
 import Rectangle45 from "../../assets/home/Rectangle45.png";
+import image1 from "../../assets/home/image1.png";
+import image2 from "../../assets/home/image2.png";
 import { CiShare2 } from "react-icons/ci";
 import { BiGitCompare } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import './styles.css';
+import { Pagination } from 'swiper/modules';
 const HomePage = () => {
-  const product = [
+  const products = [
     {
       image: Syltherine,
       name: "Syltherine",
@@ -91,6 +98,7 @@ const HomePage = () => {
       isNew: true
     },
   ];
+  
   return (
     <>
       {/* Sub header */}
@@ -142,7 +150,7 @@ const HomePage = () => {
       <div className="mt-20 container">
         <h1 className="text-center text-[40px] font-bold mb-5">Our Products</h1>
         <div className="grid grid-cols-4 gap-y-14 ">
-          {product.map((products) => {
+          {products.map((product) => {
             return (
               <div>
                 {" "}
@@ -179,36 +187,36 @@ const HomePage = () => {
 
                     <div className="relative">
                       <div className="relative">
-                        <img src={products.image} alt="" />
-                        {products.discount > 0 && (
+                        <img src={product.image} alt="" />
+                        {product.discount > 0 && (
                           <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-1.5 bg-[#E97171]">
-                            -{products.discount}%
+                            -{product.discount}%
                           </div>
                         )}
-                        {products.isNew && (
+                        {product.isNew && (
                           <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-1.5">
                             New
                           </div>
                         )}
                         <div className="bg-[#F4F5F7] w-[285px] h-[145px] space-y-3 pl-5">
                           <h2 className=" font-semibold leading-7 text-[#3A3A3A] pt-5 text-[24px]">
-                            {products.name}
+                            {product.name}
                           </h2>
                           <p className="text-[16px] font-medium leading-6 text-[#898989]">
-                            {products.des}
+                            {product.des}
                           </p>
-                          {products.discount > 0 ? (
+                          {product.discount > 0 ? (
                             <div className="flex items-center">
                               <h3 className="font-bold text-[20px] text-[#3A3A3A]">
-                                Rp {products.price.toLocaleString()}
+                                Rp {product.price.toLocaleString()}
                               </h3>
                               <span className="text-[16px] text-[#B0B0B0] line-through ml-3">
-                                Rp {(products.price + (products.price * (products.discount / 100))).toLocaleString()}
+                                Rp {(product.price + (product.price * (product.discount / 100))).toLocaleString()}
                               </span>
                             </div>
                           ) : (
                             <h3 className="font-bold text-[20px] text-[#3A3A3A]">
-                              Rp {products.price.toLocaleString()}
+                              Rp {product.price.toLocaleString()}
                             </h3>
                           )}
                         </div>
@@ -224,6 +232,27 @@ const HomePage = () => {
       <button className="w-[245px] h-[48px] text-[#B88E2F] text-[16px] mt-10 font-bold border-solid border-2 border-[#B88E2F] mx-[41%]">
         Show More
       </button>
+      <div className="bg-[#FCF8F3] mt-10 flex">
+        <div className="ml-20 mt-10">
+          <h1 className="w-[422px] h-[96px] leading-[48px] font-bold text-[40px]">50+ Beautiful rooms inspiration</h1>
+          <p className="w-[368px] h-[48px] font-medium leading-[24px] text-[16px] mt-1">Our designer already made a lot of beautiful prototipe of rooms that inspire you</p>
+          <button className='bg-[#B88E2F] text-[#FFFFFF] w-[176px] h-[48px] mt-10'>Explore More</button>
+        </div>
+        <Swiper
+          slidesPerView={4}
+          spaceBetween={10}
+          centeredSlides={true}
+          pagination={{
+            clickable: true,
+          }}
+          modules={[Pagination]}
+          className="mySwiper"
+        >
+          <SwiperSlide><img src={image1}/></SwiperSlide>
+          <SwiperSlide><img src={image2}/></SwiperSlide>
+          <SwiperSlide><img src={image2}/></SwiperSlide>
+        </Swiper>
+      </div>
       <p className="text-center text-[20px] leading-7 font-semibold mt-20">
         Share your setup with
       </p>

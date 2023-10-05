@@ -70,27 +70,14 @@ const ProductComparison = () => {
         <div className="col-span-1 mt-20">
           <h1 className="text-[24px] font-bold leading-[30px]">Add A Product</h1>
           <div className="mt-2">
-            <button
-              type="button"
-              className="inline-flex w-[242px] gap-x-20 rounded-md bg-[#B88E2F] px-3 py-2 text-sm font-semibold text-[#FFFFFF] shadow-sm ring-1 ring-inset ring-gray-300 leading-[17.71px]"
-              id="menu-button"
-              aria-expanded="true"
-              aria-haspopup="true"
-            >
-              Choose a Product
-              <svg
-                className="-mr-1 h-5 w-5 text-[#FFFFFF]"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </button>
+            <div className="inline-block relative w-full mb-6">
+              <select className="block appearance-none w-full bg-[#B88E2F] border border-[#9F9F9F] px-4 py-3 pr-8 mb-3 rounded-md shadow leading-tight focus:outline-none focus:shadow-outline text-[#FFFFFF] h-[39px]">
+                <option>Choose a Product</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 mb-2 text-[#FFFFFF]">
+                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+              </div>
+            </div>
           </div>
         </div>
       </div>
