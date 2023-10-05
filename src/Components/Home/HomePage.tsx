@@ -31,56 +31,64 @@ const HomePage = () => {
       name: "Syltherine",
       des: "Stylish cafe chair",
       price: 2500000,
-      discount: 30
+      discount: 30,
+      isNew: false
     },
     {
       image: Leviosa,
       name: "Leviosa",
       des: "Stylish cafe chair",
       price: 2500000,
-      discount: 0
+      discount: 0,
+      isNew: false
     },
     {
       image: Lolito,
       name: "Lolito",
       des: "Luxury big sofa",
       price: 7000000,
-      discount: 50
+      discount: 50,
+      isNew: false,
     },
     {
       image: Respira,
       name: "Respira",
       des: "Outdoor bar table and stool",
       price: 500000,
-      discount: 0
+      discount: 0,
+      isNew: true
     },
     {
       image: Grifo,
       name: "Grifo",
       des: "Night lamp",
       price: 1500000,
-      discount: 0
+      discount: 0,
+      isNew: false
     },
     {
       image: Muggo,
       name: "Muggo",
       des: "SSmall mug",
       price: 150000,
-      discount: 0
+      discount: 0,
+      isNew: true
     },
     {
       image: Pingky,
       name: "Pingky",
       des: "Cute bed set",
       price: 7000000,
-      discount: 50
+      discount: 50,
+      isNew: false
     },
     {
       image: Potty,
       name: "Potty",
       des: "Minimalist flower pot",
       price: 500000,
-      discount: 0
+      discount: 0,
+      isNew: true
     },
   ];
   return (
@@ -177,6 +185,11 @@ const HomePage = () => {
                             -{products.discount}%
                           </div>
                         )}
+                        {products.isNew && (
+                          <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-1.5">
+                            New
+                          </div>
+                        )}
                         <div className="bg-[#F4F5F7] w-[285px] h-[145px] space-y-3 pl-5">
                           <h2 className=" font-semibold leading-7 text-[#3A3A3A] pt-5 text-[24px]">
                             {products.name}
@@ -186,15 +199,15 @@ const HomePage = () => {
                           </p>
                           {products.discount > 0 ? (
                             <div className="flex items-center">
-                              <h3 className="font-bold text-[20px] text-[#B88E2F]">
+                              <h3 className="font-bold text-[20px] text-[#3A3A3A]">
                                 Rp {products.price.toLocaleString()}
                               </h3>
-                              <span className="text-[16px] text-gray-500 line-through ml-3">
+                              <span className="text-[16px] text-[#B0B0B0] line-through ml-3">
                                 Rp {(products.price + (products.price * (products.discount / 100))).toLocaleString()}
                               </span>
                             </div>
                           ) : (
-                            <h3 className="font-bold text-[20px] text-[#B88E2F]">
+                            <h3 className="font-bold text-[20px] text-[#3A3A3A]">
                               Rp {products.price.toLocaleString()}
                             </h3>
                           )}
