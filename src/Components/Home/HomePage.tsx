@@ -30,49 +30,49 @@ const HomePage = () => {
       image: Syltherine,
       name: "Syltherine",
       des: "Stylish cafe chair",
-      price: "Rp 2.500.000",
+      price: 2500000,
     },
     {
       image: Leviosa,
       name: "Leviosa",
       des: "Stylish cafe chair",
-      price: "Rp 2.500.000",
+      price: 2500000,
     },
     {
       image: Lolito,
       name: "Lolito",
       des: "Luxury big sofa",
-      price: "Rp 7.000.000",
+      price: 7000000,
     },
     {
       image: Respira,
       name: "Respira",
       des: "Outdoor bar table and stool",
-      price: "Rp 500.000",
+      price: 500000,
     },
     {
       image: Grifo,
       name: "Grifo",
       des: "Night lamp",
-      price: "Rp 1.500.000",
+      price: 1500000,
     },
     {
       image: Muggo,
       name: "Muggo",
       des: "SSmall mug",
-      price: "Rp 150.000",
+      price: 150000,
     },
     {
       image: Pingky,
       name: "Pingky",
       des: "Cute bed set",
-      price: "Rp 7.000.000",
+      price: 7000000,
     },
     {
       image: Potty,
       name: "Potty",
       des: "Minimalist flower pot",
-      price: "Rp 500.000",
+      price: 500000,
     },
   ];
   return (
@@ -171,8 +171,8 @@ const HomePage = () => {
                           <p className="text-[16px] font-medium leading-6 text-[#898989]">
                             {products.des}
                           </p>
-                          <h3 className="font-semibold leading-[30px] text-[#3A3A3A] text-[20px]">
-                            {products.price}
+                          <h3 className="font-bold text-[20px]">
+                          Rp {products.price.toLocaleString()}
                           </h3>
                         </div>
                       </div>
