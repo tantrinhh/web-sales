@@ -9,23 +9,33 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <>
-      <div className=" bg-[#FFFFFF]  ">
-        <div className=" justify-between h-[100px] flex items-center  ml-[4%] mr-[5%]">
+      <div className="  ">
+        <div className="  fixed z-50 w-full bg-[#FFFFFF]  justify-between h-[100px] flex items-center px-10 ">
           <div className="flex">
             <div className="mt-1">
               <img src={Logo} alt="" />
             </div>
             <div className=" ml-1 font-bold text-[34px] leading-10">
-              Furniro
+              <Link to="#">Furniro</Link>
             </div>
           </div>
           <div>
-            <ul className="list-none flex gap-x-10 justify-between font-medium text-lg leading-6">
-              <Link to="/">Home</Link>
-              <Link to="/shop">Shop</Link>
-              <Link to="/blog">Blog</Link>
+            <ul className="list-none  flex gap-x-10 justify-between font-medium text-lg leading-6">
+              <div className="hover:text-[#B88E2F]">
+                <Link to="/">Home</Link>
+              </div>
+              <div className="hover:text-[#B88E2F]">
+                <Link to="/shop">Shop</Link>
+              </div>
+              <div className="hover:text-[#B88E2F]">
+                {" "}
+                <Link to="/blog">Blog</Link>
+              </div>
 
-              <Link to="/contact">Contact</Link>
+              <div className="hover:text-[#B88E2F]">
+                {" "}
+                <Link to="/contact">Contact</Link>
+              </div>
             </ul>
           </div>
           <div className="flex gap-x-8">

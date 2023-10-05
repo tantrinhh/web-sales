@@ -165,13 +165,13 @@ const HomePage = () => {
                       <div className="relative">
                         <img src={products.image} alt="" />
                         <div className="bg-[#F4F5F7] w-[285px] h-[145px] space-y-3 pl-5">
-                          <h2 className="font-bold pt-5 text-[24px]">
+                          <h2 className=" font-semibold leading-7 text-[#3A3A3A] pt-5 text-[24px]">
                             {products.name}
                           </h2>
-                          <p className="text-[16px] text-[#898989]">
+                          <p className="text-[16px] font-medium leading-6 text-[#898989]">
                             {products.des}
                           </p>
-                          <h3 className="font-bold text-[20px]">
+                          <h3 className="font-semibold leading-[30px] text-[#3A3A3A] text-[20px]">
                             {products.price}
                           </h3>
                         </div>
@@ -187,8 +187,12 @@ const HomePage = () => {
       <button className="w-[245px] h-[48px] text-[#B88E2F] text-[16px] mt-10 font-bold border-solid border-2 border-[#B88E2F] mx-[41%]">
         Show More
       </button>
-      <p className="text-center text-[20px] leading-7 font-semibold mt-20">Share your setup with</p>
-      <h1 className="text-center text-[40px] leading-10 font-bold">#FuniroFurniture</h1>
+      <p className="text-center text-[20px] leading-7 font-semibold mt-20">
+        Share your setup with
+      </p>
+      <h1 className="text-center text-[40px] leading-10 font-bold">
+        #FuniroFurniture
+      </h1>
       <div className="flex gap-x-7 justify-between mb-20">
         <div className="flex flex-col gap-7">
           <div className="flex gap-7">
