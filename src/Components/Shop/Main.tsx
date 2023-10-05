@@ -6,7 +6,10 @@ import image1 from "../../assets/shop/image1.png";
 import Images from "../../assets/shop/Images.png";
 import image3 from "../../assets/shop/image3.png";
 import image4 from "../../assets/shop/image4.png";
-
+import { CiShare2 } from "react-icons/ci";
+import { BiGitCompare } from "react-icons/bi";
+import { AiOutlineHeart } from "react-icons/ai";
+import { Link } from "react-router-dom";
 const Main = () => {
   const products = [
     {
@@ -106,7 +109,7 @@ const Main = () => {
       price: "Rp 500.000",
     },
   ];
-  const [productPerPage, setProductPerPage] = useState<number | string>(4); // Số sản phẩm trên mỗi trang
+  const [productPerPage, setProductPerPage] = useState<number | string>(8); // Số sản phẩm trên mỗi trang
   const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
   const totalPages = Math.ceil(products.length / (+productPerPage || 1));
 
@@ -165,7 +168,7 @@ const Main = () => {
               <div className="mt-2">
                 <input
                   type="number" // Sử dụng type="number"
-                  className="w-14 h-14 px-2 rounded-md border-0 py-1.5 text-[#000000] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="w-14 h-14 px-3 rounded-md border-0 py-1.5 text-[#000000] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   placeholder=""
                   value={productPerPage}
                   onChange={(e) => {
@@ -205,17 +208,63 @@ const Main = () => {
         <div className="grid grid-cols-4  gap-y-14 ">
           {currentProducts.map((product, index) => (
             <div key={index}>
-              <img src={product.image} alt="" />
-              <div className="bg-[#F4F5F7] w-[285px] h-[145px] space-y-3 pl-5">
-                <h2 className="font-bold pt-5 text-[24px]">{product.name}</h2>
-                <p className="text-[16px] text-[#898989]">{product.des}</p>
-                <h3 className="font-bold text-[20px]">{product.price}</h3>
+              <div>
+                {" "}
+                <Link to="single_product">
+                  <div className="relative ">
+                    <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
+                      <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
+                        <Link to="/cart">Add to cart</Link>
+                      </div>
+                      <div className="flex gap-5 text-[#FFFFFF] text-base leading-6 font-semibold">
+                        <div className="flex">
+                          <div className="mt-1">
+                            <CiShare2 />
+                          </div>
+                          <div>Share</div>
+                        </div>
+                        <div className="flex">
+                          <div className="mt-1">
+                            <BiGitCompare />
+                          </div>
+                          <div className=" cursor-pointer">
+                            {" "}
+                            <Link to="/product_comparison">Compare</Link>
+                          </div>
+                        </div>
+                        <div className="flex">
+                          <div className="mt-1">
+                            <AiOutlineHeart />
+                          </div>
+                          <div>Like</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="relative">
+                      <div className="relative">
+                        <img src={product.image} alt="" />
+                        <div className="bg-[#F4F5F7] w-[285px] h-[145px] space-y-3 pl-5">
+                          <h2 className=" font-semibold leading-7 text-[#3A3A3A] pt-5 text-[24px]">
+                            {product.name}
+                          </h2>
+                          <p className="text-[16px] font-medium leading-6 text-[#898989]">
+                            {product.des}
+                          </p>
+                          <h3 className="font-semibold leading-[30px] text-[#3A3A3A] text-[20px]">
+                            {product.price}
+                          </h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
               </div>
             </div>
           ))}
         </div>
       </div>
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-4 my-20">
         <button
           onClick={handlePrevPage}
           className={`px-4 py-2 mx-2 rounded-lg ${
@@ -252,20 +301,6 @@ const Main = () => {
         >
           Next
         </button>
-      </div>
-      <div className="max-w-[400px]">
-        {" "}
-        <div className="relative ">
-          <a className="absolute inset-0 z-10 bg-white text-center flex flex-col items-center justify-center opacity-0 hover:opacity-100 bg-opacity-10 duration-300">
-            <h1 className="tracking-wider">Title</h1>
-            <p className="mx-auto">Description</p>
-          </a>
-          <a href="#" className="relative">
-            <div className="h-48 flex flex-wrap content-center">
-              <img src={image3} alt="" />
-            </div>
-          </a>
-        </div>
       </div>
     </>
   );
