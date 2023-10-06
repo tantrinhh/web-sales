@@ -5,10 +5,12 @@ import Sub_blog from "../../Components/Blog/sub_blog"
 
 const index = () => {
   return (
+    <div className="bg-[#FFFFFF]">
     <LayoutPage>
       <Sub_blog/>
       <Blog/>
     </LayoutPage>
+    </div>
   )
 };
 

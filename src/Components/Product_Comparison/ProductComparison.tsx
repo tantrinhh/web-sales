@@ -84,93 +84,93 @@ const ProductComparison = () => {
     <div className='grid grid-cols-4 divide-x divide-[#E8E8E8] mt-10'>
         <div className='col-span-1 ml-10'>
             
-            <div className='mt-10 space-y-3'>
-            <h1 className='text-[28px] font-bold'>General</h1>
-                <ul className='space-y-5'>
+            <div className='mt-10 space-y-10'>
+            <h1 className='font-medium text-3xl'>General</h1>
+                <ul className="space-y-10">
                 
-                <li>Sales Package</li>
-                <li>Model Number</li>
-                <li>Secondary Material</li>
-                <li>Configuration</li>
-                <li>Upholstery Material</li>
-                <li>Upholstery Color</li>
+                <li className="text-xl font-normal">Sales Package</li>
+                <li className="text-xl font-normal mt-14">Model Number</li>
+                <li className="text-xl font-normal mt-5">Secondary Material</li>
+                <li className="text-xl font-normal mt-5">Configuration</li>
+                <li className="text-xl font-normal mt-5">Upholstery Material</li>
+                <li className="text-xl font-normal mt-5">Upholstery Color</li>
                 </ul>
             </div>
-            <div className='mt-10 space-y-3'>
-            <h1 className='text-[28px] font-bold'>Product </h1>
+            <div className='mt-20 space-y-10'>
+            <h1 className='font-medium text-3xl'>Product </h1>
 
-                <ul className='space-y-5'>
-                <li>Filling Material</li>
-                <li>Finish Type</li>
-                <li>Adjustable Headrest</li>
-                <li>Maximum Load Capacity</li>
-                <li>Origin of Manufacture</li>
+                <ul className='space-y-10'>
+                <li className="text-xl font-normal">Filling Material</li>
+                <li className="text-xl font-normal">Finish Type</li>
+                <li className="text-xl font-normal">Adjustable Headrest</li>
+                <li className="text-xl font-normal">Maximum Load Capacity</li>
+                <li className="text-xl font-normal">Origin of Manufacture</li>
                 </ul>
             </div>
-            <div className='mt-10 space-y-3'>
-            <h1 className='text-[28px] font-bold'>Dimensions </h1>
-                <ul className='space-y-5'>
+            <div className='mt-20 space-y-10'>
+            <h1 className='font-medium text-3xl'>Dimensions </h1>
+                <ul className='space-y-10'>
                 
-                <li>Width</li>
-                <li>Height</li>
-                <li>Depth</li>
-                <li>Weight</li>
-                <li>Seat Height</li>
-                <li>Leg Height</li>
+                <li className="text-xl font-normal">Width</li>
+                <li className="text-xl font-normal">Height</li>
+                <li className="text-xl font-normal">Depth</li>
+                <li className="text-xl font-normal">Weight</li>
+                <li className="text-xl font-normal">Seat Height</li>
+                <li className="text-xl font-normal">Leg Height</li>
                 </ul>
             </div>
-            <div className='mt-12 space-y-3'>
+            <div className='mt-20 space-y-10'>
                 
-                <div className='space-y-3'>
-                <h1 className='text-[28px] font-bold'>Warranty </h1>
+                <div className='space-y-10'>
+                <h1 className='font-medium text-3xl'>Warranty </h1>
                 <ul>
-                    <li>Warranty Summary</li>
-                    <li className='mt-14'>Warranty Service Type</li>
-                    <li className='mt-24'>Covered in Warranty</li>
-                    <li className='mt-14'>Not Covered in Warranty</li>
-                    <li className='mt-32'>Domestic Warranty</li>
+                    <li className="text-xl font-normal">Warranty Summary</li>
+                    <li className="text-xl font-normal mt-14">Warranty Service Type</li>
+                    <li className="text-xl font-normal mt-32">Covered in Warranty</li>
+                    <li className="text-xl font-normal mt-20">Not Covered in Warranty</li>
+                    <li className="text-xl font-normal mt-52">Domestic Warranty</li>
                     </ul>
                 </div>
             </div>
           </div>
           <div className='col-span-1'>
-            <div className='mt-24 space-y-3 ml-12'>
-                <ul className='space-y-5'>
-                <li>1 sectional sofa</li>
-                <li>TFCBLIGRBL6SRHS</li>
-                <li>Solid Wood</li>
-                <li>L-shaped</li>
-                <li>Fabric + Cotton</li>
-                <li>Bright Grey & Lion</li>
+            <div className='mt-28 ml-12'>
+                <ul>
+                <li className="text-xl font-normal">1 sectional sofa</li>
+                <li className="text-xl font-normal mt-12">TFCBLIGRBL6SRHS</li>
+                <li className="text-xl font-normal mt-9">Solid Wood</li>
+                <li className="text-xl font-normal mt-10">L-shaped</li>
+                <li className="text-xl font-normal mt-10">Fabric + Cotton</li>
+                <li className="text-xl font-normal mt-10">Bright Grey & Lion</li>
                 </ul>
             </div>
-            <div className='mt-24 space-y-3 ml-12'>
-                <ul className='space-y-5'>
-                <li>Foam</li>
-                <li>Bright Grey & Lion</li>
-                <li>No</li>
-                <li>280 KG</li>
-                <li>India</li>
+            <div className='mt-40 ml-12'>
+                <ul className='space-y-10'>
+                <li className="text-xl font-normal">Foam</li>
+                <li className="text-xl font-normal">Bright Grey & Lion</li>
+                <li className="text-xl font-normal">No</li>
+                <li className="text-xl font-normal">280 KG</li>
+                <li className="text-xl font-normal">India</li>
                 </ul>
             </div>
-            <div className='mt-24 space-y-3 ml-12'>
-                <ul className='space-y-5'>
-                <li>265.32 cm</li>
-                <li>76 cm</li>
-                <li>167.76 cm</li>
-                <li>45 KG</li>
-                <li>41.52 cm</li>
-                <li>5.46 cm</li>
+            <div className='mt-40 ml-12'>
+                <ul className='space-y-10'>
+                <li className="text-xl font-normal">265.32 cm</li>
+                <li className="text-xl font-normal">76 cm</li>
+                <li className="text-xl font-normal">167.76 cm</li>
+                <li className="text-xl font-normal">45 KG</li>
+                <li className="text-xl font-normal">41.52 cm</li>
+                <li className="text-xl font-normal">5.46 cm</li>
                 </ul>
             </div>
-            <div className='mt-24 ml-12'>
+            <div className='mt-36 ml-12'>
                 <div >
-                    <ul className='space-y-7'>
-                    <li className='h-[50px] w-[226px]'>1 Year Manufacturing Warranty</li>
-                    <li className=' w-[241px]'>For Warranty Claims or Any Product Related Issues Please Email at operations@trevifurniture.com</li>
-                    <li className='w-[241px]'>Warranty Against Manufacturing Defect</li>
-                    <li className='w-[241px] mt-10'>The Warranty Does Not Cover Damages Due To Usage Of The Product Beyond Its Intended Use And Wear & Tear In The Natural Course Of Product Usage.</li>
-                    <li >1 Year</li>
+                    <ul>
+                    <li className="text-xl font-normal w-[226px]">1 Year Manufacturing Warranty</li>
+                    <li className="text-xl font-normal  w-[241px] mt-9">For Warranty Claims or Any Product Related Issues Please Email at operations@trevifurniture.com</li>
+                    <li className="text-xl font-normal w-[241px] mt-10">Warranty Against Manufacturing Defect</li>
+                    <li className="text-xl font-normal w-[241px] mt-16">The Warranty Does Not Cover Damages Due To Usage Of The Product Beyond Its Intended Use And Wear & Tear In The Natural Course Of Product Usage.</li>
+                    <li className="text-xl font-normal mt-8">1 Year</li>
                     </ul>
                 </div>
                 <button className='bg-[#B88E2F] text-[#FFFFFF] w-[215px] h-[64px] mt-10'>Add To Cart</button>
@@ -178,53 +178,48 @@ const ProductComparison = () => {
         </div>
         <div className='col-span-1'>
             
-            <div className='mt-24 space-y-3 ml-12'>
-                <ul className='space-y-5'>
+            <div className='mt-20 ml-7'>
+                <ul className=' ml-7'>
                 
-                <li>1 Three Seater, 2 Single Seater</li>
-                <li>DTUBLIGRBL568</li>
-                <li>Solid Wood</li>
-                <li>L-shaped</li>
-                <li>Fabric + Cotton</li>
-                <li>Bright Grey & Lion</li>
+                <li className="text-xl font-normal w-[226px] mt-28">1 Three Seater, 2 Single Seater</li>
+                <li className="text-xl font-normal mt-5">DTUBLIGRBL568</li>
+                <li className="text-xl font-normal mt-9">Solid Wood</li>
+                <li className="text-xl font-normal mt-10">L-shaped</li>
+                <li className="text-xl font-normal mt-10">Fabric + Cotton</li>
+                <li className="text-xl font-normal mt-10">Bright Grey & Lion</li>
                 </ul>
             </div>
-            <div className='mt-24 space-y-3 ml-12'>
+            <div className='mt-40 ml-12'>
 
-                <ul className='space-y-5'>
-                <li>Matte</li>
-                <li>Bright Grey & Lion</li>
-                <li>yes</li>
-                <li>300 KG</li>
-                <li>India</li>
+                <ul className='space-y-10 ml-2'>
+                <li className="text-xl font-normal">Matte</li>
+                <li className="text-xl font-normal">Bright Grey & Lion</li>
+                <li className="text-xl font-normal">yes</li>
+                <li className="text-xl font-normal">300 KG</li>
+                <li className="text-xl font-normal">India</li>
                 </ul>
             </div>
-            <div className='mt-24 space-y-3 ml-12'>
+            <div className='mt-40 ml-12'>
 
-                <ul className='space-y-5'>
+                <ul className='space-y-10 ml-2'>
                 
-                <li>265.32 cm</li>
-                <li>76 cm</li>
-                <li>167.76 cm</li>
-                <li>65 KG</li>
-                <li>41.52 cm</li>
-                <li>5.46 cm</li>
+                <li className="text-xl font-normal">265.32 cm</li>
+                <li className="text-xl font-normal">76 cm</li>
+                <li className="text-xl font-normal">167.76 cm</li>
+                <li className="text-xl font-normal">65 KG</li>
+                <li className="text-xl font-normal">41.52 cm</li>
+                <li className="text-xl font-normal">5.46 cm</li>
                 </ul>
             </div>
-            <div className='mt-24 '>
-                
-                <div >
-   
-                <ul className='space-y-7 ml-12'>
-                <li className='w-[226px] h-[50px]'>1.2 Year Manufacturing Warranty</li>
-                    <li className='w-[241px] h-[100px]'>For Warranty Claims or Any Product Related Issues Please Email at support@xyz.com</li>
-                    <li className='w-[241px]'>Warranty of the product is limited to manufacturing defects only.</li>
-                    <li className='w-[241px] '> The Warranty Does Not Cover Damages Due To Usage Of The Product Beyond Its Intended Use And Wear & Tear In The Natural Course Of Product Usage.</li>
-                    <li>3 Months</li>
+            <div className='mt-36 '>
+                <ul className='space-y-9 ml-12'>
+                <li className="text-xl font-normal w-[226px]">1.2 Year Manufacturing Warranty</li>
+                    <li className="text-xl font-normal w-[241px] ">For Warranty Claims or Any Product Related Issues Please Email at support@xyz.com</li>
+                    <li className="text-xl font-normal w-[241px]">Warranty of the product is limited to manufacturing defects only.</li>
+                    <li className="text-xl font-normal w-[241px] "> The Warranty Does Not Cover Damages Due To Usage Of The Product Beyond Its Intended Use And Wear & Tear In The Natural Course Of Product Usage.</li>
+                    <li className="text-xl font-normal">3 Months</li>
                     </ul>
-                </div>
-                <button className='bg-[#B88E2F] text-[#FFFFFF] w-[215px] h-[64px] mt-9 ml-12'>Add To Cart</button>
-
+                <button className='bg-[#B88E2F] text-[#FFFFFF] w-[215px] h-[64px] mt-10 ml-12'>Add To Cart</button>
             </div>
         </div>
         <div className='col-span-1'></div>

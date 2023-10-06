@@ -5,12 +5,12 @@ import CheckOut from "../../Components/Checkout/Checkout";
 
 const index = () => {
   return (
-    <>
+    <div className="bg-[#FFFFFF]">
       <LayoutPage>
         <Sub_Checkout/>
         <CheckOut/>
       </LayoutPage>
-    </>
+    </div>
   );
 };
 

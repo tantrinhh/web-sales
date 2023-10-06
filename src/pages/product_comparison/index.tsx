@@ -3,11 +3,11 @@ import LayoutPage from "../../Components/Layout/Layout_Page";
 
 const Product_comparison = () => {
   return (
-    <>
+    <div className="bg-[#FFFFFF]">
       <LayoutPage>
         <ProductComparison />
       </LayoutPage>
-    </>
+    </div>
   );
 };
 

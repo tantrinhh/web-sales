@@ -4,12 +4,12 @@ import LayoutChildren from "../../Components/Layout/Layout_Children";
 
 const index = () => {
   return (
-    <>
+    <div className="bg-[#FFFFFF]">
       <GoToTop />
       <LayoutChildren>
         <HomePage />
       </LayoutChildren>
-    </>
+    </div>
   );
 };
 
