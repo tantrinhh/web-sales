@@ -4,10 +4,10 @@ import Sub_Cart from "../../Components/Cart/Sub_Cart";
 
 export const Cart = () => {
   return (
-    <>
+    <div className="bg-[#FFFFFF]">
       <LayoutPage>
         <Sub_Cart />
       </LayoutPage>
-    </>
+    </div>
   );
 };

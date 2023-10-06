@@ -117,7 +117,7 @@ const HomePage = () => {
           </p>
           <div className="mt-20">
             {" "}
-            <button className="bg-[#B88E2F] rounded-sm py-[25px] px-[72px]  text-white">
+            <button className="bg-[#B88E2F] rounded-sm py-[25px] px-[72px] text-white">
               BUY NOW
             </button>
           </div>
@@ -125,12 +125,12 @@ const HomePage = () => {
       </div>
 
       {/* Browse The Range */}
-      <div className="mt-20 text-center justify-center items-center container space-y-5">
+      <div className="mt-20 text-center justify-center items-center container">
         <h1 className="text-[32px] font-bold">Browse The Range</h1>
         <p className="text-[20px]">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </p>
-        <div className="flex gap-20">
+        <div className="flex gap-20 mt-20">
           <div>
             <img src={Dining} alt="" />
             <p className="font-bold mt-5 text-[24px]">Dining</p>
@@ -232,7 +232,7 @@ const HomePage = () => {
       <button className="w-[245px] h-[48px] text-[#B88E2F] text-[16px] mt-10 font-bold border-solid border-2 border-[#B88E2F] mx-[41%]">
         Show More
       </button>
-      <div className="bg-[#FCF8F3] mt-10 flex">
+      <div className="bg-[#FCF8F3] mt-20 flex">
         <div className="ml-20 mt-10">
           <h1 className="w-[422px] h-[96px] leading-[48px] font-bold text-[40px]">50+ Beautiful rooms inspiration</h1>
           <p className="w-[368px] h-[48px] font-medium leading-[24px] text-[16px] mt-1">Our designer already made a lot of beautiful prototipe of rooms that inspire you</p>

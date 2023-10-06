@@ -6,13 +6,13 @@ import GoToTop from "../../Components/Common/GoToTop";
 
 const index = () => {
   return (
-    <>
+    <div className="bg-[#FFFFFF]">
       <GoToTop />
       <LayoutPage>
         <Sub_Shop />
         <Main />
       </LayoutPage>
-    </>
+    </div>
   );
 };
 
