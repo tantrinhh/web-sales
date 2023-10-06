@@ -189,12 +189,12 @@ const HomePage = () => {
                       <div className="relative">
                         <img src={product.image} alt="" />
                         {product.discount > 0 && (
-                          <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-1.5 bg-[#E97171]">
+                          <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2 bg-[#E97171]">
                             -{product.discount}%
                           </div>
                         )}
                         {product.isNew && (
-                          <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-1.5">
+                          <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-2">
                             New
                           </div>
                         )}
