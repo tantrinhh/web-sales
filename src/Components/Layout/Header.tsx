@@ -9,8 +9,8 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <>
-      <div className="  ">
-        <div className="  fixed z-50 w-full bg-[#FFFFFF]  justify-between h-[100px] flex items-center px-10 ">
+      <div className=" mb-[100px] ">
+        <div className="  fixed z-50 w-full bg-[#FFFFFF]  justify-between h-[100px] top-0 flex items-center px-10 ">
           <div className="flex">
             <div className="mt-1">
               <img src={Logo} alt="" />
