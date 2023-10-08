@@ -7,6 +7,7 @@ const LayoutPage = ({ children }: any) => {
   return (
     <>
       <Header />
+
       {children}
       <Top_Footer />
       <Footer />

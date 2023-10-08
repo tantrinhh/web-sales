@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Vector1 from "../../assets/shop/Vector1.png";
 import Vector2 from "../../assets/shop/Vector2.png";
 import Vector3 from "../../assets/shop/Vector3.png";
-import image1 from "../../assets/shop/image1.png";
-import Images from "../../assets/shop/Images.png";
-import image3 from "../../assets/shop/image3.png";
-import image4 from "../../assets/shop/image4.png";
+import Syltherine from "../../assets/shop/image1.png";
+import Leviosa from "../../assets/shop/Images.png";
+import Lolito from "../../assets/shop/image3.png";
+import Respira from "../../assets/shop/image4.png";
 import { CiShare2 } from "react-icons/ci";
 import { BiGitCompare } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -13,100 +13,134 @@ import { Link } from "react-router-dom";
 const Main = () => {
   const products = [
     {
-      image: image1,
+      image: Syltherine,
       name: "Syltherine",
       des: "Stylish cafe chair",
-      price: "Rp 2.500.000",
+      price: 2500000,
+      discount: 30,
+      isNew: false,
     },
     {
-      image: Images,
+      image: Leviosa,
       name: "Leviosa",
       des: "Stylish cafe chair",
-      price: "Rp 2.500.000",
+      price: 2500000,
+      discount: 0,
+      isNew: false,
     },
     {
-      image: image3,
+      image: Lolito,
       name: "Lolito",
       des: "Luxury big sofa",
-      price: "Rp 7.000.000",
+      price: 7000000,
+      discount: 50,
+      isNew: false,
     },
     {
-      image: image4,
+      image: Respira,
       name: "Respira",
       des: "Outdoor bar table and stool",
-      price: "Rp 500.000",
+      price: 500000,
+      discount: 0,
+      isNew: true,
     },
     {
-      image: image1,
+      image: Syltherine,
       name: "Syltherine",
       des: "Stylish cafe chair",
-      price: "Rp 2.500.000",
+      price: 2500000,
+      discount: 30,
+      isNew: false,
     },
     {
-      image: Images,
+      image: Leviosa,
       name: "Leviosa",
       des: "Stylish cafe chair",
-      price: "Rp 2.500.000",
+      price: 2500000,
+      discount: 0,
+      isNew: false,
     },
     {
-      image: image3,
+      image: Lolito,
       name: "Lolito",
       des: "Luxury big sofa",
-      price: "Rp 7.000.000",
+      price: 7000000,
+      discount: 50,
+      isNew: false,
     },
     {
-      image: image4,
+      image: Respira,
       name: "Respira",
       des: "Outdoor bar table and stool",
-      price: "Rp 500.000",
+      price: 500000,
+      discount: 0,
+      isNew: true,
     },
+
     {
-      image: image1,
+      image: Syltherine,
       name: "Syltherine",
       des: "Stylish cafe chair",
-      price: "Rp 2.500.000",
+      price: 2500000,
+      discount: 30,
+      isNew: false,
     },
     {
-      image: Images,
+      image: Leviosa,
       name: "Leviosa",
       des: "Stylish cafe chair",
-      price: "Rp 2.500.000",
+      price: 2500000,
+      discount: 0,
+      isNew: false,
     },
     {
-      image: image3,
+      image: Lolito,
       name: "Lolito",
       des: "Luxury big sofa",
-      price: "Rp 7.000.000",
+      price: 7000000,
+      discount: 50,
+      isNew: false,
     },
     {
-      image: image4,
+      image: Respira,
       name: "Respira",
       des: "Outdoor bar table and stool",
-      price: "Rp 500.000",
+      price: 500000,
+      discount: 0,
+      isNew: true,
     },
+
     {
-      image: image1,
+      image: Syltherine,
       name: "Syltherine",
       des: "Stylish cafe chair",
-      price: "Rp 2.500.000",
+      price: 2500000,
+      discount: 30,
+      isNew: false,
     },
     {
-      image: Images,
+      image: Leviosa,
       name: "Leviosa",
       des: "Stylish cafe chair",
-      price: "Rp 2.500.000",
+      price: 2500000,
+      discount: 0,
+      isNew: false,
     },
     {
-      image: image3,
+      image: Lolito,
       name: "Lolito",
       des: "Luxury big sofa",
-      price: "Rp 7.000.000",
+      price: 7000000,
+      discount: 50,
+      isNew: false,
     },
     {
-      image: image4,
+      image: Respira,
       name: "Respira",
       des: "Outdoor bar table and stool",
-      price: "Rp 500.000",
+      price: 500000,
+      discount: 0,
+      isNew: true,
     },
   ];
   const [productPerPage, setProductPerPage] = useState<number | string>(8); // Số sản phẩm trên mỗi trang
@@ -210,7 +244,7 @@ const Main = () => {
             <div key={index}>
               <div>
                 {" "}
-                <Link to="single_product">
+                <Link to="/single_product">
                   <div className="relative ">
                     <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
                       <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
@@ -244,6 +278,16 @@ const Main = () => {
                     <div className="relative">
                       <div className="relative">
                         <img src={product.image} alt="" />
+                        {product.discount > 0 && (
+                          <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-1.5 bg-[#E97171]">
+                            -{product.discount}%
+                          </div>
+                        )}
+                        {product.isNew && (
+                          <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-1.5">
+                            New
+                          </div>
+                        )}
                         <div className="bg-[#F4F5F7] w-[285px] h-[145px] space-y-3 pl-5">
                           <h2 className=" font-semibold leading-7 text-[#3A3A3A] pt-5 text-[24px]">
                             {product.name}
@@ -251,9 +295,24 @@ const Main = () => {
                           <p className="text-[16px] font-medium leading-6 text-[#898989]">
                             {product.des}
                           </p>
-                          <h3 className="font-semibold leading-[30px] text-[#3A3A3A] text-[20px]">
-                            {product.price}
-                          </h3>
+                          {product.discount > 0 ? (
+                            <div className="flex items-center">
+                              <h3 className="font-bold text-[20px] text-[#3A3A3A]">
+                                Rp {product.price.toLocaleString()}
+                              </h3>
+                              <span className="text-[16px] text-[#B0B0B0] line-through ml-3">
+                                Rp{" "}
+                                {(
+                                  product.price +
+                                  product.price * (product.discount / 100)
+                                ).toLocaleString()}
+                              </span>
+                            </div>
+                          ) : (
+                            <h3 className="font-bold text-[20px] text-[#3A3A3A]">
+                              Rp {product.price.toLocaleString()}
+                            </h3>
+                          )}
                         </div>
                       </div>
                     </div>
