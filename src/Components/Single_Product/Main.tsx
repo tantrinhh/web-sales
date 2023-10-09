@@ -222,7 +222,7 @@ const Main = () => {
             <div></div>
           </div>
         </div>
-        <div className="border-t border border-[#9F9F9F]"></div>
+        <div className="border-t border border-[#D9D9D9]"></div>
         <div className=" ">
           <div className="flex max-w-[650px] mx-auto gap-10 justify-between font-medium text-2xl leading-9 my-14">
             <div className="text-[#000000]">Description</div>
@@ -258,7 +258,7 @@ const Main = () => {
             </div>
           </div>
         </div>
-        <div className="border-t border border-[#9F9F9F]"></div>
+        <div className="border-t border border-[#D9D9D9]"></div>
         <div>
           <div className="text-center font-medium text-4xl leading-[54px] text-[#000000] mb-5 mt-14">
             Related Products
@@ -306,7 +306,7 @@ const Main = () => {
                             <div className="relative">
                               <img src={fakeData.image} alt="" />
                               {fakeData.discount > 0 && (
-                                <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-1.5 bg-[#E97171]">
+                                <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2.5 bg-[#E97171]">
                                   -{fakeData.discount}%
                                 </div>
                               )}
