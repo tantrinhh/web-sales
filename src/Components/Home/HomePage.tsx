@@ -234,7 +234,7 @@ const HomePage = () => {
         </div>
       </div>
       <button className="w-[245px] h-[48px] text-[#B88E2F] text-[16px] mt-10 font-bold border-solid border-2 border-[#B88E2F] mx-[41%]">
-        Show More
+        <Link to='/shop'>Show More</Link>
       </button>
       <div className="bg-[#FCF8F3] mt-20 flex">
         <div className="ml-20 mt-10">
