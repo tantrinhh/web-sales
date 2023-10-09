@@ -1,5 +1,6 @@
 import { AiTwotoneDelete } from "react-icons/ai";
 import Asgaardsofa from "../../assets/cart/Asgaardsofa.png";
+import { Link } from "react-router-dom";
 const Main_Cart = () => {
   return (
     <>
@@ -54,7 +55,7 @@ const Main_Cart = () => {
           </div>
           <div>
             <button className="border border-black rounded-[15px] px-20 h-14 font-normal text-xl mt-2 ">
-              Check Out
+              <Link to="/checkout"> Check Out</Link>
             </button>
           </div>
         </div>

@@ -26,11 +26,11 @@ import { CiShare2 } from "react-icons/ci";
 import { BiGitCompare } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import './styles.css';
-import { Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "./styles.css";
+import { Pagination } from "swiper/modules";
 const HomePage = () => {
   const products = [
     {
@@ -39,7 +39,7 @@ const HomePage = () => {
       des: "Stylish cafe chair",
       price: 2500000,
       discount: 30,
-      isNew: false
+      isNew: false,
     },
     {
       image: Leviosa,
@@ -47,7 +47,7 @@ const HomePage = () => {
       des: "Stylish cafe chair",
       price: 2500000,
       discount: 0,
-      isNew: false
+      isNew: false,
     },
     {
       image: Lolito,
@@ -63,7 +63,7 @@ const HomePage = () => {
       des: "Outdoor bar table and stool",
       price: 500000,
       discount: 0,
-      isNew: true
+      isNew: true,
     },
     {
       image: Grifo,
@@ -71,7 +71,7 @@ const HomePage = () => {
       des: "Night lamp",
       price: 1500000,
       discount: 0,
-      isNew: false
+      isNew: false,
     },
     {
       image: Muggo,
@@ -79,7 +79,7 @@ const HomePage = () => {
       des: "SSmall mug",
       price: 150000,
       discount: 0,
-      isNew: true
+      isNew: true,
     },
     {
       image: Pingky,
@@ -87,7 +87,7 @@ const HomePage = () => {
       des: "Cute bed set",
       price: 7000000,
       discount: 50,
-      isNew: false
+      isNew: false,
     },
     {
       image: Potty,
@@ -95,10 +95,10 @@ const HomePage = () => {
       des: "Minimalist flower pot",
       price: 500000,
       discount: 0,
-      isNew: true
+      isNew: true,
     },
   ];
-  
+
   return (
     <>
       {/* Sub header */}
@@ -189,7 +189,7 @@ const HomePage = () => {
                       <div className="relative">
                         <img src={product.image} alt="" />
                         {product.discount > 0 && (
-                          <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2 bg-[#E97171]">
+                          <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2.5 bg-[#E97171]">
                             -{product.discount}%
                           </div>
                         )}
@@ -211,7 +211,11 @@ const HomePage = () => {
                                 Rp {product.price.toLocaleString()}
                               </h3>
                               <span className="text-[16px] text-[#B0B0B0] line-through ml-3">
-                                Rp {(product.price + (product.price * (product.discount / 100))).toLocaleString()}
+                                Rp{" "}
+                                {(
+                                  product.price +
+                                  product.price * (product.discount / 100)
+                                ).toLocaleString()}
                               </span>
                             </div>
                           ) : (
@@ -234,9 +238,16 @@ const HomePage = () => {
       </button>
       <div className="bg-[#FCF8F3] mt-20 flex">
         <div className="ml-20 mt-10">
-          <h1 className="w-[422px] h-[96px] leading-[48px] font-bold text-[40px]">50+ Beautiful rooms inspiration</h1>
-          <p className="w-[368px] h-[48px] font-medium leading-[24px] text-[16px] mt-1">Our designer already made a lot of beautiful prototipe of rooms that inspire you</p>
-          <button className='bg-[#B88E2F] text-[#FFFFFF] w-[176px] h-[48px] mt-10'>Explore More</button>
+          <h1 className="w-[422px] h-[96px] leading-[48px] font-bold text-[40px]">
+            50+ Beautiful rooms inspiration
+          </h1>
+          <p className="w-[368px] h-[48px] font-medium leading-[24px] text-[16px] mt-1">
+            Our designer already made a lot of beautiful prototipe of rooms that
+            inspire you
+          </p>
+          <button className="bg-[#B88E2F] text-[#FFFFFF] w-[176px] h-[48px] mt-10">
+            Explore More
+          </button>
         </div>
         <Swiper
           slidesPerView={4}
@@ -248,9 +259,15 @@ const HomePage = () => {
           modules={[Pagination]}
           className="mySwiper"
         >
-          <SwiperSlide><img src={image1}/></SwiperSlide>
-          <SwiperSlide><img src={image2}/></SwiperSlide>
-          <SwiperSlide><img src={image2}/></SwiperSlide>
+          <SwiperSlide>
+            <img src={image1} />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src={image2} />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src={image2} />
+          </SwiperSlide>
         </Swiper>
       </div>
       <p className="text-center text-[20px] leading-7 font-semibold mt-20">
