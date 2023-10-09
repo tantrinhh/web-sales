@@ -4,11 +4,11 @@ import Main from "../../Components/Single_Product/Main";
 
 const Single_product = () => {
   return (
-    <>
+    <div className="bg-[#FFFFFF]">
       <LayoutChildren>
         <Main />
       </LayoutChildren>
-    </>
+    </div>
   );
 };
 
