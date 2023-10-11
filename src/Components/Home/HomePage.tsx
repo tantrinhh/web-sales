@@ -54,6 +54,12 @@ const HomePage: React.FC = () => {
       setListUsers(res.data);
     }
   };
+  const today: Date = new Date();
+  function isProductNew(product: data): boolean {
+    const productAddedDate: Date = new Date(product.dateAdded); // Chuyển đổi chuỗi thành Date
+    const daysDifference: number = Math.ceil((today.getTime() - productAddedDate.getTime()) / (1000 * 60 * 60 * 24));
+    return daysDifference <= 7;
+  }
 
   return (
     <>
@@ -161,7 +167,7 @@ const HomePage: React.FC = () => {
                             -{item.discount}%
                           </div>
                         )}
-                        {item.s && (
+                        {isProductNew(item) && (
                           <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-2">
                             New
                           </div>
@@ -228,13 +234,13 @@ const HomePage: React.FC = () => {
           className="mySwiper"
         >
           <SwiperSlide>
-            <img src={image1} alt="" />
+            <img src={image1} alt=""/>
           </SwiperSlide>
           <SwiperSlide>
-            <img src={image2} alt="" />
+            <img src={image2} alt=""/>
           </SwiperSlide>
           <SwiperSlide>
-            <img src={image2} alt="" />
+            <img src={image2} alt=""/>
           </SwiperSlide>
         </Swiper>
       </div>
