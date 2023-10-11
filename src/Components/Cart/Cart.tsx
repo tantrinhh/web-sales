@@ -6,7 +6,7 @@ import { RootState } from '../store';
 import { removeFromCart } from '../cartSlice';
 import { useDispatch } from 'react-redux';
 
-const Main_Cart = () => {
+const Cart = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
   const total = cartItems.reduce((acc, item) => {
@@ -78,4 +78,4 @@ const Main_Cart = () => {
   );
 };
 
-export default Main_Cart;
+export default Cart;

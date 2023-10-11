@@ -1,12 +1,10 @@
-import { AiOutlineRight } from "react-icons/ai";
-import { Link } from "react-router-dom";
 import Rectangle1 from "../../assets/shop/Rectangle1.png";
 import Logo from "../../assets/Logo.png";
-
-const Sub_blog = () => {
+import { AiOutlineRight } from "react-icons/ai";
+import { Link } from "react-router-dom";
+const SubShop = () => {
   return (
     <>
-      {" "}
       <div className="">
         <div className="relative">
           <img src={Rectangle1} className="w-screen" alt="" />
@@ -15,7 +13,7 @@ const Sub_blog = () => {
             <img src={Logo} alt="" />
           </div>
           <div className="absolute -translate-x-2/4 top-1/2 left-1/2   -mt-6  item-center text-center  text-[#000000]  ">
-            <p className="lg:text-5xl  leading-[72px] font-medium">Blog</p>
+            <p className="lg:text-5xl  leading-[72px] font-medium">Shop</p>
           </div>
           <div className="flex absolute  -translate-x-2/4  lg:bottom-24 max-md:-bottom-3 left-1/2   lg:py-4  justify-between  text-base   leading-6  ">
             <button className="text-[#000000] lg:font-medium mr-2">
@@ -25,12 +23,12 @@ const Sub_blog = () => {
               {" "}
               <AiOutlineRight style={{ width: "12px", height: "12px" }} />
             </div>
-            <button className=" font-light ml-2">Blog</button>
+            <button className=" font-light ml-2">Shop</button>
           </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Sub_blog
+export default SubShop;

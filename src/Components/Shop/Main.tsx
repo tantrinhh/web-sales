@@ -11,138 +11,170 @@ import { BiGitCompare } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 const Main = () => {
-  const products = [
+  interface Product {
+    id: number;
+    image: string;
+    name: string;
+    des: string;
+    price: number;
+    discount: number;
+    dateAdded: string; 
+  }
+  
+  const today: Date = new Date();
+  const products: Product[]  = [
     {
+      id: 1,
       image: Syltherine,
       name: "Syltherine",
       des: "Stylish cafe chair",
       price: 3500000,
       discount: 30,
-      isNew: false,
+      dateAdded: new Date("2023-10-01").toISOString(),
     },
     {
+      id: 2,
       image: Leviosa,
       name: "Leviosa",
       des: "Stylish cafe chair",
       price: 2500000,
       discount: 0,
-      isNew: false,
+      dateAdded: new Date("2023-10-01").toISOString(),
     },
     {
+      id: 3,
       image: Lolito,
       name: "Lolito",
       des: "Luxury big sofa",
       price: 14000000,
       discount: 50,
-      isNew: false,
+      dateAdded: new Date("2023-10-01").toISOString(),
     },
     {
+      id: 4,
       image: Respira,
       name: "Respira",
       des: "Outdoor bar table and stool",
       price: 500000,
       discount: 0,
-      isNew: true,
+      dateAdded: new Date("2023-10-11").toISOString(),
     },
     {
+      id: 1,
       image: Syltherine,
       name: "Syltherine",
       des: "Stylish cafe chair",
       price: 3500000,
       discount: 30,
-      isNew: false,
+      dateAdded: new Date("2023-10-01").toISOString(),
     },
     {
+      id: 2,
       image: Leviosa,
       name: "Leviosa",
       des: "Stylish cafe chair",
       price: 2500000,
       discount: 0,
-      isNew: false,
+      dateAdded: new Date("2023-10-01").toISOString(),
     },
     {
+      id: 3,
       image: Lolito,
       name: "Lolito",
       des: "Luxury big sofa",
       price: 14000000,
       discount: 50,
-      isNew: false,
+      dateAdded: new Date("2023-10-01").toISOString(),
     },
     {
+      id: 4,
       image: Respira,
       name: "Respira",
       des: "Outdoor bar table and stool",
       price: 500000,
       discount: 0,
-      isNew: true,
+      dateAdded: new Date("2023-10-11").toISOString(),
     },
 
     {
+      id: 1,
       image: Syltherine,
       name: "Syltherine",
       des: "Stylish cafe chair",
       price: 3500000,
       discount: 30,
-      isNew: false,
+      dateAdded: new Date("2023-10-01").toISOString(),
     },
     {
+      id: 2,
       image: Leviosa,
       name: "Leviosa",
       des: "Stylish cafe chair",
       price: 2500000,
       discount: 0,
-      isNew: false,
+      dateAdded: new Date("2023-10-01").toISOString(),
     },
     {
+      id: 3,
       image: Lolito,
       name: "Lolito",
       des: "Luxury big sofa",
       price: 14000000,
       discount: 50,
-      isNew: false,
+      dateAdded: new Date("2023-10-01").toISOString(),
     },
     {
+      id: 4,
       image: Respira,
       name: "Respira",
       des: "Outdoor bar table and stool",
       price: 500000,
       discount: 0,
-      isNew: true,
+      dateAdded: new Date("2023-10-11").toISOString(),
     },
 
     {
+      id: 1,
       image: Syltherine,
       name: "Syltherine",
       des: "Stylish cafe chair",
       price: 3500000,
       discount: 30,
-      isNew: false,
+      dateAdded: new Date("2023-10-01").toISOString(),
     },
     {
+      id: 2,
       image: Leviosa,
       name: "Leviosa",
       des: "Stylish cafe chair",
       price: 2500000,
       discount: 0,
-      isNew: false,
+      dateAdded: new Date("2023-10-01").toISOString(),
     },
     {
+      id: 3,
       image: Lolito,
       name: "Lolito",
       des: "Luxury big sofa",
       price: 14000000,
       discount: 50,
-      isNew: false,
+      dateAdded: new Date("2023-10-01").toISOString(),
     },
     {
+      id: 4,
       image: Respira,
       name: "Respira",
       des: "Outdoor bar table and stool",
       price: 500000,
       discount: 0,
-      isNew: true,
+      dateAdded: new Date("2023-10-11").toISOString(),
     },
   ];
+  function isProductNew(product: Product): boolean {
+    const productAddedDate: Date = new Date(product.dateAdded); // Chuyển đổi chuỗi thành Date
+    const daysDifference: number = Math.ceil((today.getTime() - productAddedDate.getTime()) / (1000 * 60 * 60 * 24));
+    return daysDifference <= 7;
+  }
   const [productPerPage, setProductPerPage] = useState<number | string>(8); // Số sản phẩm trên mỗi trang
   const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
   const totalPages = Math.ceil(products.length / (+productPerPage || 1));
@@ -283,7 +315,7 @@ const Main = () => {
                             -{product.discount}%
                           </div>
                         )}
-                        {product.isNew && (
+                        {isProductNew(product) && (
                           <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-1.5">
                             New
                           </div>

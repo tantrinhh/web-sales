@@ -1,19 +1,19 @@
 import React from "react";
-import Sub_Shop from "../../Components/Shop/Sub_Shop";
+import SubShop from "../../Components/Shop/SubShop";
 import Main from "../../Components/Shop/Main";
 import LayoutPage from "../../Components/Layout/Layout_Page";
 import GoToTop from "../../Components/Common/GoToTop";
 
-const index = () => {
+const shop = () => {
   return (
     <div className="bg-[#FFFFFF]">
       <GoToTop />
       <LayoutPage>
-        <Sub_Shop />
+        <SubShop />
         <Main />
       </LayoutPage>
     </div>
   );
 };
 
-export default index;
+export default shop;

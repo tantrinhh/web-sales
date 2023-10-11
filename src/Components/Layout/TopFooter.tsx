@@ -5,7 +5,7 @@ import Vector1 from "../../assets/top-footer/Vector1.png";
 
 import Vector2 from "../../assets/top-footer/Vector2.png";
 
-const Top_Footer = () => {
+const TopFooter = () => {
   return (
     <>
       <div className="bg-[#FAF3EA] py-24">
@@ -68,4 +68,4 @@ const Top_Footer = () => {
     </>
   );
 };
-export default Top_Footer;
+export default TopFooter;

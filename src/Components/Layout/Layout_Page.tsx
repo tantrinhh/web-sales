@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import Top_Footer from "./Top_Footer";
+import TopFooter from "./TopFooter";
 
 const LayoutPage = ({ children }: any) => {
   return (
@@ -9,7 +9,7 @@ const LayoutPage = ({ children }: any) => {
       <Header />
 
       {children}
-      <Top_Footer />
+      <TopFooter />
       <Footer />
     </>
   );

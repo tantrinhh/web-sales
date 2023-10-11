@@ -1,15 +1,16 @@
 import React from "react";
 import LayoutPage from "../../Components/Layout/Layout_Page";
-import Sub_Cart from "../../Components/Cart/Sub_Cart";
-import Main_Cart from "../../Components/Cart/Cart";
+import SubCart from "../../Components/Cart/SubCart";
+import MainCart from "../../Components/Cart/Cart";
 
-export const Cart = () => {
+const cart = () => {
   return (
     <div className="bg-[#FFFFFF]">
       <LayoutPage>
-        <Sub_Cart />
-        <Main_Cart />
+        <SubCart />
+        <MainCart />
       </LayoutPage>
     </div>
   );
 };
+export default cart;
