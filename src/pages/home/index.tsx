@@ -1,7 +1,7 @@
 import GoToTop from "../../Components/Common/GoToTop";
 import HomePage from "../../Components/Home/HomePage";
-import LayoutChildren from "../../Components/Layout/Layout_Children";
-const index = () => {
+import LayoutChildren from "../../Components/Layout/LayoutChildren";
+const home = () => {
   return (
     <div className="bg-[#FFFFFF]">
       <GoToTop />
@@ -12,4 +12,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default home;

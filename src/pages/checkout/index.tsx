@@ -1,17 +1,17 @@
 import React from "react";
 import LayoutPage from "../../Components/Layout/Layout_Page";
-import Sub_Checkout from "../../Components/Checkout/Sub_Checkout"
+import SubCheckout from "../../Components/Checkout/SubCheckout"
 import CheckOut from "../../Components/Checkout/Checkout";
 
-const index = () => {
+const checkout = () => {
   return (
     <div className="bg-[#FFFFFF]">
       <LayoutPage>
-        <Sub_Checkout/>
+        <SubCheckout/>
         <CheckOut/>
       </LayoutPage>
     </div>
   );
 };
 
-export default index;
+export default checkout;

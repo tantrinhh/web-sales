@@ -1,17 +1,17 @@
 import React from "react";
 import LayoutPage from "../../Components/Layout/Layout_Page";
 import Blog from "../../Components/Blog/blog";
-import Sub_blog from "../../Components/Blog/sub_blog"
+import Subblog from "../../Components/Blog/subBlog"
 
-const index = () => {
+const blog = () => {
   return (
     <div className="bg-[#FFFFFF]">
     <LayoutPage>
-      <Sub_blog/>
+      <Subblog/>
       <Blog/>
     </LayoutPage>
     </div>
   )
 };
 
-export default index;
+export default blog;

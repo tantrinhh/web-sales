@@ -34,7 +34,18 @@ import { Pagination } from "swiper/modules";
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../Components/cartSlice';
 const HomePage = () => {
-  const products  = [
+  interface Product {
+    id: number;
+    image: string;
+    name: string;
+    des: string;
+    price: number;
+    discount: number;
+    dateAdded: string; 
+  }
+  
+  const today: Date = new Date();
+  const products: Product[]  = [
     {
       id: 1,
       image: Syltherine,
@@ -42,7 +53,7 @@ const HomePage = () => {
       des: "Stylish cafe chair",
       price: 3500000,
       discount: 30,
-      isNew: false,
+      dateAdded: new Date("2023-10-01").toISOString(),
     },
     {
       id: 2,
@@ -51,7 +62,7 @@ const HomePage = () => {
       des: "Stylish cafe chair",
       price: 2500000,
       discount: 0,
-      isNew: false,
+      dateAdded: new Date("2023-10-01").toISOString(),
     },
     {
       id: 3,
@@ -60,7 +71,7 @@ const HomePage = () => {
       des: "Luxury big sofa",
       price: 14000000,
       discount: 50,
-      isNew: false,
+      dateAdded: new Date("2023-10-01").toISOString(),
     },
     {
       id: 4,
@@ -69,7 +80,7 @@ const HomePage = () => {
       des: "Outdoor bar table and stool",
       price: 500000,
       discount: 0,
-      isNew: true,
+      dateAdded: new Date("2023-10-11").toISOString(),
     },
     {
       id: 5,
@@ -78,16 +89,16 @@ const HomePage = () => {
       des: "Night lamp",
       price: 1500000,
       discount: 0,
-      isNew: false,
+      dateAdded: new Date("2023-10-01").toISOString(),
     },
     {
       id: 6,
       image: Muggo,
       name: "Muggo",
-      des: "SSmall mug",
+      des: "Small mug",
       price: 150000,
       discount: 0,
-      isNew: true,
+      dateAdded: new Date("2023-10-11").toISOString(),
     },
     {
       id: 7,
@@ -96,7 +107,7 @@ const HomePage = () => {
       des: "Cute bed set",
       price: 14000000,
       discount: 50,
-      isNew: false,
+      dateAdded: new Date("2023-10-01").toISOString(),
     },
     {
       id: 8,
@@ -105,11 +116,18 @@ const HomePage = () => {
       des: "Minimalist flower pot",
       price: 500000,
       discount: 0,
-      isNew: true,
+      dateAdded: new Date("2023-10-11").toISOString(),
     },
   ];
+
+  function isProductNew(product: Product): boolean {
+    const productAddedDate: Date = new Date(product.dateAdded); // Chuyển đổi chuỗi thành Date
+    const daysDifference: number = Math.ceil((today.getTime() - productAddedDate.getTime()) / (1000 * 60 * 60 * 24));
+    return daysDifference <= 7;
+  }
+
   const dispatch = useDispatch();
-  
+ 
   return (
     <>
       {/* Sub header */}
@@ -204,7 +222,7 @@ const HomePage = () => {
                             -{product.discount}%
                           </div>
                         )}
-                        {product.isNew && (
+                        {isProductNew(product) && (
                           <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-2">
                             New
                           </div>

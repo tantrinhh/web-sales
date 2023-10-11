@@ -1,17 +1,17 @@
 import React from "react";
-import Sub_Contact from "../../Components/Contact/Sub_Contact";
+import SubContact from "../../Components/Contact/SubContact";
 import Main from "../../Components/Contact/Main";
 import LayoutPage from "../../Components/Layout/Layout_Page";
 
-const index = () => {
+const contact = () => {
   return (
     <div className="bg-[#FFFFFF]">
       <LayoutPage>
-        <Sub_Contact />
+        <SubContact />
         <Main />
       </LayoutPage>
     </div>
   );
 };
 
-export default index;
+export default contact;
