@@ -3,14 +3,7 @@ import MaskGroup from "../../assets/home/MaskGroup.jpg";
 import Dining from "../../assets/home/Dining.png";
 import Living from "../../assets/home/Image-living room.png";
 import Bedroom from "../../assets/home/Bedroom.png";
-import Syltherine from "../../assets/home/Syltherine.png";
-import Leviosa from "../../assets/home/Leviosa.png";
-import Lolito from "../../assets/home/Lolito.png";
-import Respira from "../../assets/home/Respira.png";
-import Grifo from "../../assets/home/Grifo.png";
-import Muggo from "../../assets/home/Muggo.png";
-import Pingky from "../../assets/home/Pingky.png";
-import Potty from "../../assets/home/Potty.png";
+
 import Rectangle36 from "../../assets/home/Rectangle36.png";
 import Rectangle37 from "../../assets/home/Rectangle37.png";
 import Rectangle38 from "../../assets/home/Rectangle38.png";
@@ -31,103 +24,37 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "./styles.css";
 import { Pagination } from "swiper/modules";
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../../Components/cartSlice';
-const HomePage = () => {
-  interface Product {
-    id: number;
-    image: string;
-    name: string;
-    des: string;
-    price: number;
-    discount: number;
-    dateAdded: string; 
-  }
-  
-  const today: Date = new Date();
-  const products: Product[]  = [
-    {
-      id: 1,
-      image: Syltherine,
-      name: "Syltherine",
-      des: "Stylish cafe chair",
-      price: 3500000,
-      discount: 30,
-      dateAdded: new Date("2023-10-01").toISOString(),
-    },
-    {
-      id: 2,
-      image: Leviosa,
-      name: "Leviosa",
-      des: "Stylish cafe chair",
-      price: 2500000,
-      discount: 0,
-      dateAdded: new Date("2023-10-01").toISOString(),
-    },
-    {
-      id: 3,
-      image: Lolito,
-      name: "Lolito",
-      des: "Luxury big sofa",
-      price: 14000000,
-      discount: 50,
-      dateAdded: new Date("2023-10-01").toISOString(),
-    },
-    {
-      id: 4,
-      image: Respira,
-      name: "Respira",
-      des: "Outdoor bar table and stool",
-      price: 500000,
-      discount: 0,
-      dateAdded: new Date("2023-10-11").toISOString(),
-    },
-    {
-      id: 5,
-      image: Grifo,
-      name: "Grifo",
-      des: "Night lamp",
-      price: 1500000,
-      discount: 0,
-      dateAdded: new Date("2023-10-01").toISOString(),
-    },
-    {
-      id: 6,
-      image: Muggo,
-      name: "Muggo",
-      des: "Small mug",
-      price: 150000,
-      discount: 0,
-      dateAdded: new Date("2023-10-11").toISOString(),
-    },
-    {
-      id: 7,
-      image: Pingky,
-      name: "Pingky",
-      des: "Cute bed set",
-      price: 14000000,
-      discount: 50,
-      dateAdded: new Date("2023-10-01").toISOString(),
-    },
-    {
-      id: 8,
-      image: Potty,
-      name: "Potty",
-      des: "Minimalist flower pot",
-      price: 500000,
-      discount: 0,
-      dateAdded: new Date("2023-10-11").toISOString(),
-    },
-  ];
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/cartSlice";
+import { useEffect, useState } from "react";
+import { usesSevice } from "../../store/services/getApi";
 
-  function isProductNew(product: Product): boolean {
-    const productAddedDate: Date = new Date(product.dateAdded); // Chuyển đổi chuỗi thành Date
-    const daysDifference: number = Math.ceil((today.getTime() - productAddedDate.getTime()) / (1000 * 60 * 60 * 24));
-    return daysDifference <= 7;
-  }
+type data = {
+  id: number;
+  image: string;
+  name: string;
+  des: string;
+  price: number;
+  discount: number;
+  dateAdded: string;
+  [key: string]: any; // Thêm chỉ mục kiểu 'string' vào đây
+};
+const HomePage: React.FC = () => {
+  const [listUsers, setListUsers] = useState<data[]>([]);
 
   const dispatch = useDispatch();
- 
+
+  useEffect(() => {
+    getUSers();
+  }, []);
+
+  const getUSers = async () => {
+    let res = await usesSevice();
+    if (res && res.data && res.data) {
+      setListUsers(res.data);
+    }
+  };
+
   return (
     <>
       {/* Sub header */}
@@ -175,19 +102,27 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Our product */}
       <div className="mt-20 container">
         <h1 className="text-center text-[40px] font-bold mb-5">Our Products</h1>
         <div className="grid grid-cols-4 gap-y-14 ">
-          {products.map((product) => {
+          {listUsers.map((item: data, index) => {
             return (
-              <div key={product.id}>
+              <div key={item.id}>
                 {" "}
-                <Link to={`/single_product/${product.id}`}>
+                <Link to={`/singleProduct/${item.id}`}>
                   <div className="relative ">
                     <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
                       <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
-                        <Link to="/cart" onClick={() => dispatch(addToCart({ productId: product.id, quantity: 1 }))}>Add to cart</Link>
+                        <Link
+                          to="/cart"
+                          onClick={() =>
+                            dispatch(
+                              addToCart({ productId: item.id, quantity: 1 })
+                            )
+                          }
+                        >
+                          Add to cart
+                        </Link>
                       </div>
                       <div className="flex gap-5 text-[#FFFFFF] text-base leading-6 font-semibold">
                         <div className="flex">
@@ -202,7 +137,7 @@ const HomePage = () => {
                           </div>
                           <div className=" cursor-pointer">
                             {" "}
-                            <Link to="/product_comparison">Compare</Link>
+                            <Link to="/item_comparison">Compare</Link>
                           </div>
                         </div>
                         <div className="flex">
@@ -216,40 +151,44 @@ const HomePage = () => {
 
                     <div className="relative">
                       <div className="relative">
-                        <img src={product.image} alt="" />
-                        {product.discount > 0 && (
+                        <img
+                          src={item.image}
+                          className="w-[285px] h-[305px]"
+                          alt=""
+                        />
+                        {item.discount > 0 && (
                           <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2.5 bg-[#E97171]">
-                            -{product.discount}%
+                            -{item.discount}%
                           </div>
                         )}
-                        {isProductNew(product) && (
+                        {item.s && (
                           <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-2">
                             New
                           </div>
                         )}
                         <div className="bg-[#F4F5F7] w-[285px] h-[145px] space-y-3 pl-5">
                           <h2 className=" font-semibold leading-7 text-[#3A3A3A] pt-5 text-[24px]">
-                            {product.name}
+                            {item.name}
                           </h2>
                           <p className="text-[16px] font-medium leading-6 text-[#898989]">
-                            {product.des}
+                            {item.des}
                           </p>
-                          {product.discount > 0 ? (
+                          {item.discount > 0 ? (
                             <div className="flex items-center">
                               <h3 className="font-bold text-[20px] text-[#3A3A3A]">
-                                Rp {(
-                                  product.price -
-                                  product.price * (product.discount / 100)
+                                Rp{" "}
+                                {(
+                                  item.price -
+                                  item.price * (item.discount / 100)
                                 ).toLocaleString()}
                               </h3>
                               <span className="text-[16px] text-[#B0B0B0] line-through ml-3">
-                                Rp{" "}
-                                {product.price.toLocaleString()}
+                                Rp {item.price.toLocaleString()}
                               </span>
                             </div>
                           ) : (
                             <h3 className="font-bold text-[20px] text-[#3A3A3A]">
-                              Rp {product.price.toLocaleString()}
+                              Rp {item.price.toLocaleString()}
                             </h3>
                           )}
                         </div>
@@ -263,7 +202,7 @@ const HomePage = () => {
         </div>
       </div>
       <button className="w-[245px] h-[48px] text-[#B88E2F] text-[16px] mt-10 font-bold border-solid border-2 border-[#B88E2F] mx-[41%]">
-        <Link to='/shop'>Show More</Link>
+        <Link to="/shop">Show More</Link>
       </button>
       <div className="bg-[#FCF8F3] mt-20 flex">
         <div className="ml-20 mt-10">
@@ -289,13 +228,13 @@ const HomePage = () => {
           className="mySwiper"
         >
           <SwiperSlide>
-            <img src={image1} />
+            <img src={image1} alt="" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={image2} />
+            <img src={image2} alt="" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={image2} />
+            <img src={image2} alt="" />
           </SwiperSlide>
         </Swiper>
       </div>

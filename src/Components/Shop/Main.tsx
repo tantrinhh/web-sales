@@ -18,11 +18,11 @@ const Main = () => {
     des: string;
     price: number;
     discount: number;
-    dateAdded: string; 
+    dateAdded: string;
   }
-  
+
   const today: Date = new Date();
-  const products: Product[]  = [
+  const products: Product[] = [
     {
       id: 1,
       image: Syltherine,
@@ -172,7 +172,9 @@ const Main = () => {
   ];
   function isProductNew(product: Product): boolean {
     const productAddedDate: Date = new Date(product.dateAdded); // Chuyển đổi chuỗi thành Date
-    const daysDifference: number = Math.ceil((today.getTime() - productAddedDate.getTime()) / (1000 * 60 * 60 * 24));
+    const daysDifference: number = Math.ceil(
+      (today.getTime() - productAddedDate.getTime()) / (1000 * 60 * 60 * 24)
+    );
     return daysDifference <= 7;
   }
   const [productPerPage, setProductPerPage] = useState<number | string>(8); // Số sản phẩm trên mỗi trang
@@ -271,7 +273,7 @@ const Main = () => {
         </div>
       </div>
       <div className="my-20 container gap-x-5 gap-y-7 ">
-        <div className="grid grid-cols-4  gap-y-14 ">
+        <div className="grid max-md: justify-center md:grid-cols-4  gap-y-14 ">
           {currentProducts.map((product, index) => (
             <div key={index}>
               <div>
@@ -311,7 +313,7 @@ const Main = () => {
                       <div className="relative">
                         <img src={product.image} alt="" />
                         {product.discount > 0 && (
-                          <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2.5 bg-[#E97171]">
+                          <div className="absolute md:top-6 top-7 md:right-20 right-7 text-white rounded-full w-10 h-10 items-center text-center pt-2.5 bg-[#E97171]">
                             -{product.discount}%
                           </div>
                         )}
@@ -330,14 +332,14 @@ const Main = () => {
                           {product.discount > 0 ? (
                             <div className="flex items-center">
                               <h3 className="font-bold text-[20px] text-[#3A3A3A]">
-                                Rp {(
+                                Rp{" "}
+                                {(
                                   product.price -
                                   product.price * (product.discount / 100)
                                 ).toLocaleString()}
                               </h3>
                               <span className="text-[16px] text-[#B0B0B0] line-through ml-3">
-                                Rp{" "}
-                                {product.price.toLocaleString()}
+                                Rp {product.price.toLocaleString()}
                               </span>
                             </div>
                           ) : (
