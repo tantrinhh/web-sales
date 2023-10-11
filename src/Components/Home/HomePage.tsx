@@ -31,17 +31,21 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "./styles.css";
 import { Pagination } from "swiper/modules";
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../Components/cartSlice';
 const HomePage = () => {
-  const products = [
+  const products  = [
     {
+      id: 1,
       image: Syltherine,
       name: "Syltherine",
       des: "Stylish cafe chair",
-      price: 2500000,
+      price: 3500000,
       discount: 30,
       isNew: false,
     },
     {
+      id: 2,
       image: Leviosa,
       name: "Leviosa",
       des: "Stylish cafe chair",
@@ -50,14 +54,16 @@ const HomePage = () => {
       isNew: false,
     },
     {
+      id: 3,
       image: Lolito,
       name: "Lolito",
       des: "Luxury big sofa",
-      price: 7000000,
+      price: 14000000,
       discount: 50,
       isNew: false,
     },
     {
+      id: 4,
       image: Respira,
       name: "Respira",
       des: "Outdoor bar table and stool",
@@ -66,6 +72,7 @@ const HomePage = () => {
       isNew: true,
     },
     {
+      id: 5,
       image: Grifo,
       name: "Grifo",
       des: "Night lamp",
@@ -74,6 +81,7 @@ const HomePage = () => {
       isNew: false,
     },
     {
+      id: 6,
       image: Muggo,
       name: "Muggo",
       des: "SSmall mug",
@@ -82,14 +90,16 @@ const HomePage = () => {
       isNew: true,
     },
     {
+      id: 7,
       image: Pingky,
       name: "Pingky",
       des: "Cute bed set",
-      price: 7000000,
+      price: 14000000,
       discount: 50,
       isNew: false,
     },
     {
+      id: 8,
       image: Potty,
       name: "Potty",
       des: "Minimalist flower pot",
@@ -98,7 +108,8 @@ const HomePage = () => {
       isNew: true,
     },
   ];
-
+  const dispatch = useDispatch();
+  
   return (
     <>
       {/* Sub header */}
@@ -152,13 +163,13 @@ const HomePage = () => {
         <div className="grid grid-cols-4 gap-y-14 ">
           {products.map((product) => {
             return (
-              <div>
+              <div key={product.id}>
                 {" "}
-                <Link to="single_product">
+                <Link to={`/single_product/${product.id}`}>
                   <div className="relative ">
                     <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
                       <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
-                        <Link to="/cart">Add to cart</Link>
+                        <Link to="/cart" onClick={() => dispatch(addToCart({ productId: product.id, quantity: 1 }))}>Add to cart</Link>
                       </div>
                       <div className="flex gap-5 text-[#FFFFFF] text-base leading-6 font-semibold">
                         <div className="flex">
@@ -208,14 +219,14 @@ const HomePage = () => {
                           {product.discount > 0 ? (
                             <div className="flex items-center">
                               <h3 className="font-bold text-[20px] text-[#3A3A3A]">
-                                Rp {product.price.toLocaleString()}
+                                Rp {(
+                                  product.price -
+                                  product.price * (product.discount / 100)
+                                ).toLocaleString()}
                               </h3>
                               <span className="text-[16px] text-[#B0B0B0] line-through ml-3">
                                 Rp{" "}
-                                {(
-                                  product.price +
-                                  product.price * (product.discount / 100)
-                                ).toLocaleString()}
+                                {product.price.toLocaleString()}
                               </span>
                             </div>
                           ) : (

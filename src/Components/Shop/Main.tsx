@@ -16,7 +16,7 @@ const Main = () => {
       image: Syltherine,
       name: "Syltherine",
       des: "Stylish cafe chair",
-      price: 2500000,
+      price: 3500000,
       discount: 30,
       isNew: false,
     },
@@ -32,7 +32,7 @@ const Main = () => {
       image: Lolito,
       name: "Lolito",
       des: "Luxury big sofa",
-      price: 7000000,
+      price: 14000000,
       discount: 50,
       isNew: false,
     },
@@ -48,7 +48,7 @@ const Main = () => {
       image: Syltherine,
       name: "Syltherine",
       des: "Stylish cafe chair",
-      price: 2500000,
+      price: 3500000,
       discount: 30,
       isNew: false,
     },
@@ -64,40 +64,7 @@ const Main = () => {
       image: Lolito,
       name: "Lolito",
       des: "Luxury big sofa",
-      price: 7000000,
-      discount: 50,
-      isNew: false,
-    },
-    {
-      image: Respira,
-      name: "Respira",
-      des: "Outdoor bar table and stool",
-      price: 500000,
-      discount: 0,
-      isNew: true,
-    },
-
-    {
-      image: Syltherine,
-      name: "Syltherine",
-      des: "Stylish cafe chair",
-      price: 2500000,
-      discount: 30,
-      isNew: false,
-    },
-    {
-      image: Leviosa,
-      name: "Leviosa",
-      des: "Stylish cafe chair",
-      price: 2500000,
-      discount: 0,
-      isNew: false,
-    },
-    {
-      image: Lolito,
-      name: "Lolito",
-      des: "Luxury big sofa",
-      price: 7000000,
+      price: 14000000,
       discount: 50,
       isNew: false,
     },
@@ -114,7 +81,7 @@ const Main = () => {
       image: Syltherine,
       name: "Syltherine",
       des: "Stylish cafe chair",
-      price: 2500000,
+      price: 3500000,
       discount: 30,
       isNew: false,
     },
@@ -130,7 +97,40 @@ const Main = () => {
       image: Lolito,
       name: "Lolito",
       des: "Luxury big sofa",
-      price: 7000000,
+      price: 14000000,
+      discount: 50,
+      isNew: false,
+    },
+    {
+      image: Respira,
+      name: "Respira",
+      des: "Outdoor bar table and stool",
+      price: 500000,
+      discount: 0,
+      isNew: true,
+    },
+
+    {
+      image: Syltherine,
+      name: "Syltherine",
+      des: "Stylish cafe chair",
+      price: 3500000,
+      discount: 30,
+      isNew: false,
+    },
+    {
+      image: Leviosa,
+      name: "Leviosa",
+      des: "Stylish cafe chair",
+      price: 2500000,
+      discount: 0,
+      isNew: false,
+    },
+    {
+      image: Lolito,
+      name: "Lolito",
+      des: "Luxury big sofa",
+      price: 14000000,
       discount: 50,
       isNew: false,
     },
@@ -298,14 +298,14 @@ const Main = () => {
                           {product.discount > 0 ? (
                             <div className="flex items-center">
                               <h3 className="font-bold text-[20px] text-[#3A3A3A]">
-                                Rp {product.price.toLocaleString()}
+                                Rp {(
+                                  product.price -
+                                  product.price * (product.discount / 100)
+                                ).toLocaleString()}
                               </h3>
                               <span className="text-[16px] text-[#B0B0B0] line-through ml-3">
                                 Rp{" "}
-                                {(
-                                  product.price +
-                                  product.price * (product.discount / 100)
-                                ).toLocaleString()}
+                                {product.price.toLocaleString()}
                               </span>
                             </div>
                           ) : (
