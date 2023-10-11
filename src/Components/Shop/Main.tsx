@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Vector1 from "../../assets/shop/Vector1.png";
 import Vector2 from "../../assets/shop/Vector2.png";
 import Vector3 from "../../assets/shop/Vector3.png";
@@ -10,167 +10,36 @@ import { CiShare2 } from "react-icons/ci";
 import { BiGitCompare } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
-const Main = () => {
-  interface Product {
-    id: number;
-    image: string;
-    name: string;
-    des: string;
-    price: number;
-    discount: number;
-    dateAdded: string;
-  }
+import { useDispatch } from "react-redux";
+import { usesSevice } from "../../store/services/getApi";
+type data = {
+  id: number;
+  image: string;
+  name: string;
+  des: string;
+  price: number;
+  discount: number;
+  dateAdded: string;
+  [key: string]: any; // Thêm chỉ mục kiểu 'string' vào đây
+};
 
+const Main: React.FC = () => {
+  const [listUsers, setListUsers] = useState<data[]>([]);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getUSers();
+  }, []);
+
+  const getUSers = async () => {
+    let res = await usesSevice();
+    if (res && res.data && res.data) {
+      setListUsers(res.data);
+    }
+  };
   const today: Date = new Date();
-  const products: Product[] = [
-    {
-      id: 1,
-      image: Syltherine,
-      name: "Syltherine",
-      des: "Stylish cafe chair",
-      price: 3500000,
-      discount: 30,
-      dateAdded: new Date("2023-10-01").toISOString(),
-    },
-    {
-      id: 2,
-      image: Leviosa,
-      name: "Leviosa",
-      des: "Stylish cafe chair",
-      price: 2500000,
-      discount: 0,
-      dateAdded: new Date("2023-10-01").toISOString(),
-    },
-    {
-      id: 3,
-      image: Lolito,
-      name: "Lolito",
-      des: "Luxury big sofa",
-      price: 14000000,
-      discount: 50,
-      dateAdded: new Date("2023-10-01").toISOString(),
-    },
-    {
-      id: 4,
-      image: Respira,
-      name: "Respira",
-      des: "Outdoor bar table and stool",
-      price: 500000,
-      discount: 0,
-      dateAdded: new Date("2023-10-11").toISOString(),
-    },
-    {
-      id: 1,
-      image: Syltherine,
-      name: "Syltherine",
-      des: "Stylish cafe chair",
-      price: 3500000,
-      discount: 30,
-      dateAdded: new Date("2023-10-01").toISOString(),
-    },
-    {
-      id: 2,
-      image: Leviosa,
-      name: "Leviosa",
-      des: "Stylish cafe chair",
-      price: 2500000,
-      discount: 0,
-      dateAdded: new Date("2023-10-01").toISOString(),
-    },
-    {
-      id: 3,
-      image: Lolito,
-      name: "Lolito",
-      des: "Luxury big sofa",
-      price: 14000000,
-      discount: 50,
-      dateAdded: new Date("2023-10-01").toISOString(),
-    },
-    {
-      id: 4,
-      image: Respira,
-      name: "Respira",
-      des: "Outdoor bar table and stool",
-      price: 500000,
-      discount: 0,
-      dateAdded: new Date("2023-10-11").toISOString(),
-    },
-
-    {
-      id: 1,
-      image: Syltherine,
-      name: "Syltherine",
-      des: "Stylish cafe chair",
-      price: 3500000,
-      discount: 30,
-      dateAdded: new Date("2023-10-01").toISOString(),
-    },
-    {
-      id: 2,
-      image: Leviosa,
-      name: "Leviosa",
-      des: "Stylish cafe chair",
-      price: 2500000,
-      discount: 0,
-      dateAdded: new Date("2023-10-01").toISOString(),
-    },
-    {
-      id: 3,
-      image: Lolito,
-      name: "Lolito",
-      des: "Luxury big sofa",
-      price: 14000000,
-      discount: 50,
-      dateAdded: new Date("2023-10-01").toISOString(),
-    },
-    {
-      id: 4,
-      image: Respira,
-      name: "Respira",
-      des: "Outdoor bar table and stool",
-      price: 500000,
-      discount: 0,
-      dateAdded: new Date("2023-10-11").toISOString(),
-    },
-
-    {
-      id: 1,
-      image: Syltherine,
-      name: "Syltherine",
-      des: "Stylish cafe chair",
-      price: 3500000,
-      discount: 30,
-      dateAdded: new Date("2023-10-01").toISOString(),
-    },
-    {
-      id: 2,
-      image: Leviosa,
-      name: "Leviosa",
-      des: "Stylish cafe chair",
-      price: 2500000,
-      discount: 0,
-      dateAdded: new Date("2023-10-01").toISOString(),
-    },
-    {
-      id: 3,
-      image: Lolito,
-      name: "Lolito",
-      des: "Luxury big sofa",
-      price: 14000000,
-      discount: 50,
-      dateAdded: new Date("2023-10-01").toISOString(),
-    },
-    {
-      id: 4,
-      image: Respira,
-      name: "Respira",
-      des: "Outdoor bar table and stool",
-      price: 500000,
-      discount: 0,
-      dateAdded: new Date("2023-10-11").toISOString(),
-    },
-  ];
-  function isProductNew(product: Product): boolean {
+  function isProductNew(product: data): boolean {
     const productAddedDate: Date = new Date(product.dateAdded); // Chuyển đổi chuỗi thành Date
     const daysDifference: number = Math.ceil(
       (today.getTime() - productAddedDate.getTime()) / (1000 * 60 * 60 * 24)
@@ -179,13 +48,13 @@ const Main = () => {
   }
   const [productPerPage, setProductPerPage] = useState<number | string>(8); // Số sản phẩm trên mỗi trang
   const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
-  const totalPages = Math.ceil(products.length / (+productPerPage || 1));
+  const totalPages = Math.ceil(listUsers.length / (+productPerPage || 1));
 
   // Cập nhật indexOfLastProduct và indexOfFirstProduct
   const productPerPageNumber = +productPerPage || 1; // Chuyển đổi productPerPage thành số và mặc định là 1 nếu không hợp lệ
   const indexOfLastProduct = currentPage * productPerPageNumber;
   const indexOfFirstProduct = indexOfLastProduct - productPerPageNumber;
-  const currentProducts = products.slice(
+  const currentdata = listUsers.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
@@ -243,7 +112,7 @@ const Main = () => {
                     const inputValue = parseInt(e.target.value, 10); // Chuyển đổi giá trị nhập thành số nguyên
                     if (!isNaN(inputValue)) {
                       // Nếu giá trị là một số hợp lệ
-                      const maxProductPerPage = products.length; // Giới hạn tối đa là tổng số sản phẩm
+                      const maxProductPerPage = listUsers.length; // Giới hạn tối đa là tổng số sản phẩm
                       let newProductPerPage = Math.min(
                         inputValue,
                         maxProductPerPage
@@ -274,11 +143,11 @@ const Main = () => {
       </div>
       <div className="my-20 container gap-x-5 gap-y-7 ">
         <div className="grid max-md: justify-center md:grid-cols-4  gap-y-14 ">
-          {currentProducts.map((product, index) => (
+          {currentdata.map((product, index) => (
             <div key={index}>
               <div>
                 {" "}
-                <Link to="/single_product">
+                <Link to="/singleProduct">
                   <div className="relative ">
                     <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
                       <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
@@ -311,7 +180,7 @@ const Main = () => {
 
                     <div className="relative">
                       <div className="relative">
-                        <img src={product.image} alt="" />
+                        <img src={product.image} className="w-[285px] h-[305px]" alt="" />
                         {product.discount > 0 && (
                           <div className="absolute md:top-6 top-7 md:right-20 right-7 text-white rounded-full w-10 h-10 items-center text-center pt-2.5 bg-[#E97171]">
                             -{product.discount}%
