@@ -1,4 +1,4 @@
-import sofa from "../../assets/single_product/sofa.png";
+import sofa from "../../assets/single-product/sofa.png";
 import {
   AiFillInstagram,
   AiFillTwitterCircle,
@@ -13,11 +13,11 @@ import { Link } from "react-router-dom";
 import { BiGitCompare } from "react-icons/bi";
 import { CiShare2 } from "react-icons/ci";
 import stars from "../../assets/ProductComparison/stars.png";
-import sofa3 from "../../assets/single_product/sofa1.png";
-import Group96 from "../../assets/single_product/Group96.png";
-import Group97 from "../../assets/single_product/Group97.png";
-import Group98 from "../../assets/single_product/Group98.png";
-import Group94 from "../../assets/single_product/Group94.png";
+import sofa3 from "../../assets/single-product/sofa1.png";
+import Group96 from "../../assets/single-product/Group96.png";
+import Group97 from "../../assets/single-product/Group97.png";
+import Group98 from "../../assets/single-product/Group98.png";
+import Group94 from "../../assets/single-product/Group94.png";
 import { FaFacebook } from "react-icons/fa";
 
 const Main = () => {

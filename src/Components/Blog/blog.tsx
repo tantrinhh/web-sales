@@ -1,15 +1,15 @@
 import { useState } from "react";
-import going from "../../assets/blog/Rectangle 68.png";
-import exploring from "../../assets/blog/Rectangle 68 (1).png";
-import handmade from "../../assets/blog/Rectangle 68 (2).png";
-import admin from "../../assets/blog/dashicons_admin-users.png";
-import calendar from "../../assets/blog/uis_calender.png";
-import tag from "../../assets/blog/ci_tag.png";
-import post1 from "../../assets/blog/Rectangle 69.png";
-import post2 from "../../assets/blog/Rectangle 69 (1).png";
-import post3 from "../../assets/blog/Rectangle 69 (2).png";
-import post4 from "../../assets/blog/Rectangle 69 (4).png";
-import post5 from "../../assets/blog/Rectangle 69 (5).png";
+import going from "../../assets/blog/Rectangle1.png";
+import exploring from "../../assets/blog/Rectangle2.png";
+import handmade from "../../assets/blog/Rectangle3.png";
+import admin from "../../assets/blog/dashiconsadmin-users.png";
+import calendar from "../../assets/blog/uiscalender.png";
+import tag from "../../assets/blog/citag.png";
+import post1 from "../../assets/blog/Rectangle4.png";
+import post2 from "../../assets/blog/Rectangle5.png";
+import post3 from "../../assets/blog/Rectangle6.png";
+import post4 from "../../assets/blog/Rectangle7.png";
+import post5 from "../../assets/blog/Rectangle8.png";
 const Blog = () => {
   const posts = [
     {
@@ -18,12 +18,12 @@ const Blog = () => {
       time: "03 Aug 2022",
     },
     {
-      image: post2,
+      image: post3,
       content: "Exploring new ways of decorating",
       time: "03 Aug 2022",
     },
     {
-      image: post3,
+      image: post2,
       content: "Handmade pieces that took time to make",
       time: "03 Aug 2022",
     },
@@ -104,21 +104,9 @@ const Blog = () => {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus mauris vitae ultricies leo integer malesuada nunc. In nulla posuere sollicitudin aliquam ultrices. Morbi blandit cursus risus at ultrices mi tempus imperdiet. Libero enim sed faucibus turpis in. Cursus mattis molestie a iaculis at erat. Nibh cras pulvinar mattis nunc sed blandit libero. Pellentesque elit ullamcorper dignissim cras tincidunt. Pharetra et ultrices neque ornare aenean euismod elementum.",
       read: "Read more",
     },
-    {
-      image: handmade,
-      icon1: admin,
-      name1: "Admin",
-      icon2: calendar,
-      name2: "14 Oct 2022",
-      icon3: tag,
-      name3: "Wood",
-      title: "Handmade pieces that took time to make",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus mauris vitae ultricies leo integer malesuada nunc. In nulla posuere sollicitudin aliquam ultrices. Morbi blandit cursus risus at ultrices mi tempus imperdiet. Libero enim sed faucibus turpis in. Cursus mattis molestie a iaculis at erat. Nibh cras pulvinar mattis nunc sed blandit libero. Pellentesque elit ullamcorper dignissim cras tincidunt. Pharetra et ultrices neque ornare aenean euismod elementum.",
-      read: "Read more",
-    },
+    
   ];
-  const productPerPage = 4; // Số sản phẩm trên mỗi trang
+  const productPerPage = 3; // Số sản phẩm trên mỗi trang
   const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
 
   // Tính toán số trang
