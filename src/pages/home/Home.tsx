@@ -1,12 +1,13 @@
 import GoToTop from "../../Components/Common/GoToTop";
 import HomePage from "../../Components/Home/HomePage";
 import LayoutChildren from "../../Components/Layout/Layout_Children";
+
 const index = () => {
   return (
     <div className="bg-[#FFFFFF]">
       <GoToTop />
       <LayoutChildren>
-        <HomePage/>
+        <HomePage />
       </LayoutChildren>
     </div>
   );

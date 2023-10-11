@@ -26,89 +26,78 @@ import { CiShare2 } from "react-icons/ci";
 import { BiGitCompare } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "./styles.css";
-import { Pagination } from "swiper/modules";
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../../Components/cartSlice';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import './styles.css';
+import { Pagination } from 'swiper/modules';
 const HomePage = () => {
-  const products  = [
+  const products = [
     {
-      id: 1,
       image: Syltherine,
       name: "Syltherine",
       des: "Stylish cafe chair",
-      price: 3500000,
+      price: 2500000,
       discount: 30,
-      isNew: false,
+      isNew: false
     },
     {
-      id: 2,
       image: Leviosa,
       name: "Leviosa",
       des: "Stylish cafe chair",
       price: 2500000,
       discount: 0,
-      isNew: false,
+      isNew: false
     },
     {
-      id: 3,
       image: Lolito,
       name: "Lolito",
       des: "Luxury big sofa",
-      price: 14000000,
+      price: 7000000,
       discount: 50,
       isNew: false,
     },
     {
-      id: 4,
       image: Respira,
       name: "Respira",
       des: "Outdoor bar table and stool",
       price: 500000,
       discount: 0,
-      isNew: true,
+      isNew: true
     },
     {
-      id: 5,
       image: Grifo,
       name: "Grifo",
       des: "Night lamp",
       price: 1500000,
       discount: 0,
-      isNew: false,
+      isNew: false
     },
     {
-      id: 6,
       image: Muggo,
       name: "Muggo",
       des: "SSmall mug",
       price: 150000,
       discount: 0,
-      isNew: true,
+      isNew: true
     },
     {
-      id: 7,
       image: Pingky,
       name: "Pingky",
       des: "Cute bed set",
-      price: 14000000,
+      price: 7000000,
       discount: 50,
-      isNew: false,
+      isNew: false
     },
     {
-      id: 8,
       image: Potty,
       name: "Potty",
       des: "Minimalist flower pot",
       price: 500000,
       discount: 0,
-      isNew: true,
+      isNew: true
     },
   ];
-  const dispatch = useDispatch();
   
   return (
     <>
@@ -163,13 +152,13 @@ const HomePage = () => {
         <div className="grid grid-cols-4 gap-y-14 ">
           {products.map((product) => {
             return (
-              <div key={product.id}>
+              <div>
                 {" "}
-                <Link to={`/single_product/${product.id}`}>
+                <Link to="single_product">
                   <div className="relative ">
                     <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
                       <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
-                        <Link to="/cart" onClick={() => dispatch(addToCart({ productId: product.id, quantity: 1 }))}>Add to cart</Link>
+                        <Link to="/cart">Add to cart</Link>
                       </div>
                       <div className="flex gap-5 text-[#FFFFFF] text-base leading-6 font-semibold">
                         <div className="flex">
@@ -200,7 +189,7 @@ const HomePage = () => {
                       <div className="relative">
                         <img src={product.image} alt="" />
                         {product.discount > 0 && (
-                          <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2.5 bg-[#E97171]">
+                          <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2 bg-[#E97171]">
                             -{product.discount}%
                           </div>
                         )}
@@ -219,14 +208,10 @@ const HomePage = () => {
                           {product.discount > 0 ? (
                             <div className="flex items-center">
                               <h3 className="font-bold text-[20px] text-[#3A3A3A]">
-                                Rp {(
-                                  product.price -
-                                  product.price * (product.discount / 100)
-                                ).toLocaleString()}
+                                Rp {product.price.toLocaleString()}
                               </h3>
                               <span className="text-[16px] text-[#B0B0B0] line-through ml-3">
-                                Rp{" "}
-                                {product.price.toLocaleString()}
+                                Rp {(product.price + (product.price * (product.discount / 100))).toLocaleString()}
                               </span>
                             </div>
                           ) : (
@@ -245,20 +230,13 @@ const HomePage = () => {
         </div>
       </div>
       <button className="w-[245px] h-[48px] text-[#B88E2F] text-[16px] mt-10 font-bold border-solid border-2 border-[#B88E2F] mx-[41%]">
-        <Link to='/shop'>Show More</Link>
+        Show More
       </button>
       <div className="bg-[#FCF8F3] mt-20 flex">
         <div className="ml-20 mt-10">
-          <h1 className="w-[422px] h-[96px] leading-[48px] font-bold text-[40px]">
-            50+ Beautiful rooms inspiration
-          </h1>
-          <p className="w-[368px] h-[48px] font-medium leading-[24px] text-[16px] mt-1">
-            Our designer already made a lot of beautiful prototipe of rooms that
-            inspire you
-          </p>
-          <button className="bg-[#B88E2F] text-[#FFFFFF] w-[176px] h-[48px] mt-10">
-            Explore More
-          </button>
+          <h1 className="w-[422px] h-[96px] leading-[48px] font-bold text-[40px]">50+ Beautiful rooms inspiration</h1>
+          <p className="w-[368px] h-[48px] font-medium leading-[24px] text-[16px] mt-1">Our designer already made a lot of beautiful prototipe of rooms that inspire you</p>
+          <button className='bg-[#B88E2F] text-[#FFFFFF] w-[176px] h-[48px] mt-10'>Explore More</button>
         </div>
         <Swiper
           slidesPerView={4}
@@ -270,15 +248,9 @@ const HomePage = () => {
           modules={[Pagination]}
           className="mySwiper"
         >
-          <SwiperSlide>
-            <img src={image1} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src={image2} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src={image2} />
-          </SwiperSlide>
+          <SwiperSlide><img src={image1}/></SwiperSlide>
+          <SwiperSlide><img src={image2}/></SwiperSlide>
+          <SwiperSlide><img src={image2}/></SwiperSlide>
         </Swiper>
       </div>
       <p className="text-center text-[20px] leading-7 font-semibold mt-20">
