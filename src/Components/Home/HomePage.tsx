@@ -3,7 +3,6 @@ import MaskGroup from "../../assets/home/MaskGroup.jpg";
 import Dining from "../../assets/home/Dining.png";
 import Living from "../../assets/home/Image-living room.png";
 import Bedroom from "../../assets/home/Bedroom.png";
-
 import Rectangle36 from "../../assets/home/Rectangle36.png";
 import Rectangle37 from "../../assets/home/Rectangle37.png";
 import Rectangle38 from "../../assets/home/Rectangle38.png";
@@ -25,22 +24,12 @@ import "swiper/css/pagination";
 import "./styles.css";
 import { Pagination } from "swiper/modules";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../store/cartSlice";
+import { addToCart, usesSevice } from "../../store/cartSlice";
 import { useEffect, useState } from "react";
-import { usesSevice } from "../../store/services/getApi";
+import { Data } from "../Interface";
 
-type data = {
-  id: number;
-  image: string;
-  name: string;
-  des: string;
-  price: number;
-  discount: number;
-  dateAdded: string;
-  [key: string]: any; // Thêm chỉ mục kiểu 'string' vào đây
-};
 const HomePage: React.FC = () => {
-  const [listUsers, setListUsers] = useState<data[]>([]);
+  const [listUsers, setListUsers] = useState<Data[]>([]);
 
   const dispatch = useDispatch();
 
@@ -55,9 +44,11 @@ const HomePage: React.FC = () => {
     }
   };
   const today: Date = new Date();
-  function isProductNew(product: data): boolean {
+  function isProductNew(product: Data): boolean {
     const productAddedDate: Date = new Date(product.dateAdded); // Chuyển đổi chuỗi thành Date
-    const daysDifference: number = Math.ceil((today.getTime() - productAddedDate.getTime()) / (1000 * 60 * 60 * 24));
+    const daysDifference: number = Math.ceil(
+      (today.getTime() - productAddedDate.getTime()) / (1000 * 60 * 60 * 24)
+    );
     return daysDifference <= 7;
   }
 
@@ -111,7 +102,7 @@ const HomePage: React.FC = () => {
       <div className="mt-20 container">
         <h1 className="text-center text-[40px] font-bold mb-5">Our Products</h1>
         <div className="grid grid-cols-4 gap-y-14 ">
-          {listUsers.map((item: data, index) => {
+          {listUsers.map((item: Data, index) => {
             return (
               <div key={item.id}>
                 {" "}
@@ -211,7 +202,7 @@ const HomePage: React.FC = () => {
         <Link to="/shop">Show More</Link>
       </button>
       <div className="bg-[#FCF8F3] mt-20 flex">
-        <div className="ml-20 mt-10">
+        <div className="ml-20 mr-32 mt-10">
           <h1 className="w-[422px] h-[96px] leading-[48px] font-bold text-[40px]">
             50+ Beautiful rooms inspiration
           </h1>
@@ -224,23 +215,29 @@ const HomePage: React.FC = () => {
           </button>
         </div>
         <Swiper
-          slidesPerView={4}
+          slidesPerView={2.5}
           spaceBetween={10}
-          centeredSlides={true}
           pagination={{
             clickable: true,
           }}
           modules={[Pagination]}
-          className="mySwiper"
+          className="mySwiper "
         >
+          {" "}
           <SwiperSlide>
-            <img src={image1} alt=""/>
+            <img src={image1} alt="" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={image2} alt=""/>
+            <img src={image2} alt="" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src={image2} alt=""/>
+            <img src={image2} alt="" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src={image2} alt="" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src={image2} alt="" />
           </SwiperSlide>
         </Swiper>
       </div>
