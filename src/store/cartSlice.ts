@@ -1,6 +1,6 @@
 // cartSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+import { instance } from "./services/axios";
 interface CartItem {
   productId: number;
   quantity: number;
@@ -12,6 +12,10 @@ interface CartState {
 
 const initialState: CartState = {
   items: [],
+};
+
+export const usesSevice = () => {
+  return instance.get("/crud-api/products");
 };
 
 const cartSlice = createSlice({

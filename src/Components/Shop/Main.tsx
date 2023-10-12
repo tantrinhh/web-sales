@@ -2,29 +2,16 @@ import React, { useEffect, useState } from "react";
 import Vector1 from "../../assets/shop/Vector1.png";
 import Vector2 from "../../assets/shop/Vector2.png";
 import Vector3 from "../../assets/shop/Vector3.png";
-import Syltherine from "../../assets/shop/image1.png";
-import Leviosa from "../../assets/shop/Images.png";
-import Lolito from "../../assets/shop/image3.png";
-import Respira from "../../assets/shop/image4.png";
 import { CiShare2 } from "react-icons/ci";
 import { BiGitCompare } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { usesSevice } from "../../store/services/getApi";
-type data = {
-  id: number;
-  image: string;
-  name: string;
-  des: string;
-  price: number;
-  discount: number;
-  dateAdded: string;
-  [key: string]: any; // Thêm chỉ mục kiểu 'string' vào đây
-};
+import { addToCart, usesSevice } from "../../store/cartSlice";
+import { Data } from "../Interface";
 
 const Main: React.FC = () => {
-  const [listUsers, setListUsers] = useState<data[]>([]);
+  const [listUsers, setListUsers] = useState<Data[]>([]);
 
   const dispatch = useDispatch();
 
@@ -39,7 +26,7 @@ const Main: React.FC = () => {
     }
   };
   const today: Date = new Date();
-  function isProductNew(product: data): boolean {
+  function isProductNew(product: Data): boolean {
     const productAddedDate: Date = new Date(product.dateAdded); // Chuyển đổi chuỗi thành Date
     const daysDifference: number = Math.ceil(
       (today.getTime() - productAddedDate.getTime()) / (1000 * 60 * 60 * 24)
@@ -54,10 +41,7 @@ const Main: React.FC = () => {
   const productPerPageNumber = +productPerPage || 1; // Chuyển đổi productPerPage thành số và mặc định là 1 nếu không hợp lệ
   const indexOfLastProduct = currentPage * productPerPageNumber;
   const indexOfFirstProduct = indexOfLastProduct - productPerPageNumber;
-  const currentdata = listUsers.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
+  const currentdata = listUsers.slice(indexOfFirstProduct, indexOfLastProduct);
 
   // Xử lý khi người dùng chuyển trang
   const handlePageChange = (page: any) => {
@@ -143,15 +127,24 @@ const Main: React.FC = () => {
       </div>
       <div className="my-20 container gap-x-5 gap-y-7 ">
         <div className="grid max-md: justify-center md:grid-cols-4  gap-y-14 ">
-          {currentdata.map((product, index) => (
+          {currentdata.map((item: Data, index) => (
             <div key={index}>
               <div>
                 {" "}
-                <Link to="/singleProduct">
+                <Link to={`/singleProduct/${item.id}`}>
                   <div className="relative ">
                     <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
                       <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
-                        <Link to="/cart">Add to cart</Link>
+                        <Link
+                          to="/cart"
+                          onClick={() =>
+                            dispatch(
+                              addToCart({ productId: item.id, quantity: 1 })
+                            )
+                          }
+                        >
+                          Add to cart
+                        </Link>
                       </div>
                       <div className="flex gap-5 text-[#FFFFFF] text-base leading-6 font-semibold">
                         <div className="flex">
@@ -166,7 +159,7 @@ const Main: React.FC = () => {
                           </div>
                           <div className=" cursor-pointer">
                             {" "}
-                            <Link to="/product_comparison">Compare</Link>
+                            <Link to="/item_comparison">Compare</Link>
                           </div>
                         </div>
                         <div className="flex">
@@ -180,40 +173,44 @@ const Main: React.FC = () => {
 
                     <div className="relative">
                       <div className="relative">
-                        <img src={product.image} className="w-[285px] h-[305px]" alt="" />
-                        {product.discount > 0 && (
-                          <div className="absolute md:top-6 top-7 md:right-20 right-7 text-white rounded-full w-10 h-10 items-center text-center pt-2.5 bg-[#E97171]">
-                            -{product.discount}%
+                        <img
+                          src={item.image}
+                          className="w-[285px] h-[305px]"
+                          alt=""
+                        />
+                        {item.discount > 0 && (
+                          <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2.5 bg-[#E97171]">
+                            -{item.discount}%
                           </div>
                         )}
-                        {isProductNew(product) && (
-                          <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-1.5">
+                        {isProductNew(item) && (
+                          <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-2">
                             New
                           </div>
                         )}
                         <div className="bg-[#F4F5F7] w-[285px] h-[145px] space-y-3 pl-5">
                           <h2 className=" font-semibold leading-7 text-[#3A3A3A] pt-5 text-[24px]">
-                            {product.name}
+                            {item.name}
                           </h2>
                           <p className="text-[16px] font-medium leading-6 text-[#898989]">
-                            {product.des}
+                            {item.des}
                           </p>
-                          {product.discount > 0 ? (
+                          {item.discount > 0 ? (
                             <div className="flex items-center">
                               <h3 className="font-bold text-[20px] text-[#3A3A3A]">
                                 Rp{" "}
                                 {(
-                                  product.price -
-                                  product.price * (product.discount / 100)
+                                  item.price -
+                                  item.price * (item.discount / 100)
                                 ).toLocaleString()}
                               </h3>
                               <span className="text-[16px] text-[#B0B0B0] line-through ml-3">
-                                Rp {product.price.toLocaleString()}
+                                Rp {item.price.toLocaleString()}
                               </span>
                             </div>
                           ) : (
                             <h3 className="font-bold text-[20px] text-[#3A3A3A]">
-                              Rp {product.price.toLocaleString()}
+                              Rp {item.price.toLocaleString()}
                             </h3>
                           )}
                         </div>
