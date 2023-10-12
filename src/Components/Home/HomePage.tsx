@@ -1,16 +1,17 @@
-import "../../index.css";
-import MaskGroup from "../../assets/home/MaskGroup.jpg";
+import { useEffect } from "react";
+import { AiOutlineHeart } from "react-icons/ai";
+import { BiGitCompare } from "react-icons/bi";
+import { CiShare2 } from "react-icons/ci";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import Bedroom from "../../assets/home/Bedroom.png";
 import Dining from "../../assets/home/Dining.png";
 import Living from "../../assets/home/Image-living room.png";
-import Bedroom from "../../assets/home/Bedroom.png";
-import Syltherine from "../../assets/home/Syltherine.png";
-import Leviosa from "../../assets/home/Leviosa.png";
-import Lolito from "../../assets/home/Lolito.png";
-import Respira from "../../assets/home/Respira.png";
-import Grifo from "../../assets/home/Grifo.png";
-import Muggo from "../../assets/home/Muggo.png";
-import Pingky from "../../assets/home/Pingky.png";
-import Potty from "../../assets/home/Potty.png";
+import MaskGroup from "../../assets/home/MaskGroup.jpg";
 import Rectangle36 from "../../assets/home/Rectangle36.png";
 import Rectangle37 from "../../assets/home/Rectangle37.png";
 import Rectangle38 from "../../assets/home/Rectangle38.png";
@@ -22,83 +23,21 @@ import Rectangle44 from "../../assets/home/Rectangle44.png";
 import Rectangle45 from "../../assets/home/Rectangle45.png";
 import image1 from "../../assets/home/image1.png";
 import image2 from "../../assets/home/image2.png";
-import { CiShare2 } from "react-icons/ci";
-import { BiGitCompare } from "react-icons/bi";
-import { AiOutlineHeart } from "react-icons/ai";
-import { Link } from "react-router-dom";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import './styles.css';
-import { Pagination } from 'swiper/modules';
+import { useAppDispatch } from "../../hooks/redux";
+import "../../index.css";
+import {
+  getProduct,
+  productSelectors,
+} from "../../services/redux/slices/product";
+import "./styles.css";
 const HomePage = () => {
-  const products = [
-    {
-      image: Syltherine,
-      name: "Syltherine",
-      des: "Stylish cafe chair",
-      price: 2500000,
-      discount: 30,
-      isNew: false
-    },
-    {
-      image: Leviosa,
-      name: "Leviosa",
-      des: "Stylish cafe chair",
-      price: 2500000,
-      discount: 0,
-      isNew: false
-    },
-    {
-      image: Lolito,
-      name: "Lolito",
-      des: "Luxury big sofa",
-      price: 7000000,
-      discount: 50,
-      isNew: false,
-    },
-    {
-      image: Respira,
-      name: "Respira",
-      des: "Outdoor bar table and stool",
-      price: 500000,
-      discount: 0,
-      isNew: true
-    },
-    {
-      image: Grifo,
-      name: "Grifo",
-      des: "Night lamp",
-      price: 1500000,
-      discount: 0,
-      isNew: false
-    },
-    {
-      image: Muggo,
-      name: "Muggo",
-      des: "SSmall mug",
-      price: 150000,
-      discount: 0,
-      isNew: true
-    },
-    {
-      image: Pingky,
-      name: "Pingky",
-      des: "Cute bed set",
-      price: 7000000,
-      discount: 50,
-      isNew: false
-    },
-    {
-      image: Potty,
-      name: "Potty",
-      des: "Minimalist flower pot",
-      price: 500000,
-      discount: 0,
-      isNew: true
-    },
-  ];
-  
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getProduct());
+  }, [dispatch]);
+
+  const productsSelector = useSelector(productSelectors.selectAll);
   return (
     <>
       {/* Sub header */}
@@ -150,7 +89,7 @@ const HomePage = () => {
       <div className="mt-20 container">
         <h1 className="text-center text-[40px] font-bold mb-5">Our Products</h1>
         <div className="grid grid-cols-4 gap-y-14 ">
-          {products.map((product) => {
+          {productsSelector?.map((product) => {
             return (
               <div>
                 {" "}
@@ -186,40 +125,46 @@ const HomePage = () => {
                     </div>
 
                     <div className="relative">
-                      <div className="relative">
-                        <img src={product.image} alt="" />
-                        {product.discount > 0 && (
-                          <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2 bg-[#E97171]">
-                            -{product.discount}%
-                          </div>
-                        )}
-                        {product.isNew && (
+                      <img
+                        src={product.image}
+                        alt=""
+                        className="w-[285px] h-[200px]"
+                      />
+                      {product.discount > 0 && (
+                        <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2 bg-[#E97171]">
+                          -{product.discount}%
+                        </div>
+                      )}
+                      {/* {product.isNew && (
                           <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-2">
                             New
                           </div>
-                        )}
-                        <div className="bg-[#F4F5F7] w-[285px] h-[145px] space-y-3 pl-5">
-                          <h2 className=" font-semibold leading-7 text-[#3A3A3A] pt-5 text-[24px]">
-                            {product.name}
-                          </h2>
-                          <p className="text-[16px] font-medium leading-6 text-[#898989]">
-                            {product.des}
-                          </p>
-                          {product.discount > 0 ? (
-                            <div className="flex items-center">
-                              <h3 className="font-bold text-[20px] text-[#3A3A3A]">
-                                Rp {product.price.toLocaleString()}
-                              </h3>
-                              <span className="text-[16px] text-[#B0B0B0] line-through ml-3">
-                                Rp {(product.price + (product.price * (product.discount / 100))).toLocaleString()}
-                              </span>
-                            </div>
-                          ) : (
+                        )} */}
+                      <div className="bg-[#F4F5F7] w-[285px] h-[145px] space-y-3 pl-5">
+                        <h2 className=" font-semibold leading-7 text-[#3A3A3A] pt-5 text-[24px]">
+                          {product.name}
+                        </h2>
+                        <p className="text-[16px] font-medium leading-6 text-[#898989]">
+                          {product.description}
+                        </p>
+                        {product.discount > 0 ? (
+                          <div className="flex items-center">
                             <h3 className="font-bold text-[20px] text-[#3A3A3A]">
                               Rp {product.price.toLocaleString()}
                             </h3>
-                          )}
-                        </div>
+                            <span className="text-[16px] text-[#B0B0B0] line-through ml-3">
+                              Rp{" "}
+                              {(
+                                product.price +
+                                product.price * (product.discount / 100)
+                              ).toLocaleString()}
+                            </span>
+                          </div>
+                        ) : (
+                          <h3 className="font-bold text-[20px] text-[#3A3A3A]">
+                            Rp {product.price.toLocaleString()}
+                          </h3>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -234,9 +179,16 @@ const HomePage = () => {
       </button>
       <div className="bg-[#FCF8F3] mt-20 flex">
         <div className="ml-20 mt-10">
-          <h1 className="w-[422px] h-[96px] leading-[48px] font-bold text-[40px]">50+ Beautiful rooms inspiration</h1>
-          <p className="w-[368px] h-[48px] font-medium leading-[24px] text-[16px] mt-1">Our designer already made a lot of beautiful prototipe of rooms that inspire you</p>
-          <button className='bg-[#B88E2F] text-[#FFFFFF] w-[176px] h-[48px] mt-10'>Explore More</button>
+          <h1 className="w-[422px] h-[96px] leading-[48px] font-bold text-[40px]">
+            50+ Beautiful rooms inspiration
+          </h1>
+          <p className="w-[368px] h-[48px] font-medium leading-[24px] text-[16px] mt-1">
+            Our designer already made a lot of beautiful prototipe of rooms that
+            inspire you
+          </p>
+          <button className="bg-[#B88E2F] text-[#FFFFFF] w-[176px] h-[48px] mt-10">
+            Explore More
+          </button>
         </div>
         <Swiper
           slidesPerView={4}
@@ -248,9 +200,15 @@ const HomePage = () => {
           modules={[Pagination]}
           className="mySwiper"
         >
-          <SwiperSlide><img src={image1}/></SwiperSlide>
-          <SwiperSlide><img src={image2}/></SwiperSlide>
-          <SwiperSlide><img src={image2}/></SwiperSlide>
+          <SwiperSlide>
+            <img src={image1} />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src={image2} />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src={image2} />
+          </SwiperSlide>
         </Swiper>
       </div>
       <p className="text-center text-[20px] leading-7 font-semibold mt-20">
