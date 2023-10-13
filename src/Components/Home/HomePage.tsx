@@ -51,8 +51,8 @@ const HomePage = () => {
     const productToSave: ProductType = {
       id: product.id,
       name: product.name,
-      image: product.images ? product.images[0] : "",
-      price: product.currentPrice,
+      image: product.image,
+      price: product.price,
       count: count,
       discount: product.discount,
       description: "",
@@ -133,7 +133,7 @@ const HomePage = () => {
                           handleCart(product);
                         }}
                       >
-                        Add to22 cart
+                        Add to cart
                       </button>
                     </div>
                     <div className="flex gap-5 text-[#FFFFFF] text-base leading-6 font-semibold">

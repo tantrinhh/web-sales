@@ -19,8 +19,9 @@ const initialState = {
 } as CartTypes;
 
 const indexSameProduct = (state: CartTypes, action: ProductType) => {
-  const sameProduct = (product: ProductType) => product.id === action.id;
-
+  // const sameProduct = (product: ProductType) => product.id === action.id;
+  const sameProduct = (product: ProductType) => console.log(product, action);
+  console.log(sameProduct, "sameProduct");
   return state.cartItems.findIndex(sameProduct);
 };
 type AddProductType = {
@@ -48,11 +49,23 @@ const cartSlice = createSlice({
         cartItems: [...state.cartItems, action.payload],
       };
     },
+    removeProduct(state, action: PayloadAction<ProductType>) {
+      // find index of product
+      state.cartItems.splice(indexSameProduct(state, action.payload), 1);
+    },
+
+    setCount(state, action: PayloadAction<AddProductType>) {
+      // find index and add new count on product count
+      const cartItems = state.cartItems;
+      const indexItem = indexSameProduct(state, action.payload.product);
+      console.log(cartItems);
+      // cartItems[indexItem].count = action.payload.count;
+    },
   },
   extraReducers: (builder) => {},
 });
 
-export const { addProduct } = cartSlice.actions;
+export const { addProduct, removeProduct, setCount } = cartSlice.actions;
 
 export default cartSlice.reducer;
 
