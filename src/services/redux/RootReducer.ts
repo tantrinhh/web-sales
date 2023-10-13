@@ -1,13 +1,10 @@
 import { combineReducers } from "@reduxjs/toolkit";
+import cart from "./slices/cart";
 import product from "./slices/product";
 
 const rootReducer = combineReducers({
   product,
-  //   map,
-  //   attack,
-  //   service,
-  //   scoreboard,
-  //   allteam,
+  cart,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
