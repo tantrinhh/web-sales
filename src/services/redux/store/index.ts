@@ -1,12 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { persistReducer, persistStore } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import rootReducer from "../RootReducer";
 import { thunkExtras } from "./thunk-extras";
 
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ thunk: { extraArgument: thunkExtras } }),
 });
+export const persistor = persistStore(store);
 
 export type AppDispatch = typeof store.dispatch;
 

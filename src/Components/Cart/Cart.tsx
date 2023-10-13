@@ -2,8 +2,11 @@ import { AiTwotoneDelete } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../hooks/redux";
 import { RootState } from "../../services/redux/RootReducer";
-import { removeProduct, setCount } from "../../services/redux/slices/cart";
-import { ProductType } from "../../services/redux/slices/cart/type";
+import {
+  decrementQuantity,
+  incrementQuantity,
+  removeProduct,
+} from "../../services/redux/slices/cart";
 const Main_Cart = () => {
   const { cartItems } = useSelector((state: RootState) => state.cart);
   const dispatch = useAppDispatch();
@@ -12,15 +15,12 @@ const Main_Cart = () => {
     dispatch(removeProduct(product));
   };
 
-  const setProductCount = (count: number, product: ProductType) => {
-    if (count <= 0) {
-      return;
-    }
-    const payload = {
-      count,
-      product,
-    };
-    dispatch(setCount(payload));
+  const handleDecrementQuantity = (id: any) => {
+    dispatch(decrementQuantity(id));
+  };
+
+  const handleIncrementQuantity = (id: any) => {
+    dispatch(incrementQuantity(id));
   };
 
   return (
@@ -56,9 +56,7 @@ const Main_Cart = () => {
                   <div className="quantity-button">
                     <button
                       type="button"
-                      onClick={() =>
-                        setProductCount(item.count - 1, item.product)
-                      }
+                      onClick={() => handleIncrementQuantity(item.product.id)}
                       className="quantity-button__btn"
                     >
                       -
@@ -66,9 +64,7 @@ const Main_Cart = () => {
                     <span>{item.count}</span>
                     <button
                       type="button"
-                      onClick={() =>
-                        setProductCount(item.count + 1, item.product)
-                      }
+                      onClick={() => handleIncrementQuantity(item.product.id)}
                       className="quantity-button__btn"
                     >
                       +

@@ -54,18 +54,33 @@ const cartSlice = createSlice({
       state.cartItems.splice(indexSameProduct(state, action.payload), 1);
     },
 
-    setCount(state, action: PayloadAction<AddProductType>) {
-      // find index and add new count on product count
-      const cartItems = state.cartItems;
-      const indexItem = indexSameProduct(state, action.payload.product);
-      console.log(cartItems);
-      // cartItems[indexItem].count = action.payload.count;
+    incrementQuantity: (state, action) => {
+      const item = state.cartItems.find(
+        (item) => item.id === action.payload.id
+      );
+      console.log(item);
+    },
+    decrementQuantity: (state, action) => {
+      const item = state.cartItems.find(
+        (item) => item.id === action.payload.id
+      );
+      console.log(item);
+      // if (item.quantity === 1) {
+      //   item.quantity = 1;
+      // } else {
+      //   item.quantity--;
+      // }
     },
   },
   extraReducers: (builder) => {},
 });
 
-export const { addProduct, removeProduct, setCount } = cartSlice.actions;
+export const {
+  addProduct,
+  removeProduct,
+  incrementQuantity,
+  decrementQuantity,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;
 
