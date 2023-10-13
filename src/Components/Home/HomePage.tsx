@@ -48,24 +48,8 @@ const HomePage = () => {
 
   const handleCart = (product: any) => {
     navigate("/cart");
-    const productToSave: ProductType = {
-      id: product.id,
-      name: product.name,
-      image: product.image,
-      price: product.price,
-      count: count,
-      discount: product.discount,
-      description: "",
-      dateAdded: 0,
-    };
 
-    const productStore = {
-      count,
-      product: productToSave,
-    };
-
-    console.log(product, "product");
-    dispatch(addProduct(productStore));
+    dispatch(addProduct(product));
   };
 
   const productsSelector = useSelector(productSelectors.selectAll);

@@ -19,57 +19,57 @@ const initialState = {
 } as CartTypes;
 
 const indexSameProduct = (state: CartTypes, action: ProductType) => {
-  // const sameProduct = (product: ProductType) => product.id === action.id;
-  const sameProduct = (product: ProductType) => console.log(product, action);
-  console.log(sameProduct, "sameProduct");
+  const sameProduct = (product: ProductType) => product.id === action.id;
+  // const sameProduct = (product: ProductType) => console.log(product, action);
   return state.cartItems.findIndex(sameProduct);
 };
 type AddProductType = {
   product: ProductType;
-  count: number;
+  // count: number;
 };
 // Create a cart slice
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addProduct: (state: any, action: PayloadAction<AddProductType>) => {
-      const cartItems = state.cartItems;
-
-      // find index of product
-      const index = indexSameProduct(state, action.payload.product);
-
-      if (index !== -1) {
-        cartItems[index].count += action.payload.count;
-        return;
+    //Thêm  sản phẩm
+    addProduct: (state: any, action: PayloadAction<ProductType>) => {
+      const itemInCart = state.cartItems.find(
+        (item: any) => item.id === action.payload.id
+      );
+      console.log(itemInCart, "itemInCart");
+      if (itemInCart) {
+        itemInCart.count++;
+      } else {
+        state.cartItems.push({ ...action.payload, count: 1 });
       }
-
-      return {
-        ...state,
-        cartItems: [...state.cartItems, action.payload],
-      };
     },
-    removeProduct(state, action: PayloadAction<ProductType>) {
-      // find index of product
-      state.cartItems.splice(indexSameProduct(state, action.payload), 1);
-    },
-
-    incrementQuantity: (state, action) => {
-      const item = state.cartItems.find(
-        (item) => item.id === action.payload.id
+    //Xóa  sản phẩm
+    removeProduct(state: any, action: PayloadAction<ProductType>) {
+      const removeItem = state.cartItems.filter(
+        (item: any) => item.id !== action.payload
       );
+
+      state.cartItems = removeItem;
+    },
+    //Giảm số lượng sản phẩm
+    incrementQuantity: (state: any, action) => {
+      const item = state.cartItems.find(
+        (item: any) => item.id === action.payload
+      );
+      item.count++;
       console.log(item);
     },
-    decrementQuantity: (state, action) => {
+    //Tăng số lượng sản phẩm
+    decrementQuantity: (state: any, action) => {
       const item = state.cartItems.find(
-        (item) => item.id === action.payload.id
+        (item: any) => item.id === action.payload
       );
-      console.log(item);
-      // if (item.quantity === 1) {
-      //   item.quantity = 1;
-      // } else {
-      //   item.quantity--;
-      // }
+      if (item.count === 1) {
+        item.count = 1;
+      } else {
+        item.count--;
+      }
     },
   },
   extraReducers: (builder) => {},
@@ -85,4 +85,6 @@ export const {
 export default cartSlice.reducer;
 
 // // Define selectors
-export const cartSelectors = cartEntity.getSelectors((state: any) => state);
+export const cartSelectors = cartEntity.getSelectors(
+  (state: any) => state.cartItems
+);
