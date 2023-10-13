@@ -7,4 +7,6 @@ export interface Product {
   discount: number;
   dateAdded: number;
   count: number;
+  color: string;
+  size: string;
 }
