@@ -7,7 +7,6 @@ import { BiGitCompare } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addToCart, usesSevice } from "../../store/cartSlice";
 import { Data } from "../Interface";
 
 const Main: React.FC = () => {
@@ -15,16 +14,6 @@ const Main: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    getUSers();
-  }, []);
-
-  const getUSers = async () => {
-    let res = await usesSevice();
-    if (res && res.data && res.data) {
-      setListUsers(res.data);
-    }
-  };
   const today: Date = new Date();
   function isProductNew(product: Data): boolean {
     const productAddedDate: Date = new Date(product.dateAdded); // Chuyển đổi chuỗi thành Date
@@ -135,14 +124,7 @@ const Main: React.FC = () => {
                   <div className="relative ">
                     <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
                       <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
-                        <Link
-                          to="/cart"
-                          onClick={() =>
-                            dispatch(
-                              addToCart({ productId: item.id, quantity: 1 })
-                            )
-                          }
-                        >
+                        <Link to="/cart" onClick={() => {}}>
                           Add to cart
                         </Link>
                       </div>
@@ -173,13 +155,9 @@ const Main: React.FC = () => {
 
                     <div className="relative">
                       <div className="relative">
-                        <img
-                          src={item.image}
-                          className="w-[285px] h-[305px]"
-                          alt=""
-                        />
+                        <img src={item.image} alt="" />
                         {item.discount > 0 && (
-                          <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2.5 bg-[#E97171]">
+                          <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-1.5 bg-[#E97171]">
                             -{item.discount}%
                           </div>
                         )}

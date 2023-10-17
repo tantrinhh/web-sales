@@ -52,14 +52,15 @@ const cartSlice = createSlice({
 
       state.cartItems = removeItem;
     },
-    // Tăng số lượng sản phẩm
+    //Giảm số lượng sản phẩm
     incrementQuantity: (state: any, action) => {
       const item = state.cartItems.find(
         (item: any) => item.id === action.payload
       );
       item.count++;
+      console.log(item);
     },
-    // Giảm số lượng sản phẩm
+    //Tăng số lượng sản phẩm
     decrementQuantity: (state: any, action) => {
       const item = state.cartItems.find(
         (item: any) => item.id === action.payload

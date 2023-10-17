@@ -1,12 +1,12 @@
-import Shop from "./pages/shop";
-import Home from "./pages/home";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Contact from "./pages/contact";
-import Cart from "./pages/cart";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Blog from "./pages/blog";
 import Checkout from "./pages/checkout";
+import Contact from "./pages/contact";
+import Shop from "./pages/shop/index";
 import ProductComparison from "./pages/productComparison";
 import SingleProduct from "./pages/singleProduct";
+import Cart from "./pages/cart";
+import Home from "./pages/home";
 
 function App() {
   return (
@@ -17,8 +17,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/product_comparison" element={<ProductComparison />} />
-        <Route path={`/product/:id`} element={<SingleProduct />} />
+        <Route path="/productComparison" element={<ProductComparison />} />
+        <Route path="/singleProduct/:id" element={<SingleProduct />} />
         <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </Router>

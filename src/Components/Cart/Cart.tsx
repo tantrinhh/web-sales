@@ -7,7 +7,7 @@ import {
   incrementQuantity,
   removeProduct,
 } from "../../services/redux/slices/cart";
-const Main_Cart = () => {
+const Cart = () => {
   const { cartItems } = useSelector((state: RootState) => state.cart);
   const dispatch = useAppDispatch();
 
