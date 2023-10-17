@@ -1,7 +1,7 @@
 const NEXT_PUBLIC_PRODUCTION_URL = process.env.NEXT_PUBLIC_PRODUCTION_URL;
 const NEXT_PUBLIC_DEVELOPMENT_URL =
   process.env.NEXT_PUBLIC_DEVELOPMENT_URL ||
-  "https://64c8ad34a1fe0128fbd60bba.mockapi.io/crud-api/";
+  "https://5e9577a7f591cb0016d81aa8.mockapi.io";
 
 const currentUrl = typeof window !== "undefined" ? window.location.href : "";
 const developmentMode =

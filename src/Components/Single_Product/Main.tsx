@@ -1,24 +1,29 @@
-import sofa from "../../assets/single_product/sofa.png";
+import { useState } from "react";
 import {
   AiFillInstagram,
   AiFillTwitterCircle,
   AiOutlineHeart,
   AiOutlineRight,
 } from "react-icons/ai";
-import Syltherine from "../../assets/shop/image1.png";
-import Leviosa from "../../assets/shop/Images.png";
-import Lolito from "../../assets/shop/image3.png";
-import Respira from "../../assets/shop/image4.png";
-import { Link } from "react-router-dom";
 import { BiGitCompare } from "react-icons/bi";
 import { CiShare2 } from "react-icons/ci";
+import { FaFacebook } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import stars from "../../assets/ProductComparison/stars.png";
-import sofa3 from "../../assets/single_product/sofa1.png";
+import Leviosa from "../../assets/shop/Images.png";
+import Syltherine from "../../assets/shop/image1.png";
+import Lolito from "../../assets/shop/image3.png";
+import Respira from "../../assets/shop/image4.png";
+import Group94 from "../../assets/single_product/Group94.png";
 import Group96 from "../../assets/single_product/Group96.png";
 import Group97 from "../../assets/single_product/Group97.png";
 import Group98 from "../../assets/single_product/Group98.png";
-import Group94 from "../../assets/single_product/Group94.png";
-import { FaFacebook } from "react-icons/fa";
+import sofa from "../../assets/single_product/sofa.png";
+import sofa3 from "../../assets/single_product/sofa1.png";
+import productsColors from "../../utils/data/products-colors";
+import productsSizes from "../../utils/data/products-sizes";
+import ColorTabSelect from "../Common/ColorSelect";
+import SizeTabSelect from "../Common/SizeSelect";
 
 const Main = () => {
   const fakeData = [
@@ -55,9 +60,21 @@ const Main = () => {
       isNew: true,
     },
   ];
+
+  const [selectedColor, setSelectedColor] = useState(null);
+
+  const [selectedSize, setSelectedSize] = useState(null);
+
+  const handleSizeSelect = (size: any) => {
+    setSelectedSize(size);
+  };
+
+  const handleColorSelect = (item: any) => {
+    setSelectedColor(item.color);
+  };
   return (
     <>
-      <div>
+      <div className="product-content">
         <div className="bg-[#FAF3EA] py-5 px-20 mb-10">
           <div className="flex gap-8 items-center text-center">
             <div className="text-[#9F9F9F] font-normal text-base leading-6">
@@ -139,27 +156,26 @@ const Main = () => {
               <div className=" font-normal text-sm text-[#9F9F9F] mt-6 mb-3">
                 Size
               </div>
-              <div className="flex gap-3">
-                <button className="px-3 py-1 bg-[#F9F1E7] rounded hover:bg-[#B88E2F]">
-                  L
-                </button>
-                <button className="px-3 py-1 bg-[#F9F1E7] rounded hover:bg-[#B88E2F]">
-                  XL
-                </button>
-                <button className="px-3 py-1 bg-[#F9F1E7] rounded hover:bg-[#B88E2F]">
-                  XS
-                </button>
-              </div>
+              <SizeTabSelect
+                sizes={productsSizes}
+                onSelect={handleSizeSelect}
+              />
             </div>
             <div>
               <div className="font-normal text-sm text-[#9F9F9F] mt-6 mb-3">
                 Color
               </div>
-              <div className="flex gap-3 mb-6">
+
+              <ColorTabSelect
+                colors={productsColors}
+                onSelect={handleColorSelect}
+              />
+
+              {/* <div className="flex gap-3 mb-6">
                 <div className=" rounded-full bg-[#816DFA] w-[30px] h-[30px]"></div>
                 <div className=" rounded-full bg-[#000000] w-[30px] h-[30px]"></div>
                 <div className=" rounded-full bg-[#B88E2F] w-[30px] h-[30px]"></div>
-              </div>
+              </div> */}
             </div>
             <div className="flex items-center gap-14 font-normal text-xl leading-[30px] text-[#000000]">
               <div>
