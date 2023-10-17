@@ -7,24 +7,23 @@ function ColorTabSelect({ colors, onSelect }: any) {
     setSelectedColor(color);
     onSelect(color);
   };
-  console.log(`bg-[${selectedColor}]`)
+  console.log(`bg-[${selectedColor}]`);
   return (
     <div className="px-2 py-5">
       <div className="flex space-x-4">
-        {colors.map((item: any,index:any) => (
+        {colors.map((item: any, index: any) => (
           <div
-          style={{ backgroundColor: selectedColor === item ? item : 'white'}}
+            style={{ backgroundColor: selectedColor === item ? item : "white" }}
             key={index}
             onClick={() => handleColorSelect(item)}
-            className={`cursor-pointer p-4 border rounded-lg ${
+            className={`cursor-pointer p-4 border rounded-full ${
               selectedColor === item
                 ? `border-[${item}] bg-[${item}]`
                 : "border-gray-300 hover:border-gray-400"
             } ${
               selectedColor === item ? `bg-[${item}]` : "border border-[#00000]"
             }`}
-          >
-          </div>
+          ></div>
         ))}
       </div>
     </div>

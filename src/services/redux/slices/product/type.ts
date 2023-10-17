@@ -3,10 +3,10 @@ export interface Product {
   image: string;
   name: string;
   description: string;
-  price: number;
+  price: string;
   discount: number;
-  dateAdded: number;
+  dateAdded: string;
   count: number;
-  sizes:[],
-  colors:[]
+  sizes: null;
+  colors: null;
 }

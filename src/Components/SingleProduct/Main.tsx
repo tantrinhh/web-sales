@@ -8,33 +8,30 @@ import {
 import { BiGitCompare } from "react-icons/bi";
 import { CiShare2 } from "react-icons/ci";
 import { FaFacebook } from "react-icons/fa";
-import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import stars from "../../assets/ProductComparison/stars.png";
-import Leviosa from "../../assets/shop/Images.png";
-import Syltherine from "../../assets/shop/image1.png";
-import Lolito from "../../assets/shop/image3.png";
-import Respira from "../../assets/shop/image4.png";
 import Group94 from "../../assets/single-product/Group94.png";
 import Group96 from "../../assets/single-product/Group96.png";
 import Group97 from "../../assets/single-product/Group97.png";
 import Group98 from "../../assets/single-product/Group98.png";
 import sofa from "../../assets/single-product/sofa.png";
 import sofa3 from "../../assets/single-product/sofa1.png";
-import productsColors from "../../utils/data/products-colors";
-import productsSizes from "../../utils/data/products-sizes";
+import { addProduct } from "../../services/redux/slices/cart";
+import { productSelectors } from "../../services/redux/slices/product";
 import ColorTabSelect from "../Common/ColorSelect";
 import SizeTabSelect from "../Common/SizeSelect";
-import { useSelector } from "react-redux";
-import { productSelectors } from "../../services/redux/slices/product";
 
 const Main = () => {
   const productsSelector = useSelector(productSelectors.selectAll);
-  const params:any = useParams()
-  console.log(params)
-  console.log(productsSelector,"productsSelector")
-  const itemDetail = productsSelector.filter((item:any)=> parseInt(item.id)===parseInt(params.id))
-  console.log(itemDetail,"itemDetail")
-  
+
+  const params: any = useParams();
+  console.log(params);
+  console.log(productsSelector, "productsSelector");
+  const itemDetail = productsSelector.filter(
+    (item: any) => parseInt(item.id) === parseInt(params.id)
+  );
+  console.log(itemDetail, "itemDetail");
 
   const [selectedColor, setSelectedColor] = useState(null);
 
@@ -45,12 +42,32 @@ const Main = () => {
   };
 
   const handleColorSelect = (item: any) => {
-    setSelectedColor(item.color);
+    setSelectedColor(item);
   };
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [count, setCount] = useState<number>(1);
 
-
-  console.log(selectedSize,selectedColor)
-
+  const handleCart = () => {
+    const actionCart: any = {
+      id: itemDetail[0].id,
+      image: itemDetail[0].image,
+      name: itemDetail[0].name,
+      description: itemDetail[0].description,
+      price: parseInt(itemDetail[0].price),
+      discount: itemDetail[0].discount,
+      dateAdded: itemDetail[0].dateAdded,
+      count: count,
+      sizes: selectedSize,
+      colors: selectedColor,
+    };
+    if (selectedSize !== null && selectedColor !== null) {
+      navigate("/cart");
+      dispatch(addProduct(actionCart));
+    } else {
+      alert("Vui lòng thêm kích cỡ và màu sắc của sản phẩm");
+    }
+  };
 
   return (
     <>
@@ -75,7 +92,7 @@ const Main = () => {
               |
             </div>
             <div className="text-[#000000] font-medium text-base leading-6">
-             {itemDetail[0].name}
+              {itemDetail[0].name}
             </div>
           </div>
         </div>
@@ -106,13 +123,11 @@ const Main = () => {
           </div>
           <div className="max-w-[610px] px-10">
             <div className=" font-medium text-[42px] leading-[63px] text-[#000000]">
-            {itemDetail[0].name}
-
+              {itemDetail[0].name}
             </div>
             <div className="text-[#9F9F9F] font-medium text-2xl leading-9">
-              Rs. 
-             {itemDetail[0].price.toLocaleString()}
-
+              Rs.
+              {itemDetail[0].price.toLocaleString()}
             </div>
             <div className="flex gap-4 my-5">
               <div>
@@ -128,12 +143,7 @@ const Main = () => {
               </div>
             </div>
             <div>
-              <p className="max-w-[424px]">
-                Setting the bar as one of the loudest speakers in its class, the
-                Kilburn is a compact, stout-hearted hero with a well-balanced
-                audio which boasts a clear midrange and extended highs for a
-                sound.
-              </p>{" "}
+              <p className="max-w-[424px]">{itemDetail[0].description}</p>{" "}
             </div>
             <div>
               <div className=" font-normal text-sm text-[#9F9F9F] mt-6 mb-3">
@@ -161,19 +171,34 @@ const Main = () => {
               </div> */}
             </div>
             <div className="flex items-center gap-14 font-normal text-xl leading-[30px] text-[#000000]">
-              <div>
-                {" "}
-                <input
-                  type="number" // Sử dụng type="number"
-                  className="w-24 h-10 px-3 rounded-md border-0 py-1.5 text-[#000000] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder=""
-                />
+              <div className="quantity-buttons">
+                <div className="quantity-button flex flex-row rounded-md space-x-2">
+                  <button
+                    type="button"
+                    onClick={() => setCount(count - 1)}
+                    className="quantity-button__btn"
+                  >
+                    -
+                  </button>
+                  <span>{count}</span>
+                  <button
+                    type="button"
+                    onClick={() => setCount(count + 1)}
+                    className="quantity-button__btn"
+                  >
+                    +
+                  </button>
+                </div>
               </div>
               <div className="h-10 px-5 border border-[#000000] pt-1.5 rounded-md">
                 {" "}
-                <Link to="/cart">
-                  <button>Add To Cart</button>
-                </Link>
+                <button
+                  onClick={() => {
+                    handleCart();
+                  }}
+                >
+                  Add To Cart
+                </button>
               </div>
               <div className="h-10 px-5 border border-[#000000] pt-1.5 rounded-md">
                 {" "}
@@ -264,9 +289,9 @@ const Main = () => {
           </div>
           <div>
             {" "}
-            <div className="mb-20 container" >
+            <div className="mb-20 container">
               <div className="grid grid-cols-4 gap-y-14 ">
-                {productsSelector.slice(0,4).map((item: any) => {
+                {productsSelector.slice(0, 4).map((item: any) => {
                   return (
                     <div>
                       {" "}
@@ -330,8 +355,7 @@ const Main = () => {
                                       Rp{" "}
                                       {(
                                         item.price +
-                                        item.price *
-                                          (item.discount / 100)
+                                        item.price * (item.discount / 100)
                                       ).toLocaleString()}
                                     </span>
                                   </div>

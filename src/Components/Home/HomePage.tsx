@@ -25,7 +25,6 @@ import image1 from "../../assets/home/image1.png";
 import image2 from "../../assets/home/image2.png";
 import { useAppDispatch } from "../../hooks/redux";
 import "../../index.css";
-import { addProduct } from "../../services/redux/slices/cart";
 import { ProductType } from "../../services/redux/slices/cart/type";
 import {
   getProduct,
@@ -46,18 +45,11 @@ const HomePage = () => {
     dispatch(getProduct());
   }, [dispatch]);
 
-  const handleCart = (product: any) => {
-    navigate("/cart");
-    dispatch(addProduct(product));
-  };
-
   const productsSelector = useSelector(productSelectors.selectAll);
-  console.log(productsSelector, "productsSelector");
 
-
-  const handleDetailProduct=(id:any)=>{
-    navigate(`/singleProduct/${id}`)
-  }
+  const handleDetailProduct = (id: any) => {
+    navigate(`/singleProduct/${id}`);
+  };
   return (
     <>
       {/* Sub header */}
@@ -108,22 +100,25 @@ const HomePage = () => {
       <div className="mt-20 container">
         <h1 className="text-center text-[40px] font-bold mb-5">Our Products</h1>
         <div className="grid grid-cols-4 gap-y-14 ">
-          {productsSelector?.map((product:any) => {
+          {productsSelector?.map((product: any) => {
             return (
               <div key={product.id}>
                 {" "}
-                <div className="relative cursor-pointer" onClick={()=>{
-                    handleDetailProduct(product.id)
-                }}  >
+                <div
+                  className="relative cursor-pointer"
+                  onClick={() => {
+                    handleDetailProduct(product.id);
+                  }}
+                >
                   <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
-                    <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer" >
+                    <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
                       <button
-                        onClick={(event:any) => {
-                          event.preventDefault()
-                          handleCart(product);
+                        onClick={(event: any) => {
+                          event.preventDefault();
+                          handleDetailProduct(product.id);
                         }}
                       >
-                        Add to cart
+                        View product
                       </button>
                     </div>
                     <div className="flex gap-5 text-[#FFFFFF] text-base leading-6 font-semibold">

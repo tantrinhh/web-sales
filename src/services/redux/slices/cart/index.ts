@@ -3,6 +3,7 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
+import { Product } from "../product/type";
 import { ProductType } from "./type";
 
 interface CartTypes {
@@ -20,7 +21,6 @@ const initialState = {
 
 const indexSameProduct = (state: CartTypes, action: ProductType) => {
   const sameProduct = (product: ProductType) => product.id === action.id;
-  // const sameProduct = (product: ProductType) => console.log(product, action);
   return state.cartItems.findIndex(sameProduct);
 };
 type AddProductType = {
@@ -33,15 +33,18 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     //Thêm  sản phẩm
-    addProduct: (state: any, action: PayloadAction<ProductType>) => {
+    addProduct: (state: any, action: PayloadAction<Product>) => {
       const itemInCart = state.cartItems.find(
-        (item: any) => item.id === action.payload.id
+        (item: any) =>
+          item.id === action.payload.id &&
+          item.colors === action.payload.colors &&
+          item.sizes === action.payload.sizes
       );
-      console.log(itemInCart, "itemInCart");
+
       if (itemInCart) {
         itemInCart.count++;
       } else {
-        state.cartItems.push({ ...action.payload, count: 1 });
+        state.cartItems.push({ ...action.payload });
       }
     },
     //Xóa  sản phẩm
