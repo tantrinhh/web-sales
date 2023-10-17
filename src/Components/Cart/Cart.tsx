@@ -1,79 +1,132 @@
 import { AiTwotoneDelete } from "react-icons/ai";
-import Asgaardsofa from "../../assets/cart/Asgaardsofa.png";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { useAppDispatch } from "../../hooks/redux";
+import { RootState } from "../../services/redux/RootReducer";
+import {
+  decrementQuantity,
+  incrementQuantity,
+  removeProduct,
+} from "../../services/redux/slices/cart";
+const Main_Cart = () => {
+  const { cartItems } = useSelector((state: RootState) => state.cart);
+  const dispatch = useAppDispatch();
 
-import { removeFromCart } from "../../store/cartSlice";
-import { useDispatch } from "react-redux";
+  const removeFromCart = (productId: any) => {
+    console.log(productId);
+    dispatch(removeProduct(productId));
+  };
 
-const Cart = () => {
-  const cartItems = useSelector((state: RootState) => state.cart.items);
-  const dispatch = useDispatch();
-  const total = cartItems.reduce((acc, item) => {
-    // Tính tổng giá trị của từng sản phẩm và cộng vào biến acc
-    return acc + item.quantity;
-  }, 0); // Giá trị khởi tạo của biến total
+  const handleDecrementQuantity = (productId: any) => {
+    console.log(productId, "handleDecrementQuantity");
+    dispatch(decrementQuantity(productId));
+  };
+
+  const handleIncrementQuantity = (productId: any) => {
+    console.log(productId, "handleIncrementQuantity");
+    dispatch(incrementQuantity(productId));
+  };
+
+  const priceTotal = () => {
+    let totalPrice = 0;
+
+    if (cartItems.length > 0) {
+      cartItems.map((item: any) => (totalPrice += item.price * item.count));
+    }
+
+    return totalPrice;
+  };
+
   return (
     <>
-      <div className="grid grid-cols-3 justify-between my-20 mx-24 gap-10">
-        <div className="col-span-2">
-          <div className="flex px-32 py-10 justify-between bg-[#F9F1E7] font-semibold text-base text-[#000000] ">
-            <div className="mr-28 ml-10">Product</div>
-            <div className="mr-40">Price</div>
-            <div className="mr-14">Quantity</div>
-            <div>Subtotal</div>
-          </div>
-          <div className="mt-10 font-medium text-base space-y-5">
-            {cartItems.map((item) => (
-              <div key={item.productId} className="row-span-1 flex space-y-7">
-                <div>
-                  <img
-                    src={Asgaardsofa}
-                    className="bg-[#F9F1E7] rounded-xl"
-                    alt=""
-                  />
-                </div>
-                <div className="mr-20 ml-14 text-[#9F9F9F]">Asgaardsofa</div>
-                <div className="mr-[105px] text-[#9F9F9F]">Rs. 250,000.00</div>
-                <div>
-                  <input
-                    type="number" // Sử dụng
-                    className="w-14 h-10  px-2 rounded-md border-0 py-0.5 text-[#000000] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-                <div className="ml-14 mr-10">Rs. 250,000.00</div>
-                <button
-                  onClick={() => dispatch(removeFromCart(item.productId))}
+      <div className="flex justify-between my-20 mx-24">
+        {cartItems.length > 0 ? (
+          <div className="">
+            <div className="flex flex-row py-5 space-x-20   justify-between bg-[#F9F1E7] font-semibold text-base text-[#000000] ">
+              <div></div>
+              <div className="">Product</div>
+              <div>Price</div>
+              <div>Quantity</div>
+              <div>Total price</div>
+              <div></div>
+            </div>
+            {cartItems.map((item: any) => {
+              const priceItem = item.price * item.count;
+              return (
+                <div
+                  key={item.id}
+                  className="flex flex-row  space-x-20 mt-10  items-center font-medium text-base "
                 >
-                  <AiTwotoneDelete
-                    className="mb-10"
-                    style={{ width: "20px", height: "20px", color: "#B88E2F" }}
-                  />
-                </button>
-              </div>
-            ))}
+                  <div>
+                    <img
+                      src={item.image}
+                      className="bg-[#F9F1E7] rounded-md w-10 h-10"
+                      alt=""
+                    />
+                  </div>
+                  <div className=" text-[#9F9F9F]">{item.name}</div>
+                  <div className=" text-[#9F9F9F]">
+                    Rs. {item.price.toLocaleString()}
+                  </div>
+                  <div className="quantity-buttons">
+                    <div className="quantity-button flex flex-row rounded-md space-x-2">
+                      <button
+                        type="button"
+                        onClick={() => handleDecrementQuantity(item.id)}
+                        className="quantity-button__btn"
+                      >
+                        -
+                      </button>
+                      <span>{item.count}</span>
+                      <button
+                        type="button"
+                        onClick={() => handleIncrementQuantity(item.id)}
+                        className="quantity-button__btn"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <div className="">Rs. {priceItem.toLocaleString()}</div>
+                  <div onClick={() => removeFromCart(item.id)}>
+                    <AiTwotoneDelete
+                      style={{
+                        width: "20px",
+                        height: "20px",
+                        color: "#B88E2F",
+                      }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        </div>
-        <div className="col-span-1 items-center text-center bg-[#F9F1E7] px-20 pb-24 pt-10 rounded">
+        ) : (
+          <div>Quay lại shopping</div>
+        )}
+
+        <div className="items-center text-center bg-[#F9F1E7] px-20 pb-24 pt-10 rounded">
           <div className=" font-semibold text-[32px] leading-[48px] text-[#000000] mb-14">
             Cart Totals
           </div>
           <div className="flex justify-between max-w-[256px]">
-            <div className="text-base font-medium text-[#000000]">Subtotal</div>
+            <div className="text-base font-medium text-[#000000]">
+              Total Item
+            </div>
             <div className="text-[#9F9F9F] text-base font-normal">
-              Rs. {total.toLocaleString()}
+              {cartItems.length}
             </div>
           </div>
           <div className="flex justify-between max-w-[256px] my-6">
-            <div className="text-base font-medium text-[#000000]">Total</div>
+            <div className="text-base font-medium text-[#000000]">
+              Total Price
+            </div>
             <div className="font-mediun text-xl leading-[30px] text-[#B88E2F]">
-              Rs. {total.toLocaleString()}
+              Rs. {priceTotal().toLocaleString()}
             </div>
           </div>
           <div>
-            <button className="border border-black rounded-[15px] px-16 h-14 font-normal text-xl mt-2 ">
-              <Link to="/checkout"> Check Out</Link>
+            <button className="border border-black rounded-[15px] px-20 h-14 font-normal text-xl mt-2 ">
+              Check Out
             </button>
           </div>
         </div>
@@ -82,4 +135,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Main_Cart;

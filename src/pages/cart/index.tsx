@@ -3,7 +3,7 @@ import LayoutPage from "../../Components/Layout/Layout_Page";
 import SubCart from "../../Components/Cart/SubCart";
 import MainCart from "../../Components/Cart/Cart";
 
-const cart = () => {
+const Cart = () => {
   return (
     <div className="bg-[#FFFFFF]">
       <LayoutPage>
@@ -13,4 +13,4 @@ const cart = () => {
     </div>
   );
 };
-export default cart;
+export default Cart;

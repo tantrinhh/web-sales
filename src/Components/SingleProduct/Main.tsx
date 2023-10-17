@@ -217,7 +217,7 @@ const Main = () => {
             <div></div>
           </div>
         </div>
-        <div className="border-t border border-[#D9D9D9]"></div>
+        <div className="border-t border border-[#9F9F9F]"></div>
         <div className=" ">
           <div className="flex max-w-[650px] mx-auto gap-10 justify-between font-medium text-2xl leading-9 my-14">
             <div className="text-[#000000]">Description</div>
@@ -253,7 +253,7 @@ const Main = () => {
             </div>
           </div>
         </div>
-        <div className="border-t border border-[#D9D9D9]"></div>
+        <div className="border-t border border-[#9F9F9F]"></div>
         <div>
           <div className="text-center font-medium text-4xl leading-[54px] text-[#000000] mb-5 mt-14">
             Related Products
