@@ -1,12 +1,13 @@
-import Shop from "./pages/shop";
-import Home from "./pages/home";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Contact from "./pages/contact";
-import Cart from "./pages/cart";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Blog from "./pages/blog";
 import Checkout from "./pages/checkout";
+import Contact from "./pages/contact";
+import Shop from "./pages/shop/index";
+import Single_Product from "./pages/single_product";
 import ProductComparison from "./pages/productComparison";
 import SingleProduct from "./pages/singleProduct";
+import Cart from "./pages/cart";
+import Home from "./pages/home";
 
 function App() {
   return (
