@@ -3,7 +3,6 @@ import Blog from "./pages/blog";
 import Checkout from "./pages/checkout";
 import Contact from "./pages/contact";
 import Shop from "./pages/shop/index";
-import Single_Product from "./pages/single_product";
 import ProductComparison from "./pages/productComparison";
 import SingleProduct from "./pages/singleProduct";
 import Cart from "./pages/cart";
@@ -19,7 +18,7 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/productComparison" element={<ProductComparison />} />
-        <Route path="/singleProduct" element={<SingleProduct />} />
+        <Route path="/singleProduct/:id" element={<SingleProduct />} />
         <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </Router>

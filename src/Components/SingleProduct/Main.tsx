@@ -8,58 +8,33 @@ import {
 import { BiGitCompare } from "react-icons/bi";
 import { CiShare2 } from "react-icons/ci";
 import { FaFacebook } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import stars from "../../assets/ProductComparison/stars.png";
 import Leviosa from "../../assets/shop/Images.png";
 import Syltherine from "../../assets/shop/image1.png";
 import Lolito from "../../assets/shop/image3.png";
 import Respira from "../../assets/shop/image4.png";
-import Group94 from "../../assets/single_product/Group94.png";
-import Group96 from "../../assets/single_product/Group96.png";
-import Group97 from "../../assets/single_product/Group97.png";
-import Group98 from "../../assets/single_product/Group98.png";
-import sofa from "../../assets/single_product/sofa.png";
-import sofa3 from "../../assets/single_product/sofa1.png";
+import Group94 from "../../assets/single-product/Group94.png";
+import Group96 from "../../assets/single-product/Group96.png";
+import Group97 from "../../assets/single-product/Group97.png";
+import Group98 from "../../assets/single-product/Group98.png";
+import sofa from "../../assets/single-product/sofa.png";
+import sofa3 from "../../assets/single-product/sofa1.png";
 import productsColors from "../../utils/data/products-colors";
 import productsSizes from "../../utils/data/products-sizes";
 import ColorTabSelect from "../Common/ColorSelect";
 import SizeTabSelect from "../Common/SizeSelect";
+import { useSelector } from "react-redux";
+import { productSelectors } from "../../services/redux/slices/product";
 
 const Main = () => {
-  const fakeData = [
-    {
-      image: Syltherine,
-      name: "Syltherine",
-      des: "Stylish cafe chair",
-      price: 2500000,
-      discount: 30,
-      isNew: false,
-    },
-    {
-      image: Leviosa,
-      name: "Leviosa",
-      des: "Stylish cafe chair",
-      price: 2500000,
-      discount: 0,
-      isNew: false,
-    },
-    {
-      image: Lolito,
-      name: "Lolito",
-      des: "Luxury big sofa",
-      price: 7000000,
-      discount: 50,
-      isNew: false,
-    },
-    {
-      image: Respira,
-      name: "Respira",
-      des: "Outdoor bar table and stool",
-      price: 500000,
-      discount: 0,
-      isNew: true,
-    },
-  ];
+  const productsSelector = useSelector(productSelectors.selectAll);
+  const params:any = useParams()
+  console.log(params)
+  console.log(productsSelector,"productsSelector")
+  const itemDetail = productsSelector.filter((item:any)=> parseInt(item.id)===parseInt(params.id))
+  console.log(itemDetail,"itemDetail")
+  
 
   const [selectedColor, setSelectedColor] = useState(null);
 
@@ -72,6 +47,11 @@ const Main = () => {
   const handleColorSelect = (item: any) => {
     setSelectedColor(item.color);
   };
+
+
+  console.log(selectedSize,selectedColor)
+
+
   return (
     <>
       <div className="product-content">
@@ -95,7 +75,7 @@ const Main = () => {
               |
             </div>
             <div className="text-[#000000] font-medium text-base leading-6">
-              Asgaard sofa
+             {itemDetail[0].name}
             </div>
           </div>
         </div>
@@ -126,10 +106,13 @@ const Main = () => {
           </div>
           <div className="max-w-[610px] px-10">
             <div className=" font-medium text-[42px] leading-[63px] text-[#000000]">
-              Asgaard sofa
+            {itemDetail[0].name}
+
             </div>
             <div className="text-[#9F9F9F] font-medium text-2xl leading-9">
-              Rs. 250,000.00
+              Rs. 
+             {itemDetail[0].price.toLocaleString()}
+
             </div>
             <div className="flex gap-4 my-5">
               <div>
@@ -157,7 +140,7 @@ const Main = () => {
                 Size
               </div>
               <SizeTabSelect
-                sizes={productsSizes}
+                sizes={itemDetail[0].sizes}
                 onSelect={handleSizeSelect}
               />
             </div>
@@ -167,7 +150,7 @@ const Main = () => {
               </div>
 
               <ColorTabSelect
-                colors={productsColors}
+                colors={itemDetail[0].colors}
                 onSelect={handleColorSelect}
               />
 
@@ -283,11 +266,11 @@ const Main = () => {
             {" "}
             <div className="mb-20 container" >
               <div className="grid grid-cols-4 gap-y-14 ">
-                {fakeData.map((item: any) => {
+                {productsSelector.slice(0,4).map((item: any) => {
                   return (
                     <div>
                       {" "}
-                      <Link to="single_product">
+                      <Link to="single-product">
                         <div className="relative ">
                           <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
                             <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">

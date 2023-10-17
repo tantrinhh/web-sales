@@ -13,7 +13,7 @@ function SizeTabSelect({ sizes, onSelect }: any) {
       <div className="flex space-x-4">
         {sizes.map((size: any) => (
           <div
-            key={size.id}
+            key={size}
             onClick={() => handleSizeSelect(size)}
             className={`cursor-pointer p-4 border rounded-lg ${
               selectedSize === size
@@ -21,7 +21,7 @@ function SizeTabSelect({ sizes, onSelect }: any) {
                 : "border-gray-300 hover:border-gray-400"
             } ${selectedSize === size ? "bg-indigo-100" : "bg-white"}`}
           >
-            {size.label}
+            {size}
           </div>
         ))}
       </div>
