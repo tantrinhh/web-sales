@@ -54,7 +54,7 @@ const Main = () => {
       image: itemDetail[0].image,
       name: itemDetail[0].name,
       description: itemDetail[0].description,
-      price: parseInt(itemDetail[0].price),
+      price: itemDetail[0].price,
       discount: itemDetail[0].discount,
       dateAdded: itemDetail[0].dateAdded,
       count: count,

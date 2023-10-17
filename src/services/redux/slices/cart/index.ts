@@ -19,10 +19,15 @@ const initialState = {
   cartItems: [],
 } as CartTypes;
 
-const indexSameProduct = (state: CartTypes, action: ProductType) => {
-  const sameProduct = (product: ProductType) => product.id === action.id;
+const indexSameProduct = (state: CartTypes, action: Product) => {
+  const sameProduct: any = (product: Product) =>
+    product.id === action.id &&
+    product.colors === action.colors &&
+    product.sizes === action.sizes;
+
   return state.cartItems.findIndex(sameProduct);
 };
+
 type AddProductType = {
   product: ProductType;
   // count: number;
@@ -40,7 +45,6 @@ const cartSlice = createSlice({
           item.colors === action.payload.colors &&
           item.sizes === action.payload.sizes
       );
-
       if (itemInCart) {
         itemInCart.count++;
       } else {
@@ -48,12 +52,8 @@ const cartSlice = createSlice({
       }
     },
     //Xóa  sản phẩm
-    removeProduct(state: any, action: PayloadAction<ProductType>) {
-      const removeItem = state.cartItems.filter(
-        (item: any) => item.id !== action.payload
-      );
-
-      state.cartItems = removeItem;
+    removeProduct(state: any, action: PayloadAction<Product>) {
+      state.cartItems.splice(indexSameProduct(state, action.payload), 1);
     },
     //Giảm số lượng sản phẩm
     incrementQuantity: (state: any, action) => {

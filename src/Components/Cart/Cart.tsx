@@ -115,6 +115,9 @@ const Cart = () => {
                     <td>
                       {" "}
                       <AiTwotoneDelete
+                        onClick={() => {
+                          removeFromCart(item);
+                        }}
                         style={{
                           width: "20px",
                           height: "20px",
