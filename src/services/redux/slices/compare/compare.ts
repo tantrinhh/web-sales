@@ -3,7 +3,7 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import { ProductType } from "./type";
+import { ProductType } from "../cart/type";
 
 interface CartTypes {
   cartItems: ProductType[];
@@ -18,15 +18,6 @@ const initialState = {
   cartItems: [],
 } as CartTypes;
 
-const indexSameProduct = (state: CartTypes, action: ProductType) => {
-  const sameProduct = (product: ProductType) => product.id === action.id;
-  // const sameProduct = (product: ProductType) => console.log(product, action);
-  return state.cartItems.findIndex(sameProduct);
-};
-type AddProductType = {
-  product: ProductType;
-  // count: number;
-};
 // Create a cart slice
 const cartSlice = createSlice({
   name: "cart",
@@ -53,35 +44,11 @@ const cartSlice = createSlice({
 
       state.cartItems = removeItem;
     },
-    //Giảm số lượng sản phẩm
-    incrementQuantity: (state: any, action) => {
-      const item = state.cartItems.find(
-        (item: any) => item.id === action.payload
-      );
-      item.count++;
-      console.log(item);
-    },
-    //Tăng số lượng sản phẩm
-    decrementQuantity: (state: any, action) => {
-      const item = state.cartItems.find(
-        (item: any) => item.id === action.payload
-      );
-      if (item.count === 1) {
-        item.count = 1;
-      } else {
-        item.count--;
-      }
-    },
   },
   extraReducers: (builder) => {},
 });
 
-export const {
-  addProduct,
-  removeProduct,
-  incrementQuantity,
-  decrementQuantity,
-} = cartSlice.actions;
+export const { addProduct, removeProduct } = cartSlice.actions;
 
 export default cartSlice.reducer;
 

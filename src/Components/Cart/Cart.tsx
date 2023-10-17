@@ -12,17 +12,17 @@ const Cart = () => {
   const dispatch = useAppDispatch();
 
   const removeFromCart = (productId: any) => {
-    console.log(productId);
+    // console.log(productId);
     dispatch(removeProduct(productId));
   };
 
   const handleDecrementQuantity = (productId: any) => {
-    console.log(productId, "handleDecrementQuantity");
+    // console.log(productId, "handleDecrementQuantity");
     dispatch(decrementQuantity(productId));
   };
 
   const handleIncrementQuantity = (productId: any) => {
-    console.log(productId, "handleIncrementQuantity");
+    // console.log(productId, "handleIncrementQuantity");
     dispatch(incrementQuantity(productId));
   };
 
@@ -135,4 +135,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Main_Cart;

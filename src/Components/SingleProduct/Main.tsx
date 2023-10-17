@@ -29,12 +29,13 @@ import { productSelectors } from "../../services/redux/slices/product";
 
 const Main = () => {
   const productsSelector = useSelector(productSelectors.selectAll);
-  const params:any = useParams()
-  console.log(params)
-  console.log(productsSelector,"productsSelector")
-  const itemDetail = productsSelector.filter((item:any)=> parseInt(item.id)===parseInt(params.id))
-  console.log(itemDetail,"itemDetail")
-  
+  const params: any = useParams();
+  console.log(params);
+  console.log(productsSelector, "productsSelector");
+  const itemDetail = productsSelector.filter(
+    (item: any) => parseInt(item.id) === parseInt(params.id)
+  );
+  console.log(itemDetail, "itemDetail");
 
   const [selectedColor, setSelectedColor] = useState(null);
 
@@ -48,9 +49,7 @@ const Main = () => {
     setSelectedColor(item.color);
   };
 
-
-  console.log(selectedSize,selectedColor)
-
+  console.log(selectedSize, selectedColor);
 
   return (
     <>
@@ -75,7 +74,7 @@ const Main = () => {
               |
             </div>
             <div className="text-[#000000] font-medium text-base leading-6">
-             {itemDetail[0].name}
+              {itemDetail[0].name}
             </div>
           </div>
         </div>
@@ -106,13 +105,11 @@ const Main = () => {
           </div>
           <div className="max-w-[610px] px-10">
             <div className=" font-medium text-[42px] leading-[63px] text-[#000000]">
-            {itemDetail[0].name}
-
+              {itemDetail[0].name}
             </div>
             <div className="text-[#9F9F9F] font-medium text-2xl leading-9">
-              Rs. 
-             {itemDetail[0].price.toLocaleString()}
-
+              Rs.
+              {itemDetail[0].price.toLocaleString()}
             </div>
             <div className="flex gap-4 my-5">
               <div>
@@ -264,9 +261,9 @@ const Main = () => {
           </div>
           <div>
             {" "}
-            <div className="mb-20 container" >
+            <div className="mb-20 container">
               <div className="grid grid-cols-4 gap-y-14 ">
-                {productsSelector.slice(0,4).map((item: any) => {
+                {productsSelector.slice(0, 4).map((item: any) => {
                   return (
                     <div>
                       {" "}
@@ -330,8 +327,7 @@ const Main = () => {
                                       Rp{" "}
                                       {(
                                         item.price +
-                                        item.price *
-                                          (item.discount / 100)
+                                        item.price * (item.discount / 100)
                                       ).toLocaleString()}
                                     </span>
                                   </div>

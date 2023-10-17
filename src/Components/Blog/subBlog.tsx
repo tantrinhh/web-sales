@@ -30,7 +30,7 @@ const SubBlog = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default SubBlog
+export default SubBlog;
