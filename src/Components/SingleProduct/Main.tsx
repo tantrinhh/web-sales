@@ -1,58 +1,60 @@
-import sofa from "../../assets/single-product/sofa.png";
+import { useState } from "react";
 import {
   AiFillInstagram,
   AiFillTwitterCircle,
   AiOutlineHeart,
   AiOutlineRight,
 } from "react-icons/ai";
-import { Link } from "react-router-dom";
 import { BiGitCompare } from "react-icons/bi";
 import { CiShare2 } from "react-icons/ci";
+import { FaFacebook } from "react-icons/fa";
+import { Link, useParams } from "react-router-dom";
 import stars from "../../assets/ProductComparison/stars.png";
-import sofa3 from "../../assets/single-product/sofa1.png";
+import Leviosa from "../../assets/shop/Images.png";
+import Syltherine from "../../assets/shop/image1.png";
+import Lolito from "../../assets/shop/image3.png";
+import Respira from "../../assets/shop/image4.png";
+import Group94 from "../../assets/single-product/Group94.png";
 import Group96 from "../../assets/single-product/Group96.png";
 import Group97 from "../../assets/single-product/Group97.png";
 import Group98 from "../../assets/single-product/Group98.png";
-import Group94 from "../../assets/single-product/Group94.png";
-import { FaFacebook } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { addToCart, usesSevice } from "../../store/cartSlice";
-import { Data } from "../Interface";
-import { useEffect, useState } from "react";
+import sofa from "../../assets/single-product/sofa.png";
+import sofa3 from "../../assets/single-product/sofa1.png";
+import productsColors from "../../utils/data/products-colors";
+import productsSizes from "../../utils/data/products-sizes";
+import ColorTabSelect from "../Common/ColorSelect";
+import SizeTabSelect from "../Common/SizeSelect";
+import { useSelector } from "react-redux";
+import { productSelectors } from "../../services/redux/slices/product";
 
 const Main = () => {
-  const [listProduct, setListProduct] = useState<Data[]>([]);
+  const productsSelector = useSelector(productSelectors.selectAll);
+  const params:any = useParams()
+  console.log(params)
+  console.log(productsSelector,"productsSelector")
+  const itemDetail = productsSelector.filter((item:any)=> parseInt(item.id)===parseInt(params.id))
+  console.log(itemDetail,"itemDetail")
+  
 
-  const dispatch = useDispatch();
+  const [selectedColor, setSelectedColor] = useState(null);
 
-  useEffect(() => {
-    getUSers();
-  }, []);
+  const [selectedSize, setSelectedSize] = useState(null);
 
-  const getUSers = async () => {
-    let res = await usesSevice();
-    if (res && res.data && res.data) {
-      const limitedData = res.data.slice(0, 4);
-      setListProduct(limitedData);
-    }
+  const handleSizeSelect = (size: any) => {
+    setSelectedSize(size);
   };
-  const today: Date = new Date();
-  function isProductNew(product: Data): boolean {
-    const productAddedDate: Date = new Date(product.dateAdded); // Chuyển đổi chuỗi thành Date
-    const daysDifference: number = Math.ceil(
-      (today.getTime() - productAddedDate.getTime()) / (1000 * 60 * 60 * 24)
-    );
-    return daysDifference <= 7;
-  }
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth", // Cuộn mượt lên đầu trang
-    });
+
+  const handleColorSelect = (item: any) => {
+    setSelectedColor(item.color);
   };
+
+
+  console.log(selectedSize,selectedColor)
+
+
   return (
     <>
-      <div>
+      <div className="product-content">
         <div className="bg-[#FAF3EA] py-5 px-20 mb-10">
           <div className="flex gap-8 items-center text-center">
             <div className="text-[#9F9F9F] font-normal text-base leading-6">
@@ -73,7 +75,7 @@ const Main = () => {
               |
             </div>
             <div className="text-[#000000] font-medium text-base leading-6">
-              Asgaard sofa
+             {itemDetail[0].name}
             </div>
           </div>
         </div>
@@ -104,10 +106,13 @@ const Main = () => {
           </div>
           <div className="max-w-[610px] px-10">
             <div className=" font-medium text-[42px] leading-[63px] text-[#000000]">
-              Asgaard sofa
+            {itemDetail[0].name}
+
             </div>
             <div className="text-[#9F9F9F] font-medium text-2xl leading-9">
-              Rs. 250,000.00
+              Rs. 
+             {itemDetail[0].price.toLocaleString()}
+
             </div>
             <div className="flex gap-4 my-5">
               <div>
@@ -134,27 +139,26 @@ const Main = () => {
               <div className=" font-normal text-sm text-[#9F9F9F] mt-6 mb-3">
                 Size
               </div>
-              <div className="flex gap-3">
-                <button className="px-3 py-1 bg-[#F9F1E7] rounded hover:bg-[#B88E2F]">
-                  L
-                </button>
-                <button className="px-3 py-1 bg-[#F9F1E7] rounded hover:bg-[#B88E2F]">
-                  XL
-                </button>
-                <button className="px-3 py-1 bg-[#F9F1E7] rounded hover:bg-[#B88E2F]">
-                  XS
-                </button>
-              </div>
+              <SizeTabSelect
+                sizes={itemDetail[0].sizes}
+                onSelect={handleSizeSelect}
+              />
             </div>
             <div>
               <div className="font-normal text-sm text-[#9F9F9F] mt-6 mb-3">
                 Color
               </div>
-              <div className="flex gap-3 mb-6">
+
+              <ColorTabSelect
+                colors={itemDetail[0].colors}
+                onSelect={handleColorSelect}
+              />
+
+              {/* <div className="flex gap-3 mb-6">
                 <div className=" rounded-full bg-[#816DFA] w-[30px] h-[30px]"></div>
                 <div className=" rounded-full bg-[#000000] w-[30px] h-[30px]"></div>
                 <div className=" rounded-full bg-[#B88E2F] w-[30px] h-[30px]"></div>
-              </div>
+              </div> */}
             </div>
             <div className="flex items-center gap-14 font-normal text-xl leading-[30px] text-[#000000]">
               <div>
@@ -217,7 +221,7 @@ const Main = () => {
             <div></div>
           </div>
         </div>
-        <div className="border-t border border-[#D9D9D9]"></div>
+        <div className="border-t border border-[#9F9F9F]"></div>
         <div className=" ">
           <div className="flex max-w-[650px] mx-auto gap-10 justify-between font-medium text-2xl leading-9 my-14">
             <div className="text-[#000000]">Description</div>
@@ -253,37 +257,89 @@ const Main = () => {
             </div>
           </div>
         </div>
-        <div className="border-t border border-[#D9D9D9]"></div>
+        <div className="border-t border border-[#9F9F9F]"></div>
         <div>
           <div className="text-center font-medium text-4xl leading-[54px] text-[#000000] mb-5 mt-14">
             Related Products
           </div>
           <div>
             {" "}
-            <div className="mb-20 container" onClick={scrollToTop}>
+            <div className="mb-20 container" >
               <div className="grid grid-cols-4 gap-y-14 ">
-                {listProduct.map((item: Data) => {
+                {productsSelector.slice(0,4).map((item: any) => {
                   return (
                     <div>
                       {" "}
-                      <div className="relative ">
-                        <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
-                          <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
-                            <Link
-                              to="/cart"
-                              onClick={() =>
-                                dispatch(
-                                  addToCart({ productId: item.id, quantity: 1 })
-                                )
-                              }
-                            >
-                              Add to cart
-                            </Link>
+                      <Link to="single-product">
+                        <div className="relative ">
+                          <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
+                            <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
+                              <Link to="/cart">Add to cart</Link>
+                            </div>
+                            <div className="flex gap-5 text-[#FFFFFF] text-base leading-6 font-semibold">
+                              <div className="flex">
+                                <div className="mt-1">
+                                  <CiShare2 />
+                                </div>
+                                <div>Share</div>
+                              </div>
+                              <div className="flex">
+                                <div className="mt-1">
+                                  <BiGitCompare />
+                                </div>
+                                <div className=" cursor-pointer">
+                                  {" "}
+                                  <Link to="/product_comparison">Compare</Link>
+                                </div>
+                              </div>
+                              <div className="flex">
+                                <div className="mt-1">
+                                  <AiOutlineHeart />
+                                </div>
+                                <div>Like</div>
+                              </div>
+                            </div>
                           </div>
-                          <div className="flex gap-5 text-[#FFFFFF] text-base leading-6 font-semibold">
-                            <div className="flex">
-                              <div className="mt-1">
-                                <CiShare2 />
+
+                          <div className="relative">
+                            <div className="relative">
+                              <img src={item.image} alt="" />
+                              {item.discount > 0 && (
+                                <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-1.5 bg-[#E97171]">
+                                  -{item.discount}%
+                                </div>
+                              )}
+                              {item.isNew && (
+                                <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-1.5">
+                                  New
+                                </div>
+                              )}
+                              <div className="bg-[#F4F5F7] w-[285px] h-[145px] space-y-3 pl-5">
+                                <h2 className=" font-semibold leading-7 text-[#3A3A3A] pt-5 text-[24px]">
+                                  {item.name}
+                                </h2>
+                                <p className="text-[16px] font-medium leading-6 text-[#898989]">
+                                  {item.des}
+                                </p>
+                                {item.discount > 0 ? (
+                                  <div className="flex items-center">
+                                    <h3 className="font-bold text-[20px] leading-[30px] text-[#3A3A3A]">
+                                      Rp {item.price.toLocaleString()}
+                                    </h3>
+                                    <span className="text-[16px] text-[#B0B0B0] line-through ml-3">
+                                      Rp{" "}
+                                      {(
+                                        item.price +
+                                        item.price *
+                                          (item.discount / 100)
+                                      ).toLocaleString()}
+                                    </span>
+                                  </div>
+                                ) : (
+                                  <h3 className="font-bold text-[20px] text-[#3A3A3A]">
+                                    Rp {item.price.toLocaleString()}
+                                  </h3>
+                                )}
                               </div>
                               <div>Share</div>
                             </div>
@@ -304,53 +360,7 @@ const Main = () => {
                             </div>
                           </div>
                         </div>
-
-                        <div className="relative">
-                          <div className="relative">
-                            <img
-                              src={item.image}
-                              className="w-[285px] h-[305px]"
-                              alt=""
-                            />
-                            {item.discount > 0 && (
-                              <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2.5 bg-[#E97171]">
-                                -{item.discount}%
-                              </div>
-                            )}
-                            {isProductNew(item) && (
-                              <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-2">
-                                New
-                              </div>
-                            )}
-                            <div className="bg-[#F4F5F7] w-[285px] h-[145px] space-y-3 pl-5">
-                              <h2 className=" font-semibold leading-7 text-[#3A3A3A] pt-5 text-[24px]">
-                                {item.name}
-                              </h2>
-                              <p className="text-[16px] font-medium leading-6 text-[#898989]">
-                                {item.des}
-                              </p>
-                              {item.discount > 0 ? (
-                                <div className="flex items-center">
-                                  <h3 className="font-bold text-[20px] text-[#3A3A3A]">
-                                    Rp{" "}
-                                    {(
-                                      item.price -
-                                      item.price * (item.discount / 100)
-                                    ).toLocaleString()}
-                                  </h3>
-                                  <span className="text-[16px] text-[#B0B0B0] line-through ml-3">
-                                    Rp {item.price.toLocaleString()}
-                                  </span>
-                                </div>
-                              ) : (
-                                <h3 className="font-bold text-[20px] text-[#3A3A3A]">
-                                  Rp {item.price.toLocaleString()}
-                                </h3>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      </Link>
                     </div>
                   );
                 })}

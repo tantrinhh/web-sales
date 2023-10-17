@@ -6,7 +6,7 @@ const home = () => {
     <div className="bg-[#FFFFFF]">
       <GoToTop />
       <LayoutChildren>
-        <HomePage/>
+        <HomePage />
       </LayoutChildren>
     </div>
   );
