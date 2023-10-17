@@ -267,24 +267,75 @@ const Main = () => {
                   return (
                     <div>
                       {" "}
-                      <div className="relative ">
-                        <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
-                          <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
-                            <Link
-                              to="/cart"
-                              onClick={() =>
-                                dispatch(
-                                  addToCart({ productId: item.id, quantity: 1 })
-                                )
-                              }
-                            >
-                              Add to cart
-                            </Link>
+                      <Link to="single-product">
+                        <div className="relative ">
+                          <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
+                            <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
+                              <Link to="/cart">Add to cart</Link>
+                            </div>
+                            <div className="flex gap-5 text-[#FFFFFF] text-base leading-6 font-semibold">
+                              <div className="flex">
+                                <div className="mt-1">
+                                  <CiShare2 />
+                                </div>
+                                <div>Share</div>
+                              </div>
+                              <div className="flex">
+                                <div className="mt-1">
+                                  <BiGitCompare />
+                                </div>
+                                <div className=" cursor-pointer">
+                                  {" "}
+                                  <Link to="/product_comparison">Compare</Link>
+                                </div>
+                              </div>
+                              <div className="flex">
+                                <div className="mt-1">
+                                  <AiOutlineHeart />
+                                </div>
+                                <div>Like</div>
+                              </div>
+                            </div>
                           </div>
-                          <div className="flex gap-5 text-[#FFFFFF] text-base leading-6 font-semibold">
-                            <div className="flex">
-                              <div className="mt-1">
-                                <CiShare2 />
+
+                          <div className="relative">
+                            <div className="relative">
+                              <img src={item.image} alt="" />
+                              {item.discount > 0 && (
+                                <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-1.5 bg-[#E97171]">
+                                  -{item.discount}%
+                                </div>
+                              )}
+                              {item.isNew && (
+                                <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-1.5">
+                                  New
+                                </div>
+                              )}
+                              <div className="bg-[#F4F5F7] w-[285px] h-[145px] space-y-3 pl-5">
+                                <h2 className=" font-semibold leading-7 text-[#3A3A3A] pt-5 text-[24px]">
+                                  {item.name}
+                                </h2>
+                                <p className="text-[16px] font-medium leading-6 text-[#898989]">
+                                  {item.des}
+                                </p>
+                                {item.discount > 0 ? (
+                                  <div className="flex items-center">
+                                    <h3 className="font-bold text-[20px] leading-[30px] text-[#3A3A3A]">
+                                      Rp {item.price.toLocaleString()}
+                                    </h3>
+                                    <span className="text-[16px] text-[#B0B0B0] line-through ml-3">
+                                      Rp{" "}
+                                      {(
+                                        item.price +
+                                        item.price * (item.discount / 100)
+                                      ).toLocaleString()}
+                                    </span>
+                                  </div>
+                                ) : (
+                                  <h3 className="font-bold text-[20px] text-[#3A3A3A]">
+                                    Rp {item.price.toLocaleString()}
+                                  </h3>
+                                )}
                               </div>
                               <div>Share</div>
                             </div>
@@ -305,53 +356,7 @@ const Main = () => {
                             </div>
                           </div>
                         </div>
-
-                        <div className="relative">
-                          <div className="relative">
-                            <img
-                              src={item.image}
-                              className="w-[285px] h-[305px]"
-                              alt=""
-                            />
-                            {item.discount > 0 && (
-                              <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2.5 bg-[#E97171]">
-                                -{item.discount}%
-                              </div>
-                            )}
-                            {isProductNew(item) && (
-                              <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-2">
-                                New
-                              </div>
-                            )}
-                            <div className="bg-[#F4F5F7] w-[285px] h-[145px] space-y-3 pl-5">
-                              <h2 className=" font-semibold leading-7 text-[#3A3A3A] pt-5 text-[24px]">
-                                {item.name}
-                              </h2>
-                              <p className="text-[16px] font-medium leading-6 text-[#898989]">
-                                {item.des}
-                              </p>
-                              {item.discount > 0 ? (
-                                <div className="flex items-center">
-                                  <h3 className="font-bold text-[20px] text-[#3A3A3A]">
-                                    Rp{" "}
-                                    {(
-                                      item.price -
-                                      item.price * (item.discount / 100)
-                                    ).toLocaleString()}
-                                  </h3>
-                                  <span className="text-[16px] text-[#B0B0B0] line-through ml-3">
-                                    Rp {item.price.toLocaleString()}
-                                  </span>
-                                </div>
-                              ) : (
-                                <h3 className="font-bold text-[20px] text-[#3A3A3A]">
-                                  Rp {item.price.toLocaleString()}
-                                </h3>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      </Link>
                     </div>
                   );
                 })}
