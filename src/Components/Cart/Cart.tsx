@@ -12,17 +12,14 @@ const Cart = () => {
   const dispatch = useAppDispatch();
 
   const removeFromCart = (productId: any) => {
-    // console.log(productId);
     dispatch(removeProduct(productId));
   };
 
   const handleDecrementQuantity = (productId: any) => {
-    // console.log(productId, "handleDecrementQuantity");
     dispatch(decrementQuantity(productId));
   };
 
   const handleIncrementQuantity = (productId: any) => {
-    // console.log(productId, "handleIncrementQuantity");
     dispatch(incrementQuantity(productId));
   };
 
@@ -39,70 +36,102 @@ const Cart = () => {
   return (
     <>
       <div className="flex justify-between my-20 mx-24">
-        {cartItems.length > 0 ? (
-          <div className="">
-            <div className="flex flex-row py-5 space-x-20   justify-between bg-[#F9F1E7] font-semibold text-base text-[#000000] ">
-              <div></div>
-              <div className="">Product</div>
-              <div>Price</div>
-              <div>Quantity</div>
-              <div>Total price</div>
-              <div></div>
-            </div>
-            {cartItems.map((item: any) => {
-              const priceItem = item.price * item.count;
-              return (
-                <div
-                  key={item.id}
-                  className="flex flex-row  space-x-20 mt-10  items-center font-medium text-base "
-                >
-                  <div>
-                    <img
-                      src={item.image}
-                      className="bg-[#F9F1E7] rounded-md w-10 h-10"
-                      alt=""
-                    />
-                  </div>
-                  <div className=" text-[#9F9F9F]">{item.name}</div>
-                  <div className=" text-[#9F9F9F]">
-                    Rs. {item.price.toLocaleString()}
-                  </div>
-                  <div className="quantity-buttons">
-                    <div className="quantity-button flex flex-row rounded-md space-x-2">
-                      <button
-                        type="button"
-                        onClick={() => handleDecrementQuantity(item.id)}
-                        className="quantity-button__btn"
-                      >
-                        -
-                      </button>
-                      <span>{item.count}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleIncrementQuantity(item.id)}
-                        className="quantity-button__btn"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                  <div className="">Rs. {priceItem.toLocaleString()}</div>
-                  <div onClick={() => removeFromCart(item.id)}>
-                    <AiTwotoneDelete
-                      style={{
-                        width: "20px",
-                        height: "20px",
-                        color: "#B88E2F",
-                      }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <div>Quay lại shopping</div>
-        )}
+        <div className="relative overflow-x-auto">
+          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase  bg-[#F9F1E7] dark:text-gray-400">
+              <tr>
+                <th scope="col" className="px-6 py-3 "></th>
+                <th scope="col" className="px-6 py-3">
+                  Product name
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Color
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Size
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Price
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Quantity
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Total Price
+                </th>
+                <th scope="col" className="px-6 py-3"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {cartItems.map((item: any) => {
+                const totalPrice = item.price * item.count;
+                return (
+                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      <img
+                        src={item.image}
+                        className="bg-[#F9F1E7] rounded-md w-10 h-10"
+                        alt=""
+                      />
+                    </th>
+                    <td className="px-6 py-4">{item.name}</td>
+                    <td className="px-6 py-4">
+                      <div
+                        style={{
+                          backgroundColor: item.colors,
+                        }}
+                        className={`cursor-pointer p-4 border rounded-md `}
+                      ></div>
+                    </td>
+                    <td className="px-6 py-4 uppercase">{item.sizes}</td>
+                    <td className="px-6 py-4">
+                      Rs.{item.price.toLocaleString()}
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="quantity-buttons">
+                        <div className="quantity-button flex flex-row rounded-md space-x-2">
+                          <button
+                            type="button"
+                            onClick={() => handleDecrementQuantity(item.id)}
+                            className="quantity-button__btn"
+                          >
+                            -
+                          </button>
+                          <span>{item.count}</span>
+                          <button
+                            type="button"
+                            onClick={() => handleIncrementQuantity(item.id)}
+                            className="quantity-button__btn"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Rs.{totalPrice.toLocaleString()}</td>
+                    <td>
+                      {" "}
+                      <AiTwotoneDelete
+                        onClick={() => {
+                          removeFromCart(item);
+                        }}
+                        style={{
+                          width: "20px",
+                          height: "20px",
+                          color: "#B88E2F",
+                          cursor: "pointer",
+                        }}
+                      />
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
 
         <div className="items-center text-center bg-[#F9F1E7] px-20 pb-24 pt-10 rounded">
           <div className=" font-semibold text-[32px] leading-[48px] text-[#000000] mb-14">
@@ -135,4 +164,4 @@ const Cart = () => {
   );
 };
 
-export default Main_Cart;
+export default Cart;

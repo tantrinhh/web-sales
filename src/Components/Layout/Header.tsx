@@ -14,7 +14,12 @@ const Header = () => {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
-
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Cuộn mượt lên đầu trang
+    });
+  };
   return (
     <>
       <div className="md:mb-[100px] mb-20">
@@ -29,17 +34,25 @@ const Header = () => {
           <div className="hidden md:flex">
             <ul className="list-none flex gap-x-10 justify-between font-medium text-lg leading-6">
               <div className="hover:text-[#B88E2F]">
-                <Link to="/">Home</Link>
+                <Link to="/" onClick={scrollToTop}>
+                  Home
+                </Link>
               </div>
               <div className="hover:text-[#B88E2F]">
-                <Link to="/shop">Shop</Link>
+                <Link to="/shop" onClick={scrollToTop}>
+                  Shop
+                </Link>
               </div>
               <div className="hover:text-[#B88E2F]">
-                <Link to="/blog">Blog</Link>
+                <Link to="/blog" onClick={scrollToTop}>
+                  Blog
+                </Link>
               </div>
 
               <div className="hover:text-[#B88E2F]">
-                <Link to="/contact">Contact</Link>
+                <Link to="/contact" onClick={scrollToTop}>
+                  Contact
+                </Link>
               </div>
             </ul>
           </div>
@@ -55,7 +68,7 @@ const Header = () => {
               <AiOutlineHeart style={{ width: "23px", height: "23px" }} />
             </div>
             <div>
-              <Link to="/cart">
+              <Link to="/cart" onClick={scrollToTop}>
                 {" "}
                 <AiOutlineShoppingCart
                   style={{ width: "23px", height: "23px" }}
@@ -112,16 +125,24 @@ const Header = () => {
               </div>
               <ul className="list-none pt-5 flex flex-col items-center gap-y-7 font-medium text-lg leading-6">
                 <div className="hover:text-[#B88E2F]">
-                  <Link to="/">Home</Link>
+                  <Link to="/" onClick={scrollToTop}>
+                    Home
+                  </Link>
                 </div>
                 <div className="hover:text-[#B88E2F]">
-                  <Link to="/shop">Shop</Link>
+                  <Link to="/shop" onClick={scrollToTop}>
+                    Shop
+                  </Link>
                 </div>
                 <div className="hover:text-[#B88E2F]">
-                  <Link to="/blog">Blog</Link>
+                  <Link to="/blog" onClick={scrollToTop}>
+                    Blog
+                  </Link>
                 </div>
                 <div className="hover:text-[#B88E2F]">
-                  <Link to="/contact">Contact</Link>
+                  <Link to="/contact" onClick={scrollToTop}>
+                    Contact
+                  </Link>
                 </div>
               </ul>
               <div className=" flex flex-col items-center gap-y-7 mt-4">
@@ -136,7 +157,7 @@ const Header = () => {
                   <AiOutlineHeart style={{ width: "26px", height: "26px" }} />
                 </div>
                 <div>
-                  <Link to="/cart">
+                  <Link to="/cart" onClick={scrollToTop}>
                     {" "}
                     <AiOutlineShoppingCart
                       style={{ width: "26px", height: "26px" }}

@@ -24,7 +24,7 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     //Thêm  sản phẩm
-    addProduct: (state: any, action: PayloadAction<ProductType>) => {
+    compareProduct: (state: any, action: PayloadAction<ProductType>) => {
       console.log(action, "action");
       const itemInCart = state.cartItems.find(
         (item: any) => item.id === action.payload.id
@@ -48,7 +48,7 @@ const cartSlice = createSlice({
   extraReducers: (builder) => {},
 });
 
-export const { addProduct, removeProduct } = cartSlice.actions;
+export const { compareProduct, removeProduct } = cartSlice.actions;
 
 export default cartSlice.reducer;
 
