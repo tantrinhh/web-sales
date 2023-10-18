@@ -14,6 +14,7 @@ import {
   productSelectors,
 } from "../../services/redux/slices/product";
 import { addProduct } from "../../services/redux/slices/cart";
+import { compareProduct } from "../../services/redux/slices/compare/compare";
 
 const Main: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -25,17 +26,16 @@ const Main: React.FC = () => {
     dispatch(getProduct());
   }, [dispatch]);
 
-  const handleCart = (product: any, e: any) => {
-    navigate("/cart");
-    e.preventDefault();
-    dispatch(addProduct(product));
-  };
-
   const productsSelector = useSelector(productSelectors.selectAll);
 
-  const handleViewItem = (product: any) => {
-    console.log(product, "product");
-    // navigate(`/product/${product.id}`);
+  const handleDetailProduct = (id: any) => {
+    navigate(`/product/${id}`);
+  };
+
+  const handleComrare = (product: any, e: any) => {
+    navigate("/productcomparison");
+    e.preventDefault();
+    dispatch(compareProduct(product));
   };
   const today: Date = new Date();
   function isProductNew(productsSelector: any): boolean {
@@ -75,6 +75,12 @@ const Main: React.FC = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
+  };
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Cuộn mượt lên đầu trang
+    });
   };
   return (
     <>
@@ -148,21 +154,17 @@ const Main: React.FC = () => {
             <div>
               <div>
                 {" "}
-                <Link to={`/product/${product.id}`}>
-                  <div className="relative cursor-pointer">
-                    <div
-                      className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300"
-                      onClick={() => {
-                        handleViewItem(product);
-                      }}
-                    >
-                      <div className="px-8 py-2 rounded z-50 bg-[#FFFFFF] hover:text-red-500 text-[#B88E2F] cursor-pointer">
+                <Link to={`/product/${product.id}`} onClick={scrollToTop}>
+                  <div className="relative z-10 cursor-pointer">
+                    <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
+                      <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
                         <button
-                          onClick={(e) => {
-                            handleCart(product, e);
+                          onClick={(event: any) => {
+                            event.preventDefault();
+                            handleDetailProduct(product.id);
                           }}
                         >
-                          Add to cart
+                          View product
                         </button>
                       </div>
                       <div className="flex gap-5 text-[#FFFFFF] text-base leading-6 font-semibold">
@@ -176,9 +178,14 @@ const Main: React.FC = () => {
                           <div className="mt-1">
                             <BiGitCompare />
                           </div>
-                          <div className=" cursor-pointer">
-                            {" "}
-                            <Link to="/item_comparison">Compare</Link>
+                          <div
+                            className=" cursor-pointer relative z-50 "
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleComrare(product, e);
+                            }}
+                          >
+                            Compare
                           </div>
                         </div>
                         <div className="flex">

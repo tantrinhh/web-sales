@@ -2,7 +2,6 @@
   position: relative;
   .product-content__intro {
     margin-bottom: 40px;
-   
   }
   .product-filter-item {
     margin-bottom: 38px;
@@ -23,16 +22,15 @@
         height: 30px;
         margin-right: 8px;
         border: none;
-        
+
         .checkbox__check {
-          border: 1px solid #D4D4D4;
+          border: 1px solid #d4d4d4;
         }
         .checkbox__color {
           top: 4px;
           left: 4px;
           right: 4px;
           bottom: 4px;
-         
         }
       }
     }
@@ -41,16 +39,14 @@
     display: flex;
     h4 {
       font-weight: 400;
-      color: #FF0000;
+      color: #ff0000;
       font-size: 18px;
-     
     }
     span {
       margin-left: 30px;
       font-weight: 400;
       font-size: 18px;
-      color: #CECECE;
-     
+      color: #cecece;
     }
   }
   .product__id {
@@ -58,7 +54,7 @@
     right: 0;
     text-align: right;
     line-height: 146%;
-    color: #CECECE;
+    color: #cecece;
     font-size: 12px;
     position: absolute;
   }
@@ -66,11 +62,10 @@
     font-size: 20px;
     font-weight: 300;
     margin-bottom: 9px;
-   
   }
   .product-on-sale {
-    background-color: #FF0000;
-    color: #FFF;
+    background-color: #ff0000;
+    color: #fff;
     font-size: 11px;
     font-weight: 500;
     padding: 5px 9px;
@@ -78,6 +73,5 @@
     border-radius: 40px;
     margin-bottom: 15px;
     display: inline-block;
-    
   }
 }

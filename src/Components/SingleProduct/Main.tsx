@@ -8,48 +8,88 @@ import {
 import { BiGitCompare } from "react-icons/bi";
 import { CiShare2 } from "react-icons/ci";
 import { FaFacebook } from "react-icons/fa";
-import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import stars from "../../assets/ProductComparison/stars.png";
-import Leviosa from "../../assets/shop/Images.png";
-import Syltherine from "../../assets/shop/image1.png";
-import Lolito from "../../assets/shop/image3.png";
-import Respira from "../../assets/shop/image4.png";
 import Group94 from "../../assets/single-product/Group94.png";
 import Group96 from "../../assets/single-product/Group96.png";
 import Group97 from "../../assets/single-product/Group97.png";
 import Group98 from "../../assets/single-product/Group98.png";
 import sofa from "../../assets/single-product/sofa.png";
 import sofa3 from "../../assets/single-product/sofa1.png";
-import productsColors from "../../utils/data/products-colors";
-import productsSizes from "../../utils/data/products-sizes";
+import { addProduct } from "../../services/redux/slices/cart";
+import { productSelectors } from "../../services/redux/slices/product";
 import ColorTabSelect from "../Common/ColorSelect";
 import SizeTabSelect from "../Common/SizeSelect";
-import { useSelector } from "react-redux";
-import { productSelectors } from "../../services/redux/slices/product";
+import { compareProduct } from "../../services/redux/slices/compare/compare";
 
 const Main = () => {
   const productsSelector = useSelector(productSelectors.selectAll);
+
   const params: any = useParams();
-  console.log(params);
-  console.log(productsSelector, "productsSelector");
+  // console.log(params);
+  // console.log(productsSelector, "productsSelector");
   const itemDetail = productsSelector.filter(
     (item: any) => parseInt(item.id) === parseInt(params.id)
   );
   console.log(itemDetail, "itemDetail");
 
   const [selectedColor, setSelectedColor] = useState(null);
-
   const [selectedSize, setSelectedSize] = useState(null);
+  const handleDetailProduct = (id: any) => {
+    navigate(`/product/${id}`);
+  };
 
+  const handleCompare = (product: any, e: any) => {
+    navigate("/productcomparison");
+    e.preventDefault();
+    dispatch(compareProduct(product));
+  };
+  const today: Date = new Date();
+  function isProductNew(productsSelector: any): boolean {
+    const productAddedDate: Date = new Date(productsSelector.dateAdded); // Chuyển đổi chuỗi thành Date
+    const daysDifference: number = Math.ceil(
+      (today.getTime() - productAddedDate.getTime()) / (1000 * 60 * 60 * 24)
+    );
+    return daysDifference <= 7;
+  }
   const handleSizeSelect = (size: any) => {
     setSelectedSize(size);
   };
 
   const handleColorSelect = (item: any) => {
-    setSelectedColor(item.color);
+    setSelectedColor(item);
   };
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [count, setCount] = useState<number>(1);
 
-  console.log(selectedSize, selectedColor);
+  const handleCart = () => {
+    const actionCart: any = {
+      id: itemDetail[0].id,
+      image: itemDetail[0].image,
+      name: itemDetail[0].name,
+      description: itemDetail[0].description,
+      price: itemDetail[0].price,
+      discount: itemDetail[0].discount,
+      dateAdded: itemDetail[0].dateAdded,
+      count: count,
+      sizes: selectedSize,
+      colors: selectedColor,
+    };
+    if (selectedSize !== null && selectedColor !== null) {
+      navigate("/cart");
+      dispatch(addProduct(actionCart));
+    } else {
+      alert("Vui lòng thêm kích cỡ và màu sắc của sản phẩm");
+    }
+  };
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Cuộn mượt lên đầu trang
+    });
+  };
 
   return (
     <>
@@ -125,12 +165,7 @@ const Main = () => {
               </div>
             </div>
             <div>
-              <p className="max-w-[424px]">
-                Setting the bar as one of the loudest speakers in its class, the
-                Kilburn is a compact, stout-hearted hero with a well-balanced
-                audio which boasts a clear midrange and extended highs for a
-                sound.
-              </p>{" "}
+              <p className="max-w-[424px]">{itemDetail[0].description}</p>{" "}
             </div>
             <div>
               <div className=" font-normal text-sm text-[#9F9F9F] mt-6 mb-3">
@@ -158,19 +193,34 @@ const Main = () => {
               </div> */}
             </div>
             <div className="flex items-center gap-14 font-normal text-xl leading-[30px] text-[#000000]">
-              <div>
-                {" "}
-                <input
-                  type="number" // Sử dụng type="number"
-                  className="w-24 h-10 px-3 rounded-md border-0 py-1.5 text-[#000000] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder=""
-                />
+              <div className="quantity-buttons">
+                <div className="quantity-button flex flex-row rounded-md space-x-2">
+                  <button
+                    type="button"
+                    onClick={() => setCount(count - 1)}
+                    className="quantity-button__btn"
+                  >
+                    -
+                  </button>
+                  <span>{count}</span>
+                  <button
+                    type="button"
+                    onClick={() => setCount(count + 1)}
+                    className="quantity-button__btn"
+                  >
+                    +
+                  </button>
+                </div>
               </div>
               <div className="h-10 px-5 border border-[#000000] pt-1.5 rounded-md">
                 {" "}
-                <Link to="/cart">
-                  <button>Add To Cart</button>
-                </Link>
+                <button
+                  onClick={() => {
+                    handleCart();
+                  }}
+                >
+                  Add To Cart
+                </button>
               </div>
               <div className="h-10 px-5 border border-[#000000] pt-1.5 rounded-md">
                 {" "}
@@ -263,15 +313,22 @@ const Main = () => {
             {" "}
             <div className="mb-20 container">
               <div className="grid grid-cols-4 gap-y-14 ">
-                {productsSelector.slice(0, 4).map((item: any) => {
+                {productsSelector.slice(0, 4).map((product: any) => {
                   return (
                     <div>
                       {" "}
-                      <Link to="single-product">
-                        <div className="relative ">
+                      <Link to={`/product/${product.id}`} onClick={scrollToTop}>
+                        <div className="relative z-10 cursor-pointer">
                           <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
                             <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
-                              <Link to="/cart">Add to cart</Link>
+                              <button
+                                onClick={(event: any) => {
+                                  event.preventDefault();
+                                  handleDetailProduct(product.id);
+                                }}
+                              >
+                                View product
+                              </button>
                             </div>
                             <div className="flex gap-5 text-[#FFFFFF] text-base leading-6 font-semibold">
                               <div className="flex">
@@ -284,9 +341,14 @@ const Main = () => {
                                 <div className="mt-1">
                                   <BiGitCompare />
                                 </div>
-                                <div className=" cursor-pointer">
-                                  {" "}
-                                  <Link to="/product_comparison">Compare</Link>
+                                <div
+                                  className=" cursor-pointer relative z-50 "
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    handleCompare(product, e);
+                                  }}
+                                >
+                                  Compare
                                 </div>
                               </div>
                               <div className="flex">
@@ -299,60 +361,46 @@ const Main = () => {
                           </div>
 
                           <div className="relative">
-                            <div className="relative">
-                              <img src={item.image} alt="" />
-                              {item.discount > 0 && (
-                                <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-1.5 bg-[#E97171]">
-                                  -{item.discount}%
-                                </div>
-                              )}
-                              {item.isNew && (
-                                <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-1.5">
-                                  New
-                                </div>
-                              )}
-                              <div className="bg-[#F4F5F7] w-[285px] h-[145px] space-y-3 pl-5">
-                                <h2 className=" font-semibold leading-7 text-[#3A3A3A] pt-5 text-[24px]">
-                                  {item.name}
-                                </h2>
-                                <p className="text-[16px] font-medium leading-6 text-[#898989]">
-                                  {item.des}
-                                </p>
-                                {item.discount > 0 ? (
-                                  <div className="flex items-center">
-                                    <h3 className="font-bold text-[20px] leading-[30px] text-[#3A3A3A]">
-                                      Rp {item.price.toLocaleString()}
-                                    </h3>
-                                    <span className="text-[16px] text-[#B0B0B0] line-through ml-3">
-                                      Rp{" "}
-                                      {(
-                                        item.price +
-                                        item.price * (item.discount / 100)
-                                      ).toLocaleString()}
-                                    </span>
-                                  </div>
-                                ) : (
+                            <img
+                              src={product.image}
+                              alt=""
+                              className="w-[285px] h-[200px]"
+                            />
+                            {product.discount > 0 && (
+                              <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2 bg-[#E97171]">
+                                -{product.discount}%
+                              </div>
+                            )}
+                            {isProductNew(product) && (
+                              <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-2">
+                                New
+                              </div>
+                            )}
+                            <div className="bg-[#F4F5F7] w-[285px] h-[145px] space-y-3 pl-5">
+                              <h2 className=" font-semibold leading-7 text-[#3A3A3A] pt-5 text-[24px]">
+                                {product.name}
+                              </h2>
+                              <p className="text-[16px] font-medium leading-6 text-[#898989]">
+                                {product.description}
+                              </p>
+                              {product.discount > 0 ? (
+                                <div className="flex items-center">
                                   <h3 className="font-bold text-[20px] text-[#3A3A3A]">
-                                    Rp {item.price.toLocaleString()}
+                                    Rp {product.price.toLocaleString()}
                                   </h3>
-                                )}
-                              </div>
-                              <div>Share</div>
-                            </div>
-                            <div className="flex">
-                              <div className="mt-1">
-                                <BiGitCompare />
-                              </div>
-                              <div className=" cursor-pointer">
-                                {" "}
-                                <Link to="/item_comparison">Compare</Link>
-                              </div>
-                            </div>
-                            <div className="flex">
-                              <div className="mt-1">
-                                <AiOutlineHeart />
-                              </div>
-                              <div>Like</div>
+                                  <span className="text-[16px] text-[#B0B0B0] line-through ml-3">
+                                    Rp{" "}
+                                    {(
+                                      product.price +
+                                      product.price * (product.discount / 100)
+                                    ).toLocaleString()}
+                                  </span>
+                                </div>
+                              ) : (
+                                <h3 className="font-bold text-[20px] text-[#3A3A3A]">
+                                  Rp {product.price.toLocaleString()}
+                                </h3>
+                              )}
                             </div>
                           </div>
                         </div>
