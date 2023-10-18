@@ -7,8 +7,8 @@ import { thunkExtras } from "./thunk-extras";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["cart","product"],
-  
+  whitelist: ["cart", "product"],
+  blacklist: [""],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

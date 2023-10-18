@@ -24,10 +24,7 @@ import SizeTabSelect from "../Common/SizeSelect";
 
 const Main = () => {
   const productsSelector = useSelector(productSelectors.selectAll);
-
   const params: any = useParams();
-  console.log(params);
-  console.log(productsSelector, "productsSelector");
   const itemDetail = productsSelector.filter(
     (item: any) => parseInt(item.id) === parseInt(params.id)
   );
