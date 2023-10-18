@@ -164,7 +164,7 @@ const HomePage = () => {
                                 dispatch(removeFromComparison(product));
                               } else {
                                 dispatch(addToComparison(product));
-                                if (comparedProducts.length === 2) {
+                                if (comparedProducts.length <= 2) {
                                   navigate("/productcomparison");
                                 }
                               }
