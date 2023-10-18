@@ -9,6 +9,7 @@ import {
 } from "../../services/redux/slices/cart";
 const Cart = () => {
   const { cartItems } = useSelector((state: RootState) => state.cart);
+  console.log(cartItems, "cartItems");
   const dispatch = useAppDispatch();
 
   const removeFromCart = (productId: any) => {

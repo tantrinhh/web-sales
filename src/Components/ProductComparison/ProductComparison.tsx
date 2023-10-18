@@ -1,11 +1,14 @@
-import React from "react";
+import { AiOutlineRight } from "react-icons/ai";
+import { useSelector } from "react-redux";
 import sofa1 from "../../assets/ProductComparison/sofa1.png";
 import sofa2 from "../../assets/ProductComparison/sofa2.png";
 import stars from "../../assets/ProductComparison/stars.png";
 import Rectangle1 from "../../assets/shop/Rectangle1.png";
-import { AiOutlineRight } from "react-icons/ai";
+import { RootState } from "../../services/redux/RootReducer";
 
 const ProductComparison = () => {
+  const { comparedProducts } = useSelector((state: RootState) => state.compare);
+  console.log(comparedProducts, "comparedProducts");
   return (
     <>
       <div className="">

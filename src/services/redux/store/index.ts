@@ -8,7 +8,7 @@ const persistConfig = {
   key: "root",
   storage,
   whitelist: ["cart", "product"],
-  blacklist: [""],
+  blacklist: ["compare"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
