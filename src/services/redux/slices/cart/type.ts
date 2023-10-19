@@ -7,4 +7,6 @@ export interface ProductType {
   discount: number;
   dateAdded: number;
   count: number;
+  colors: string;
+  sizes: string;
 }

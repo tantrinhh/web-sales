@@ -1,0 +1,20 @@
+.cart-container {
+    position: relative;
+    width: auto;
+  }
+  
+  .cart-products {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    display: none;
+    width: 900px;
+    height: 746px;
+    /* Thêm các thuộc tính CSS khác để tùy chỉnh hiển thị */
+  }
+  
+  .cart-products.active {
+    display: block;
+    /* Thêm các thuộc tính CSS khác để tùy chỉnh hiển thị */
+  }
+  

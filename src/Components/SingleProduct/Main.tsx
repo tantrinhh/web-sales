@@ -46,14 +46,15 @@ const Main = () => {
     dispatch(compareProduct(product));
   };
   const today: Date = new Date();
-  function isProductNew(productsSelector: any): boolean {
-    const productAddedDate: Date = new Date(productsSelector.dateAdded); // Chuyển đổi chuỗi thành Date
+  function isProductNew(product: any): boolean {
+    const productAddedDate: Date = new Date(product.dateAdded); // Chuyển đổi chuỗi thành Date
     const daysDifference: number = Math.ceil(
       (today.getTime() - productAddedDate.getTime()) / (1000 * 60 * 60 * 24)
     );
     return daysDifference <= 7;
   }
   const handleSizeSelect = (size: any) => {
+    
     setSelectedSize(size);
   };
 
@@ -140,7 +141,7 @@ const Main = () => {
             </div>
             <div className="">
               {" "}
-              <img src={sofa3} alt="" className="bg-[#F9F1E7]" />
+              <img src={itemDetail[0].image} alt="" className="bg-[#F9F1E7]" />
             </div>
           </div>
           <div className="max-w-[610px] px-10">
@@ -180,17 +181,11 @@ const Main = () => {
               <div className="font-normal text-sm text-[#9F9F9F] mt-6 mb-3">
                 Color
               </div>
-
               <ColorTabSelect
                 colors={itemDetail[0].colors}
                 onSelect={handleColorSelect}
               />
 
-              {/* <div className="flex gap-3 mb-6">
-                <div className=" rounded-full bg-[#816DFA] w-[30px] h-[30px]"></div>
-                <div className=" rounded-full bg-[#000000] w-[30px] h-[30px]"></div>
-                <div className=" rounded-full bg-[#B88E2F] w-[30px] h-[30px]"></div>
-              </div> */}
             </div>
             <div className="flex items-center gap-14 font-normal text-xl leading-[30px] text-[#000000]">
               <div className="quantity-buttons">
@@ -371,7 +366,7 @@ const Main = () => {
                                 -{product.discount}%
                               </div>
                             )}
-                            {isProductNew(product) && (
+                            {isProductNew(itemDetail[0]) && (
                               <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-2">
                                 New
                               </div>

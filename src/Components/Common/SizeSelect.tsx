@@ -4,6 +4,8 @@ function SizeTabSelect({ sizes, onSelect }: any) {
   const [selectedSize, setSelectedSize] = useState(null);
 
   const handleSizeSelect = (size: any) => {
+    console.log(size);
+    
     setSelectedSize(size);
     onSelect(size);
   };
