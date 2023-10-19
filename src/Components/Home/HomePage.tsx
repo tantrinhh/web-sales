@@ -33,14 +33,9 @@ import {
 import "./styles.css";
 import { compareProduct } from "../../services/redux/slices/compare/compare";
 
-type ProductContent = {
-  product: ProductType;
-};
-
 const HomePage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [count, setCount] = useState<number>(1);
 
   useEffect(() => {
     dispatch(getProduct());

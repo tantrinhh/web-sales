@@ -4,10 +4,11 @@ function ColorTabSelect({ colors, onSelect }: any) {
   const [selectedColor, setSelectedColor] = useState(null);
 
   const handleColorSelect = (color: any) => {
+    console.log(color);
+    
     setSelectedColor(color);
     onSelect(color);
   };
-  console.log(`bg-[${selectedColor}]`)
   return (
     <div className="px-2 py-5">
       <div className="flex space-x-4">

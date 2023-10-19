@@ -55,7 +55,7 @@ const cartSlice = createSlice({
     removeProduct(state: any, action: PayloadAction<Product>) {
       state.cartItems.splice(indexSameProduct(state, action.payload), 1);
     },
-    //Giảm số lượng sản phẩm
+    //Tăng số lượng sản phẩm
     incrementQuantity: (state: any, action) => {
       const item = state.cartItems.find(
         (item: any) => item.id === action.payload
@@ -63,7 +63,7 @@ const cartSlice = createSlice({
       item.count++;
       console.log(item);
     },
-    //Tăng số lượng sản phẩm
+    //Giảm số lượng sản phẩm
     decrementQuantity: (state: any, action) => {
       const item = state.cartItems.find(
         (item: any) => item.id === action.payload

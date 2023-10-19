@@ -63,7 +63,7 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {cartItems.map((item: any) => {
+              {cartItems.map((item) => {
                 const totalPrice = item.price * item.count;
                 return (
                   <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
