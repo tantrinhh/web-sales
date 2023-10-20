@@ -9,6 +9,7 @@ import {
 } from "../../services/redux/slices/cart";
 const Cart = () => {
   const { cartItems } = useSelector((state: RootState) => state.cart);
+  console.log(cartItems, "cartItems");
   const dispatch = useAppDispatch();
 
   const removeFromCart = (productId: any) => {
@@ -23,6 +24,7 @@ const Cart = () => {
     dispatch(incrementQuantity(productId));
   };
 
+  //Total Price
   const priceTotal = () => {
     let totalPrice = 0;
 
@@ -33,6 +35,10 @@ const Cart = () => {
     return totalPrice;
   };
 
+  //Total Item
+  const calculateTotalQuantity = () => {
+    return cartItems.reduce((total, item) => total + item.count, 0);
+  };
   return (
     <>
       <div className="flex justify-between my-20 mx-24">
@@ -63,8 +69,8 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {cartItems.map((item) => {
-                const totalPrice = item.price * item.count;
+              {cartItems.map((item: any) => {
+                const totalPrice = parseInt(item.price) * parseInt(item.count);
                 return (
                   <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <th
@@ -88,7 +94,7 @@ const Cart = () => {
                     </td>
                     <td className="px-6 py-4 uppercase">{item.sizes}</td>
                     <td className="px-6 py-4">
-                      Rs.{item.price.toLocaleString()}
+                      Rs.{parseInt(item.price).toLocaleString()}
                     </td>
                     <td className="px-6 py-4">
                       <div className="quantity-buttons">
@@ -142,7 +148,7 @@ const Cart = () => {
               Total Item
             </div>
             <div className="text-[#9F9F9F] text-base font-normal">
-              {cartItems.length}
+              {calculateTotalQuantity()}
             </div>
           </div>
           <div className="flex justify-between max-w-[256px] my-6">

@@ -5,8 +5,8 @@ export interface Product {
   description: string;
   price: number;
   discount: number;
-  dateAdded: number;
+  dateAdded: string;
   count: number;
-  sizes: [];
-  colors: [];
+  sizes: null;
+  colors: null;
 }

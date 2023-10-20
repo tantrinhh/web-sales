@@ -1,11 +1,12 @@
-import React from "react";
-import sofa1 from "../../assets/ProductComparison/sofa1.png";
-import sofa2 from "../../assets/ProductComparison/sofa2.png";
+import { AiOutlineRight } from "react-icons/ai";
+import { useSelector } from "react-redux";
 import stars from "../../assets/ProductComparison/stars.png";
 import Rectangle1 from "../../assets/shop/Rectangle1.png";
-import { AiOutlineRight } from "react-icons/ai";
+import { RootState } from "../../services/redux/RootReducer";
 
 const ProductComparison = () => {
+  const { comparedProducts } = useSelector((state: RootState) => state.compare);
+  console.log(comparedProducts, "comparedProducts");
   return (
     <>
       <div className="">
@@ -27,8 +28,8 @@ const ProductComparison = () => {
         </div>
       </div>
       <div className="divide-y divide-[#E8E8E8] container mb-20">
-        <div className="grid grid-cols-4 ml-10">
-          <div className="col-span-1 mt-12">
+        <div className="flex flex-row mt-10">
+          <div className=" basis-1/3">
             <h1 className="w-[223px] h-[105px] text-[28px] font-medium leading-9">
               Go to Product page for more Products
             </h1>
@@ -41,178 +42,76 @@ const ProductComparison = () => {
             <div className="mt-10 space-y-10">
               <h1 className="font-medium text-3xl">General</h1>
               <ul className="space-y-10">
-                <li className="text-xl font-normal">Sales Package</li>
-                <li className="text-xl font-normal mt-14">Model Number</li>
-                <li className="text-xl font-normal mt-5">Secondary Material</li>
-                <li className="text-xl font-normal mt-5">Configuration</li>
-                <li className="text-xl font-normal mt-5">
-                  Upholstery Material
-                </li>
-                <li className="text-xl font-normal mt-5">Upholstery Color</li>
+                <li className="text-xl font-normal mt-14">Price</li>
+                <li className="text-xl font-normal mt-5">Sizes</li>
+                <li className="text-xl font-normal mt-5">Colors</li>
               </ul>
             </div>
           </div>
-          <div className="col-span-1 mt-9 space-y-2">
-            <img src={sofa1} alt="" />
-            <h1 className="text-[24px] font-medium leading-[30px] mt-3">
-              Asgaard Sofa
-            </h1>
-            <p className="text-[18px] font-medium leading-[27px]">
-              Rs. 250,000.00
-            </p>
-            <div className="flex gap-1">
-              <p className="text-18px font-medium leading-[27px]">4.7</p>
-              <img
-                src={stars}
-                alt=""
-                className="w-[124px] h-[20px] top-[718px] left-[428px] mt-1"
-              />
-              <div className="border-l-[1px] border-[#9F9F9F] text-[13px] text-[#9F9F9F] leading-[30px] font-normal">
-                <p className="ml-2">204 Review</p>
-              </div>
-            </div>
-            <div>
-              <div className="mt-28 ">
-                <ul>
-                  <li className="text-xl font-normal">1 sectional sofa</li>
-                  <li className="text-xl font-normal mt-12">TFCBLIGRBL6SRHS</li>
-                  <li className="text-xl font-normal mt-9">Solid Wood</li>
-                  <li className="text-xl font-normal mt-10">L-shaped</li>
-                  <li className="text-xl font-normal mt-10">Fabric + Cotton</li>
-                  <li className="text-xl font-normal mt-10">
-                    Bright Grey & Lion
-                  </li>
-                </ul>
-              </div>
-              <div className="mt-40 ">
-                <ul className="space-y-10">
-                  <li className="text-xl font-normal">Foam</li>
-                  <li className="text-xl font-normal">Bright Grey & Lion</li>
-                  <li className="text-xl font-normal">No</li>
-                  <li className="text-xl font-normal">280 KG</li>
-                  <li className="text-xl font-normal">India</li>
-                </ul>
-              </div>
-              <div className="mt-40 ">
-                <ul className="space-y-10">
-                  <li className="text-xl font-normal">265.32 cm</li>
-                  <li className="text-xl font-normal">76 cm</li>
-                  <li className="text-xl font-normal">167.76 cm</li>
-                  <li className="text-xl font-normal">45 KG</li>
-                  <li className="text-xl font-normal">41.52 cm</li>
-                  <li className="text-xl font-normal">5.46 cm</li>
-                </ul>
-              </div>
-              <div className="mt-36 ">
-                <div>
-                  <ul>
-                    <li className="text-xl font-normal w-[226px]">
-                      1 Year Manufacturing Warranty
-                    </li>
-                    <li className="text-xl font-normal  w-[241px] mt-9">
-                      For Warranty Claims or Any Product Related Issues Please
-                      Email at operations@trevifurniture.com
-                    </li>
-                    <li className="text-xl font-normal w-[241px] mt-10">
-                      Warranty Against Manufacturing Defect
-                    </li>
-                    <li className="text-xl font-normal w-[241px] mt-16">
-                      The Warranty Does Not Cover Damages Due To Usage Of The
-                      Product Beyond Its Intended Use And Wear & Tear In The
-                      Natural Course Of Product Usage.
-                    </li>
-                    <li className="text-xl font-normal mt-8">1 Year</li>
-                  </ul>
-                </div>
-                <button className="bg-[#B88E2F] text-[#FFFFFF] w-[215px] h-[64px] mt-10">
-                  Add To Cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="col-span-1 space-y-2">
-            <img src={sofa2} alt="" />
-            <h1 className="text-[24px] font-medium leading-[30px] mt-3">
-              Outdoor Sofa Set
-            </h1>
-            <p className="text-[18px] font-medium leading-[27px]">
-              Rs. 224,000.00
-            </p>
-            <div className="flex gap-1">
-              <p className="text-18px font-medium leading-[27px]">4.2</p>
-              <img
-                src={stars}
-                alt=""
-                className="w-[124px] h-[20px] top-[718px] left-[428px] mt-1"
-              />
-              <div className="border-l-[1px] border-[#9F9F9F] text-[13px] text-[#9F9F9F] leading-[30px] font-normal">
-                <p className="ml-2">145 Review</p>
-              </div>
-            </div>
+          <div className=""></div>
+          {comparedProducts.map((item: any) => {
+            const colors = item.colors;
+            const sizes = item.sizes;
 
-            <div>
-              {" "}
-              <div className="mt-20 ">
-                <ul className=" ">
-                  <li className="text-xl font-normal w-[226px] mt-28">
-                    1 Three Seater, 2 Single Seater
-                  </li>
-                  <li className="text-xl font-normal mt-5">DTUBLIGRBL568</li>
-                  <li className="text-xl font-normal mt-9">Solid Wood</li>
-                  <li className="text-xl font-normal mt-10">L-shaped</li>
-                  <li className="text-xl font-normal mt-10">Fabric + Cotton</li>
-                  <li className="text-xl font-normal mt-10">
-                    Bright Grey & Lion
-                  </li>
-                </ul>
+            return (
+              <div className="basis-1/2 ">
+                <img
+                  src={item.image}
+                  alt=""
+                  className="rounded-lg w-20 h-20 "
+                />
+                <h1 className="text-[24px] font-medium leading-[30px] mt-3">
+                  {item.name}
+                </h1>
+                <p className="text-[18px] font-medium leading-[27px]">
+                  Rs. {item.price.toLocaleString()}
+                </p>
+                <div className="flex gap-1">
+                  <p className="text-18px font-medium leading-[27px]">4.7</p>
+                  <img
+                    src={stars}
+                    alt=""
+                    className="w-[124px] h-[20px] top-[718px] left-[428px] mt-1"
+                  />
+                  <div className="border-l-[1px] border-[#9F9F9F] text-[13px] text-[#9F9F9F] leading-[30px] font-normal">
+                    <p className="ml-2">204 Review</p>
+                  </div>
+                </div>
+                <div>
+                  <div className="mt-28 ">
+                    <ul>
+                      <li className="text-xl font-normal mt-9">
+                        Rs. {item.price.toLocaleString()}
+                      </li>
+                      <li className="text-xl font-normal mt-10 flex flex-row space-x-2">
+                        {sizes?.map((item: any, index: any) => (
+                          <div
+                            key={index}
+                            className={`cursor-pointer w-10 h-10 border rounded-full shadow-lg font-bold text-center uppercase p-2`}
+                          >
+                            {item}
+                          </div>
+                        ))}
+                      </li>
+                      <li className="text-xl font-normal mt-10 flex flex-row">
+                        {colors?.map((item: any, index: any) => (
+                          <div
+                            style={{
+                              backgroundColor: item,
+                            }}
+                            key={index}
+                            className={`cursor-pointer w-10 h-10 border rounded-full `}
+                          ></div>
+                        ))}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-              <div className="mt-40 ">
-                <ul className="space-y-10 ml-2">
-                  <li className="text-xl font-normal">Matte</li>
-                  <li className="text-xl font-normal">Bright Grey & Lion</li>
-                  <li className="text-xl font-normal">yes</li>
-                  <li className="text-xl font-normal">300 KG</li>
-                  <li className="text-xl font-normal">India</li>
-                </ul>
-              </div>
-              <div className="mt-40 ">
-                <ul className="space-y-10 ">
-                  <li className="text-xl font-normal">265.32 cm</li>
-                  <li className="text-xl font-normal">76 cm</li>
-                  <li className="text-xl font-normal">167.76 cm</li>
-                  <li className="text-xl font-normal">65 KG</li>
-                  <li className="text-xl font-normal">41.52 cm</li>
-                  <li className="text-xl font-normal">5.46 cm</li>
-                </ul>
-              </div>
-              <div className="mt-36 ">
-                <ul className="space-y-9 ">
-                  <li className="text-xl font-normal w-[226px]">
-                    1.2 Year Manufacturing Warranty
-                  </li>
-                  <li className="text-xl font-normal w-[241px] ">
-                    For Warranty Claims or Any Product Related Issues Please
-                    Email at support@xyz.com
-                  </li>
-                  <li className="text-xl font-normal w-[241px]">
-                    Warranty of the product is limited to manufacturing defects
-                    only.
-                  </li>
-                  <li className="text-xl font-normal w-[241px] ">
-                    {" "}
-                    The Warranty Does Not Cover Damages Due To Usage Of The
-                    Product Beyond Its Intended Use And Wear & Tear In The
-                    Natural Course Of Product Usage.
-                  </li>
-                  <li className="text-xl font-normal">3 Months</li>
-                </ul>
-                <button className="bg-[#B88E2F] text-[#FFFFFF] w-[215px] h-[64px] mt-10 ml-12">
-                  Add To Cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="col-span-1 mt-20">
+            );
+          })}
+
+          <div className=" basis-1/3">
             <h1 className="text-[24px] font-bold leading-[30px]">
               Add A Product
             </h1>

@@ -28,10 +28,6 @@ const indexSameProduct = (state: CartTypes, action: Product) => {
   return state.cartItems.findIndex(sameProduct);
 };
 
-type AddProductType = {
-  product: ProductType;
-  // count: number;
-};
 // Create a cart slice
 const cartSlice = createSlice({
   name: "cart",

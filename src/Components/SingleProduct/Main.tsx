@@ -16,12 +16,11 @@ import Group96 from "../../assets/single-product/Group96.png";
 import Group97 from "../../assets/single-product/Group97.png";
 import Group98 from "../../assets/single-product/Group98.png";
 import sofa from "../../assets/single-product/sofa.png";
-import sofa3 from "../../assets/single-product/sofa1.png";
 import { addProduct } from "../../services/redux/slices/cart";
+import { compareProduct } from "../../services/redux/slices/compare/compare";
 import { productSelectors } from "../../services/redux/slices/product";
 import ColorTabSelect from "../Common/ColorSelect";
 import SizeTabSelect from "../Common/SizeSelect";
-import { compareProduct } from "../../services/redux/slices/compare/compare";
 
 const Main = () => {
   const productsSelector = useSelector(productSelectors.selectAll);
@@ -54,7 +53,6 @@ const Main = () => {
     return daysDifference <= 7;
   }
   const handleSizeSelect = (size: any) => {
-    
     setSelectedSize(size);
   };
 
@@ -185,7 +183,6 @@ const Main = () => {
                 colors={itemDetail[0].colors}
                 onSelect={handleColorSelect}
               />
-
             </div>
             <div className="flex items-center gap-14 font-normal text-xl leading-[30px] text-[#000000]">
               <div className="quantity-buttons">
