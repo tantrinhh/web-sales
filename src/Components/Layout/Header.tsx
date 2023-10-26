@@ -57,10 +57,13 @@ const Header = () => {
   const handleIncrementQuantity = (productId: any) => {
     dispatch(incrementQuantity(productId));
   };
+  const calculateTotalQuantity = () => {
+    return cartItems.reduce((total, item) => total + item.count, 0);
+  };
   return (
     <>
-      <div className="md:mb-[100px] mb-20 ">
-        <div className="fixed z-50 w-full overflow-x-hidden bg-[#FFFFFF] justify-between md:h-[100px] h-20 top-0 flex items-center px-10 ">
+      <div className="md:mb-[100px] mb-20">
+        <div className="fixed z-50 w-full bg-[#FFFFFF] justify-between md:h-[100px] h-20 top-0 flex items-center px-10 ">
           <div className="flex">
             <div className="mt-1">
               <img src={Logo} alt="" />
@@ -148,7 +151,7 @@ const Header = () => {
                     </td>
                     <td className="px-6 py-4 uppercase">{item.sizes}</td>
                     <td className="px-6 py-4">
-                      Rs.{item.price.toLocaleString()}
+                      Rs. {item.price.toLocaleString()}
                     </td>
                     <td className="px-6 py-4">
                       <div className="quantity-buttons">
@@ -171,7 +174,7 @@ const Header = () => {
                         </div>
                       </div>
                     </td>
-                    <td>Rs.{totalPrice.toLocaleString()}</td>
+                    <td>Rs. {totalPrice.toLocaleString()}</td>
                     <td>
                       {" "}
                       <TiDelete
@@ -181,7 +184,7 @@ const Header = () => {
                         style={{
                           width: "20px",
                           height: "20px",
-                          color: "#B88E2F",
+                          color: "#9F9F9F",
                           cursor: "pointer",
                         }}
                       />
@@ -193,12 +196,21 @@ const Header = () => {
           </table>
             
             <div className="flex justify-between mt-10">
-              <p className="text-base font-normal">Subtotal</p>
+            <p className="text-base font-normal">Total item</p>
+                    <p className="font-semibold text-[#B88E2F] text-base">{calculateTotalQuantity()}</p>
+                  </div>
+                  <div className="flex justify-between mt-5">
+                    <p className="text-base font-normal">Total price</p>
               <p className="font-semibold text-[#B88E2F] text-base">Rs. {priceTotal().toLocaleString()}</p>
             </div>
-            <div className="w-full mb-16 mt-5">
+            <div className="w-full mt-5">
               <div className="border-b border-[#D9D9D9]"></div>
             </div>
+            <div className="flex justify-center"> 
+                    <Link to="/checkout" onClick={scrollToTop}>
+                      <button className="rounded-[50px] px-4 py-2  bg-white mt-10 border border-[#000000]">Checkout</button>
+                    </Link>
+                  </div>
             </div>
         </div>
 
@@ -223,7 +235,7 @@ const Header = () => {
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute z-50  right-0 flex flex-col items-end h-full">
+          <div className="md:hidden absolute z-50   right-0 flex flex-col items-end h-full">
             <div className=" pb-5 pt-3 h-full w-64 rounded-l-lg text-white  bg-black">
               <div className="flex justify-between mx-2">
                 {" "}
