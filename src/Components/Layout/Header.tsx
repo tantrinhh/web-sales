@@ -136,85 +136,88 @@ const Header = () => {
                       <BsBagX />
                     </div>
                   </div>
-                  <div className="w-full mb-16 mt-10">
+                  <div className="w-full  mt-8">
                     <div className="border-b border-[#D9D9D9]"></div>
                   </div>
-                  <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <tbody>
-                      {cartItems.map((item) => {
-                        const totalPrice = item.price * item.count;
-                        return (
-                          <tr className="bg-white border-b dark:border-gray-700">
-                            <th
-                              scope="row"
-                              className="px-6 py-4 font-medium whitespace-nowrap dark:text-white"
-                            >
-                              <img
-                                src={item.image}
-                                className="rounded-md w-10 h-10"
-                                alt=""
-                              />
-                            </th>
-                            <td className="px-6 py-4">{item.name}</td>
-                            <td className="px-6 py-4">
-                              <div
-                                style={{
-                                  backgroundColor: item.colors,
-                                }}
-                                className={`cursor-pointer p-4 border rounded-md `}
-                              ></div>
-                            </td>
-                            <td className="px-6 py-4 uppercase">
-                              {item.sizes}
-                            </td>
-                            <td className="px-6 py-4">
-                              Rs. {item.price.toLocaleString()}
-                            </td>
-                            <td className="px-6 py-4">
-                              <div className="quantity-buttons">
-                                <div className="quantity-button flex flex-row rounded-md space-x-2">
-                                  <button
-                                    type="button"
-                                    onClick={() =>
-                                      handleDecrementQuantity(item.id)
-                                    }
-                                    className="quantity-button__btn"
-                                  >
-                                    -
-                                  </button>
-                                  <span>{item.count}</span>
-                                  <button
-                                    type="button"
-                                    onClick={() =>
-                                      handleIncrementQuantity(item.id)
-                                    }
-                                    className="quantity-button__btn"
-                                  >
-                                    +
-                                  </button>
+                  <div className="overflow-y-auto h-64">
+                    {" "}
+                    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                      <tbody>
+                        {cartItems.map((item) => {
+                          const totalPrice = item.price * item.count;
+                          return (
+                            <tr className="bg-white border-b dark:border-gray-700 overflow-y-auto h-32 ">
+                              <th
+                                scope="row"
+                                className="px-6 py-4 font-medium whitespace-nowrap dark:text-white"
+                              >
+                                <img
+                                  src={item.image}
+                                  className="rounded-md w-10 h-10"
+                                  alt=""
+                                />
+                              </th>
+                              <td className="px-6 py-4">{item.name}</td>
+                              <td className="px-6 py-4">
+                                <div
+                                  style={{
+                                    backgroundColor: item.colors,
+                                  }}
+                                  className={`cursor-pointer p-4 border rounded-md `}
+                                ></div>
+                              </td>
+                              <td className="px-6 py-4 uppercase">
+                                {item.sizes}
+                              </td>
+                              <td className="px-6 py-4">
+                                Rs. {item.price.toLocaleString()}
+                              </td>
+                              <td className="px-6 py-4">
+                                <div className="quantity-buttons">
+                                  <div className="quantity-button flex flex-row rounded-md space-x-2">
+                                    <button
+                                      type="button"
+                                      onClick={() =>
+                                        handleDecrementQuantity(item.id)
+                                      }
+                                      className="quantity-button__btn"
+                                    >
+                                      -
+                                    </button>
+                                    <span>{item.count}</span>
+                                    <button
+                                      type="button"
+                                      onClick={() =>
+                                        handleIncrementQuantity(item.id)
+                                      }
+                                      className="quantity-button__btn"
+                                    >
+                                      +
+                                    </button>
+                                  </div>
                                 </div>
-                              </div>
-                            </td>
-                            <td>Rs. {totalPrice.toLocaleString()}</td>
-                            <td>
-                              {" "}
-                              <TiDelete
-                                onClick={() => {
-                                  removeFromCart(item);
-                                }}
-                                style={{
-                                  width: "20px",
-                                  height: "20px",
-                                  color: "#9F9F9F",
-                                  cursor: "pointer",
-                                }}
-                              />
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
+                              </td>
+                              <td>Rs. {totalPrice.toLocaleString()}</td>
+                              <td>
+                                {" "}
+                                <TiDelete
+                                  onClick={() => {
+                                    removeFromCart(item);
+                                  }}
+                                  style={{
+                                    width: "20px",
+                                    height: "20px",
+                                    color: "#9F9F9F",
+                                    cursor: "pointer",
+                                  }}
+                                />
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
 
                   <div className="flex justify-between mt-10">
                     <p className="text-base font-normal">Total item</p>
@@ -233,7 +236,7 @@ const Header = () => {
                   </div>
                   <div className="flex justify-center">
                     <Link to="/checkout" onClick={scrollToTop}>
-                      <button className="rounded-[50px] px-4 py-2  bg-white mt-10 border border-[#000000]">
+                      <button className="rounded-[50px] px-4 py-2  bg-white mt-8 mb-2 border border-[#000000]">
                         Checkout
                       </button>
                     </Link>
