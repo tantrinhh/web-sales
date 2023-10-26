@@ -38,7 +38,7 @@ const Cart = () => {
 
   return (
     <>
-      <div className="flex justify-between my-20 mx-24">
+      <div className="md:flex justify-between my-20 md:mx-24">
         <div className="relative overflow-x-auto">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase  bg-[#F9F1E7] dark:text-gray-400">
