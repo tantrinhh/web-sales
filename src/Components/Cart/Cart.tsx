@@ -32,6 +32,9 @@ const Cart = () => {
 
     return totalPrice;
   };
+  const calculateTotalQuantity = () => {
+    return cartItems.reduce((total, item) => total + item.count, 0);
+  };
 
   return (
     <>
@@ -142,7 +145,7 @@ const Cart = () => {
               Total Item
             </div>
             <div className="text-[#9F9F9F] text-base font-normal">
-              {cartItems.length}
+              {calculateTotalQuantity()}
             </div>
           </div>
           <div className="flex justify-between max-w-[256px] my-6">
