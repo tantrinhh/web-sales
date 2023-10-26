@@ -104,7 +104,6 @@ const Blog = () => {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus mauris vitae ultricies leo integer malesuada nunc. In nulla posuere sollicitudin aliquam ultrices. Morbi blandit cursus risus at ultrices mi tempus imperdiet. Libero enim sed faucibus turpis in. Cursus mattis molestie a iaculis at erat. Nibh cras pulvinar mattis nunc sed blandit libero. Pellentesque elit ullamcorper dignissim cras tincidunt. Pharetra et ultrices neque ornare aenean euismod elementum.",
       read: "Read more",
     },
-    
   ];
   const productPerPage = 3; // Số sản phẩm trên mỗi trang
   const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
@@ -137,23 +136,23 @@ const Blog = () => {
   };
   return (
     <>
-      <div className="grid grid-cols-3 container mt-24">
+      <div className="md:grid grid-cols-3 container mt-24">
         <div className="col-span-2">
           {currentblogs.map((blog, index) => (
             <div key={index}>
               <img src={blog.image} alt={`Blog ${index}`} />
-              <div className="grid grid-cols-2">
+              <div className="md:grid grid-cols-2">
                 <div className="col-span-1 mt-5">
-                  <div className="flex gap-10">
-                    <div className="flex">
+                  <div className="flex md:gap-10 gap-5">
+                    <div className="flex  gap-2">
                       <img src={blog.icon1} alt="" />
                       <p className="text-[#9F9F9F] text-[16px]">{blog.name1}</p>
                     </div>
-                    <div className="flex">
+                    <div className="flex gap-2">
                       <img src={blog.icon2} alt="" />
                       <p className="text-[#9F9F9F] text-[16px]">{blog.name2}</p>
                     </div>
-                    <div className="flex">
+                    <div className="flex gap-2">
                       <img src={blog.icon3} alt="" />
                       <p className="text-[#9F9F9F] text-[16px]">{blog.name3}</p>
                     </div>
@@ -161,7 +160,9 @@ const Blog = () => {
                 </div>
               </div>
               <h1 className="text-[30px] mt-3">{blog.title}</h1>
-              <p className="text-[#9F9F9F] w-[817px] mt-3">{blog.content}</p>
+              <p className="text-[#9F9F9F] max-w-[817px] mt-3">
+                {blog.content}
+              </p>
               <p className="text-[16px] mt-5 ">{blog.read}</p>
               <div className="w-20 mb-16 mt-3">
                 <div className=" border-b border-[#000000] w-16 mx-auto"></div>
@@ -230,7 +231,7 @@ const Blog = () => {
                     <img src={post.image} alt="" />
                   </div>
                   <div className="col-span-2 mt-7">
-                    <p className="text-[14px] w-[119px]">{post.content}</p>
+                    <p className="text-[14px] max-w-[119px]">{post.content}</p>
                     <p className="text-[#9F9F9F] text-[12px]">{post.time}</p>
                   </div>
                 </div>

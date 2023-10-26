@@ -1,58 +1,43 @@
 import {
-  PayloadAction,
   createEntityAdapter,
   createSlice,
+  PayloadAction,
 } from "@reduxjs/toolkit";
-import { ProductType } from "../cart/type";
+import { Product } from "../product/type";
 
-interface CartTypes {
-  cartItems: ProductType[];
+interface ProductComparisonState {
+  comparedProducts: Product[];
 }
 // Create an entity adapter for managing products
-const cartEntity = createEntityAdapter<ProductType>({
+const compareEntity = createEntityAdapter<Product>({
   selectId: (product) => product.id,
 });
+const initialState: ProductComparisonState = {
+  comparedProducts: [],
+};
 
-// Define the initial state using the entity adapter
-const initialState = {
-  cartItems: [],
-} as CartTypes;
-
-// Create a cart slice
-const cartSlice = createSlice({
-  name: "cart",
+const productComparisonSlice = createSlice({
+  name: "productComparison",
   initialState,
   reducers: {
-    //Thêm  sản phẩm
-    compareProduct: (state: any, action: PayloadAction<ProductType>) => {
-      console.log(action, "action");
-      const itemInCart = state.cartItems.find(
-        (item: any) => item.id === action.payload.id
-      );
-      console.log(itemInCart, "itemInCart");
-      if (itemInCart) {
-        itemInCart.count++;
-      } else {
-        state.cartItems.push({ ...action.payload, count: 1 });
+    addToComparison: (state, action: PayloadAction<Product>) => {
+      const product = action.payload;
+      if (!state.comparedProducts.some((p) => p.id === product.id)) {
+        state.comparedProducts.push(product);
       }
     },
-    //Xóa  sản phẩm
-    removeProduct(state: any, action: PayloadAction<ProductType>) {
-      const removeItem = state.cartItems.filter(
-        (item: any) => item.id !== action.payload
+    removeFromComparison: (state, action: PayloadAction<Product>) => {
+      const product = action.payload;
+      state.comparedProducts = state.comparedProducts.filter(
+        (p) => p.id !== product.id
       );
-
-      state.cartItems = removeItem;
     },
   },
-  extraReducers: (builder) => {},
 });
 
-export const { compareProduct, removeProduct } = cartSlice.actions;
-
-export default cartSlice.reducer;
-
-// // Define selectors
-export const cartSelectors = cartEntity.getSelectors(
-  (state: any) => state.cartItems
+export const { addToComparison, removeFromComparison } =
+  productComparisonSlice.actions;
+export const compareSelector = compareEntity.getSelectors(
+  (state: any) => state.comparedProducts
 );
+export default productComparisonSlice.reducer;

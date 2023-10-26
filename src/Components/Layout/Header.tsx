@@ -59,8 +59,8 @@ const Header = () => {
   };
   return (
     <>
-      <div className="md:mb-[100px] mb-20">
-        <div className="fixed z-50 w-full bg-[#FFFFFF] justify-between md:h-[100px] h-20 top-0 flex items-center px-10 ">
+      <div className="md:mb-[100px] mb-20 ">
+        <div className="fixed z-50 w-full overflow-x-hidden bg-[#FFFFFF] justify-between md:h-[100px] h-20 top-0 flex items-center px-10 ">
           <div className="flex">
             <div className="mt-1">
               <img src={Logo} alt="" />
@@ -223,7 +223,7 @@ const Header = () => {
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute z-50   right-0 flex flex-col items-end h-full">
+          <div className="md:hidden absolute z-50  right-0 flex flex-col items-end h-full">
             <div className=" pb-5 pt-3 h-full w-64 rounded-l-lg text-white  bg-black">
               <div className="flex justify-between mx-2">
                 {" "}

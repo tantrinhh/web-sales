@@ -7,13 +7,17 @@ const Main = () => {
     <>
       <div>
         <div className=" text-center my-32">
-          <div className="text-[#000000] font-semibold text-4xl leading-[54px]">
+          <div className="text-[#000000] font-semibold md:text-4xl text-3xl leading-[54px]">
             Get In Touch With Us
           </div>
-          <div className="text-[#9F9F9F] text-lg leading-6 font-normal max-w-[645px] mx-auto">
+          <div className="max-md:hidden text-[#9F9F9F] md:text-lg text-base md:leading-6 leading-5 font-normal max-w-[645px] mx-auto">
             For More Information About Our Product & Services. Please Feel Free
             To Drop Us An Email. Our Staff Always Be There To Help You Out. Do
             Not Hesitate!
+          </div>
+          <div className="md:hidden text-[#9F9F9F] md:text-lg text-base md:leading-6 leading-5 font-normal max-w-[645px] mx-auto">
+            For More Information About Our Product & Services. Please Feel Free
+            To Drop Us An Email.
           </div>
         </div>
         <div>

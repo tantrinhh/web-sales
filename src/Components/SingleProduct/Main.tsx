@@ -21,7 +21,11 @@ import { addProduct } from "../../services/redux/slices/cart";
 import { productSelectors } from "../../services/redux/slices/product";
 import ColorTabSelect from "../Common/ColorSelect";
 import SizeTabSelect from "../Common/SizeSelect";
-import { compareProduct } from "../../services/redux/slices/compare/compare";
+import {
+  addToComparison,
+  removeFromComparison,
+} from "../../services/redux/slices/compare/compare";
+import { RootState } from "../../services/redux/RootReducer";
 
 const Main = () => {
   const productsSelector = useSelector(productSelectors.selectAll);
@@ -40,11 +44,6 @@ const Main = () => {
     navigate(`/product/${id}`);
   };
 
-  const handleCompare = (product: any, e: any) => {
-    navigate("/productcomparison");
-    e.preventDefault();
-    dispatch(compareProduct(product));
-  };
   const today: Date = new Date();
   function isProductNew(product: any): boolean {
     const productAddedDate: Date = new Date(product.dateAdded); // Chuyển đổi chuỗi thành Date
@@ -91,7 +90,7 @@ const Main = () => {
       behavior: "smooth", // Cuộn mượt lên đầu trang
     });
   };
-
+  const { comparedProducts } = useSelector((state: RootState) => state.compare);
   return (
     <>
       <div className="product-content">
@@ -219,7 +218,6 @@ const Main = () => {
               </div>
               <div className="h-10 px-5 border border-[#000000] pt-1.5 rounded-md">
                 {" "}
-                <Link to="/product_comparison">+ Compare</Link>
               </div>
             </div>
             <div>
@@ -309,6 +307,9 @@ const Main = () => {
             <div className="mb-20 container">
               <div className="grid grid-cols-4 gap-y-14 ">
                 {productsSelector.slice(0, 4).map((product: any) => {
+                  const isCompared = comparedProducts.some(
+                    (p: any) => p.id === product.id
+                  );
                   return (
                     <div>
                       {" "}
@@ -337,13 +338,19 @@ const Main = () => {
                                   <BiGitCompare />
                                 </div>
                                 <div
-                                  className=" cursor-pointer relative z-50 "
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    handleCompare(product, e);
+                                  className=" cursor-pointer"
+                                  onClick={() => {
+                                    if (isCompared) {
+                                      dispatch(removeFromComparison(product));
+                                    } else {
+                                      dispatch(addToComparison(product));
+                                      if (comparedProducts.length === 1) {
+                                        navigate("/productcomparison");
+                                      }
+                                    }
                                   }}
                                 >
-                                  Compare
+                                  {isCompared ? "Remove " : " Compare"}
                                 </div>
                               </div>
                               <div className="flex">
