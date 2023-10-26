@@ -6,8 +6,8 @@ import { CiShare2 } from "react-icons/ci";
 import { BiGitCompare } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Data } from "../Interface";
+import { useSelector } from "react-redux";
+
 import { useAppDispatch } from "../../hooks/redux";
 import { productSelectors } from "../../services/redux/slices/product";
 import {
