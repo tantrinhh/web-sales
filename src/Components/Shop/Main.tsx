@@ -5,7 +5,7 @@ import Vector3 from "../../assets/shop/Vector3.png";
 import { CiShare2 } from "react-icons/ci";
 import { BiGitCompare } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { useAppDispatch } from "../../hooks/redux";
