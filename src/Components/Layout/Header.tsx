@@ -9,7 +9,6 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addProduct,
   decrementQuantity,
   incrementQuantity,
   removeProduct,
@@ -32,9 +31,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state: RootState) => state.cart);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const handleAddToCart = (productId: any) => {
-    dispatch(addProduct(productId));
-  };
 
   const removeFromCart = (productId: any) => {
     dispatch(removeProduct(productId));
@@ -139,7 +135,7 @@ const Header = () => {
                   <div className="w-full  mt-8">
                     <div className="border-b border-[#D9D9D9]"></div>
                   </div>
-                  <div className="overflow-y-auto h-64">
+                  <div className="overflow-y-auto max-h-64">
                     {" "}
                     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                       <tbody>
@@ -236,7 +232,7 @@ const Header = () => {
                   </div>
                   <div className="flex justify-center">
                     <Link to="/checkout" onClick={scrollToTop}>
-                      <button className="rounded-[50px] px-4 py-2  bg-white mt-8 mb-2 border border-[#000000]">
+                      <button className="rounded-[50px] px-4 py-2  bg-white mt-6 mb-4 border border-[#000000]">
                         Checkout
                       </button>
                     </Link>

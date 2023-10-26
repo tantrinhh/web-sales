@@ -174,9 +174,3 @@ const ProductComparison = () => {
 };
 
 export default ProductComparison;
-function dispatch(arg0: {
-  payload: import("../../services/redux/slices/product/type").Product;
-  type: "productComparison/removeFromComparison";
-}) {
-  throw new Error("Function not implemented.");
-}

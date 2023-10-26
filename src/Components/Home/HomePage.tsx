@@ -2,7 +2,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BiGitCompare } from "react-icons/bi";
 import { CiShare2 } from "react-icons/ci";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
@@ -30,7 +30,6 @@ import {
 } from "../../services/redux/slices/product";
 import "./styles.css";
 import { useEffect } from "react";
-//import { Product } from "../../services/redux/slices/product/type";
 import {
   addToComparison,
   removeFromComparison,
