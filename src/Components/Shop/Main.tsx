@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Vector1 from "../../assets/shop/Vector1.png";
 import Vector2 from "../../assets/shop/Vector2.png";
 import Vector3 from "../../assets/shop/Vector3.png";
@@ -6,14 +6,15 @@ import { CiShare2 } from "react-icons/ci";
 import { BiGitCompare } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+
 import { useAppDispatch } from "../../hooks/redux";
+import { productSelectors } from "../../services/redux/slices/product";
 import {
-  getProduct,
-  productSelectors,
-} from "../../services/redux/slices/product";
-import { addProduct } from "../../services/redux/slices/cart";
-import { compareProduct } from "../../services/redux/slices/compare/compare";
+  addToComparison,
+  removeFromComparison,
+} from "../../services/redux/slices/compare/compare";
+import { RootState } from "../../services/redux/RootReducer";
 
 const Main: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -21,21 +22,12 @@ const Main: React.FC = () => {
   const navigate = useNavigate();
   // const [count, setCount] = useState<number>(1);
 
-  useEffect(() => {
-    dispatch(getProduct());
-  }, [dispatch]);
-
   const productsSelector = useSelector(productSelectors.selectAll);
 
   const handleDetailProduct = (id: any) => {
     navigate(`/product/${id}`);
   };
-
-  const handleComrare = (product: any, e: any) => {
-    navigate("/productcomparison");
-    e.preventDefault();
-    dispatch(compareProduct(product));
-  };
+  const { comparedProducts } = useSelector((state: RootState) => state.compare);
   const today: Date = new Date();
   function isProductNew(productsSelector: any): boolean {
     const productAddedDate: Date = new Date(productsSelector.dateAdded); // Chuyển đổi chuỗi thành Date
@@ -81,6 +73,7 @@ const Main: React.FC = () => {
       behavior: "smooth", // Cuộn mượt lên đầu trang
     });
   };
+
   return (
     <>
       <div className="bg-[#FAF3EA] py-5 md:px-16 mb-10">
@@ -149,11 +142,13 @@ const Main: React.FC = () => {
       </div>
       <div className="my-20 container gap-x-5 gap-y-7 ">
         <div className="grid max-md: justify-center md:grid-cols-4  gap-y-14 ">
-          {currentdata.map((product: any) => (
-            <div>
-              <div>
-                {" "}
-                <Link to={`/product/${product.id}`} onClick={scrollToTop}>
+          {currentdata.map((product: any) => {
+            const isCompared = comparedProducts.some(
+              (p: any) => p.id === product.id
+            );
+            return (
+              <div key={product.id}>
+                <div>
                   <div className="relative z-10 cursor-pointer">
                     <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
                       <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
@@ -178,13 +173,19 @@ const Main: React.FC = () => {
                             <BiGitCompare />
                           </div>
                           <div
-                            className=" cursor-pointer relative z-50 "
-                            onClick={(e) => {
-                              e.preventDefault();
-                              handleComrare(product, e);
+                            className=" cursor-pointer"
+                            onClick={() => {
+                              if (isCompared) {
+                                dispatch(removeFromComparison(product));
+                              } else {
+                                dispatch(addToComparison(product));
+                                if (comparedProducts.length === 1) {
+                                  navigate("/productcomparison");
+                                }
+                              }
                             }}
                           >
-                            Compare
+                            {isCompared ? "Remove " : " Compare"}
                           </div>
                         </div>
                         <div className="flex">
@@ -240,10 +241,10 @@ const Main: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
       <div className="flex justify-center mt-4 my-20">

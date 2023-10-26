@@ -9,15 +9,17 @@ const SubBlog = () => {
       {" "}
       <div className="">
         <div className="relative">
-          <img src={Rectangle1} className="w-screen" alt="" />
-          <div className="absolute -translate-x-2/4 top-32 left-1/2   -mt-6  item-center">
+          <img src={Rectangle1} className="w-full" alt="" />
+          <div className="absolute -translate-x-2/4 md:top-32 top-10 left-1/2   -mt-6  item-center">
             {" "}
-            <img src={Logo} alt="" />
+            <img src={Logo} className="w-10" alt="" />
           </div>
-          <div className="absolute -translate-x-2/4 top-1/2 left-1/2   -mt-6  item-center text-center  text-[#000000]  ">
-            <p className="lg:text-5xl  leading-[72px] font-medium">Blog</p>
+          <div className="absolute -translate-x-2/4 top-1/2 left-1/2   -mt-7  item-center text-center  text-[#000000]  ">
+            <p className="md:text-5xl text-2xl leading-[72px] font-medium">
+              Blog
+            </p>
           </div>
-          <div className="flex absolute  -translate-x-2/4  lg:bottom-24 max-md:-bottom-3 left-1/2   lg:py-4  justify-between  text-base   leading-6  ">
+          <div className="flex absolute  -translate-x-2/4  md:bottom-24 bottom-1 left-1/2   lg:py-4  justify-between  text-base   leading-6  ">
             <button className="text-[#000000] lg:font-medium mr-2">
               <Link to="/">Home</Link>
             </button>
