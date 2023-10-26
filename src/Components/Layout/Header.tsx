@@ -2,16 +2,21 @@ import React, { useState } from "react";
 import Logo from "../../assets/Logo.png";
 import { BiUserPlus } from "react-icons/bi";
 import { HiOutlinePlus } from "react-icons/hi";
-import './styles.css'
+import "./styles.css";
 import { FiSearch } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
-import { addProduct, decrementQuantity, incrementQuantity, removeProduct } from "../../services/redux/slices/cart";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addProduct,
+  decrementQuantity,
+  incrementQuantity,
+  removeProduct,
+} from "../../services/redux/slices/cart";
 import { RootState } from "../../services/redux/RootReducer";
-import { BsBagX } from 'react-icons/bs'
-import { TiDelete } from 'react-icons/ti'
+import { BsBagX } from "react-icons/bs";
+import { TiDelete } from "react-icons/ti";
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -107,113 +112,134 @@ const Header = () => {
             <div>
               <AiOutlineHeart style={{ width: "23px", height: "23px" }} />
             </div>
-            <div className="cart-container" onMouseEnter={handleCartHover} onMouseLeave={handleCartLeave}>
+            <div
+              className="cart-container"
+              onMouseEnter={handleCartHover}
+              onMouseLeave={handleCartLeave}
+            >
               <Link to="/cart" onClick={scrollToTop}>
                 {" "}
                 <AiOutlineShoppingCart
                   style={{ width: "23px", height: "23px" }}
                 />
               </Link>
-              <div className={`cart-products ${isCartOpen ? 'active' : ''}`}>
-        
-              <div  className="bg-[#FFFFFF]  px-10">
-              <div className="flex justify-between mt-10">
-                <h1 className="font-semibold text-[24px] leading-[36px]">Shopping Cart</h1>
-                <div className="mt-3 w-[16.63px] h-[19px]" style={{color: '#9F9F9F'}}><BsBagX/></div>
-              </div>
-              <div className="w-full mb-16 mt-10">
-              <div className="border-b border-[#D9D9D9]"></div>
-            </div>
-            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <tbody>
-              {cartItems.map((item) => {
-                const totalPrice = item.price * item.count;
-                return (
-                  <tr className="bg-white border-b dark:border-gray-700">
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-medium whitespace-nowrap dark:text-white"
+              <div className={`cart-products ${isCartOpen ? "active" : ""}`}>
+                <div className="bg-[#FFFFFF]  px-10">
+                  <div className="flex justify-between mt-10">
+                    <h1 className="font-semibold text-[24px] leading-[36px]">
+                      Shopping Cart
+                    </h1>
+                    <div
+                      className="mt-3 w-[16.63px] h-[19px]"
+                      style={{ color: "#9F9F9F" }}
                     >
-                      <img
-                        src={item.image}
-                        className="rounded-md w-10 h-10"
-                        alt=""
-                      />
-                    </th>
-                    <td className="px-6 py-4">{item.name}</td>
-                    <td className="px-6 py-4">
-                      <div
-                        style={{
-                          backgroundColor: item.colors,
-                        }}
-                        className={`cursor-pointer p-4 border rounded-md `}
-                      ></div>
-                    </td>
-                    <td className="px-6 py-4 uppercase">{item.sizes}</td>
-                    <td className="px-6 py-4">
-                      Rs. {item.price.toLocaleString()}
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="quantity-buttons">
-                        <div className="quantity-button flex flex-row rounded-md space-x-2">
-                          <button
-                            type="button"
-                            onClick={() => handleDecrementQuantity(item.id)}
-                            className="quantity-button__btn"
-                          >
-                            -
-                          </button>
-                          <span>{item.count}</span>
-                          <button
-                            type="button"
-                            onClick={() => handleIncrementQuantity(item.id)}
-                            className="quantity-button__btn"
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                    <td>Rs. {totalPrice.toLocaleString()}</td>
-                    <td>
-                      {" "}
-                      <TiDelete
-                        onClick={() => {
-                          removeFromCart(item);
-                        }}
-                        style={{
-                          width: "20px",
-                          height: "20px",
-                          color: "#9F9F9F",
-                          cursor: "pointer",
-                        }}
-                      />
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-            
-            <div className="flex justify-between mt-10">
-            <p className="text-base font-normal">Total item</p>
-                    <p className="font-semibold text-[#B88E2F] text-base">{calculateTotalQuantity()}</p>
+                      <BsBagX />
+                    </div>
+                  </div>
+                  <div className="w-full mb-16 mt-10">
+                    <div className="border-b border-[#D9D9D9]"></div>
+                  </div>
+                  <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <tbody>
+                      {cartItems.map((item) => {
+                        const totalPrice = item.price * item.count;
+                        return (
+                          <tr className="bg-white border-b dark:border-gray-700">
+                            <th
+                              scope="row"
+                              className="px-6 py-4 font-medium whitespace-nowrap dark:text-white"
+                            >
+                              <img
+                                src={item.image}
+                                className="rounded-md w-10 h-10"
+                                alt=""
+                              />
+                            </th>
+                            <td className="px-6 py-4">{item.name}</td>
+                            <td className="px-6 py-4">
+                              <div
+                                style={{
+                                  backgroundColor: item.colors,
+                                }}
+                                className={`cursor-pointer p-4 border rounded-md `}
+                              ></div>
+                            </td>
+                            <td className="px-6 py-4 uppercase">
+                              {item.sizes}
+                            </td>
+                            <td className="px-6 py-4">
+                              Rs. {item.price.toLocaleString()}
+                            </td>
+                            <td className="px-6 py-4">
+                              <div className="quantity-buttons">
+                                <div className="quantity-button flex flex-row rounded-md space-x-2">
+                                  <button
+                                    type="button"
+                                    onClick={() =>
+                                      handleDecrementQuantity(item.id)
+                                    }
+                                    className="quantity-button__btn"
+                                  >
+                                    -
+                                  </button>
+                                  <span>{item.count}</span>
+                                  <button
+                                    type="button"
+                                    onClick={() =>
+                                      handleIncrementQuantity(item.id)
+                                    }
+                                    className="quantity-button__btn"
+                                  >
+                                    +
+                                  </button>
+                                </div>
+                              </div>
+                            </td>
+                            <td>Rs. {totalPrice.toLocaleString()}</td>
+                            <td>
+                              {" "}
+                              <TiDelete
+                                onClick={() => {
+                                  removeFromCart(item);
+                                }}
+                                style={{
+                                  width: "20px",
+                                  height: "20px",
+                                  color: "#9F9F9F",
+                                  cursor: "pointer",
+                                }}
+                              />
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+
+                  <div className="flex justify-between mt-10">
+                    <p className="text-base font-normal">Total item</p>
+                    <p className="font-semibold text-[#B88E2F] text-base">
+                      {calculateTotalQuantity()}
+                    </p>
                   </div>
                   <div className="flex justify-between mt-5">
                     <p className="text-base font-normal">Total price</p>
-              <p className="font-semibold text-[#B88E2F] text-base">Rs. {priceTotal().toLocaleString()}</p>
-            </div>
-            <div className="w-full mt-5">
-              <div className="border-b border-[#D9D9D9]"></div>
-            </div>
-            <div className="flex justify-center"> 
+                    <p className="font-semibold text-[#B88E2F] text-base">
+                      Rs. {priceTotal().toLocaleString()}
+                    </p>
+                  </div>
+                  <div className="w-full mt-5">
+                    <div className="border-b border-[#D9D9D9]"></div>
+                  </div>
+                  <div className="flex justify-center">
                     <Link to="/checkout" onClick={scrollToTop}>
-                      <button className="rounded-[50px] px-4 py-2  bg-white mt-10 border border-[#000000]">Checkout</button>
+                      <button className="rounded-[50px] px-4 py-2  bg-white mt-10 border border-[#000000]">
+                        Checkout
+                      </button>
                     </Link>
                   </div>
-            </div>
-        </div>
-
+                </div>
+              </div>
             </div>
           </div>
 

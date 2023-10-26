@@ -45,7 +45,7 @@ const HomePage = () => {
   }, [dispatch]);
 
   const productsSelector = useSelector(productSelectors.selectAll);
-
+  const { comparedProducts } = useSelector((state: RootState) => state.compare);
   const handleDetailProduct = (id: any) => {
     navigate(`/product/${id}`);
   };
@@ -58,7 +58,7 @@ const HomePage = () => {
     );
     return daysDifference <= 7;
   }
-  const { comparedProducts } = useSelector((state: RootState) => state.compare);
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -121,12 +121,13 @@ const HomePage = () => {
         <h1 className="text-center text-[40px] font-bold mb-5">Our Products</h1>
         <div className="grid max-md: justify-center md:grid-cols-4  gap-y-14">
           {productsSelector?.map((product: any) => {
-            const isCompared = comparedProducts.some(
+            const isProductInComparison = comparedProducts.some(
               (p: any) => p.id === product.id
             );
+            const disableComparison =
+              comparedProducts.length >= 2 && !isProductInComparison;
             return (
               <div key={product.id}>
-                {/* <Link to={`/product/${product.id}`} onClick={scrollToTop}> */}
                 <div className="relative z-10 cursor-pointer">
                   <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
                     <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
@@ -134,6 +135,7 @@ const HomePage = () => {
                         onClick={(event: any) => {
                           event.preventDefault();
                           handleDetailProduct(product.id);
+                          scrollToTop();
                         }}
                       >
                         View product
@@ -150,23 +152,30 @@ const HomePage = () => {
                         <div className="mt-1">
                           <BiGitCompare />
                         </div>
-                        <div onClick={scrollToTop}>
-                          {" "}
-                          <div
-                            className=" cursor-pointer"
-                            onClick={() => {
-                              if (isCompared) {
+
+                        <div
+                          className={`cursor-pointer ${
+                            disableComparison
+                              ? "opacity-50 pointer-events-none"
+                              : ""
+                          }`}
+                          onClick={() => {
+                            if (!disableComparison) {
+                              if (isProductInComparison) {
                                 dispatch(removeFromComparison(product));
                               } else {
-                                dispatch(addToComparison(product));
-                                if (comparedProducts.length === 1) {
-                                  navigate("/productcomparison");
+                                if (comparedProducts.length < 2) {
+                                  dispatch(addToComparison(product));
+                                  if (comparedProducts.length === 1) {
+                                    navigate("/productcomparison");
+                                    scrollToTop();
+                                  }
                                 }
                               }
-                            }}
-                          >
-                            {isCompared ? "Remove " : " Compare"}
-                          </div>
+                            }
+                          }}
+                        >
+                          {isProductInComparison ? "Remove" : "Compare"}
                         </div>
                       </div>
                       <div className="flex">
