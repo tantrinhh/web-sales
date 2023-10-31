@@ -7,6 +7,7 @@ import {
   incrementQuantity,
   removeProduct,
 } from "../../services/redux/slices/cart";
+import { Link } from "react-router-dom";
 const Cart = () => {
   const { cartItems } = useSelector((state: RootState) => state.cart);
   const dispatch = useAppDispatch();
@@ -35,7 +36,12 @@ const Cart = () => {
   const calculateTotalQuantity = () => {
     return cartItems.reduce((total, item) => total + item.count, 0);
   };
-
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Cuộn mượt lên đầu trang
+    });
+  };
   return (
     <>
       <div className="md:flex justify-between my-20 md:mx-24">
@@ -158,7 +164,7 @@ const Cart = () => {
           </div>
           <div>
             <button className="border border-black rounded-[15px] px-20 h-14 font-normal text-xl mt-2 ">
-              Check Out
+              <Link to =  '/checkout' onClick={scrollToTop}>Check out</Link>
             </button>
           </div>
         </div>
