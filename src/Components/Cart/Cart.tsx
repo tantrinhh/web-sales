@@ -17,7 +17,17 @@ const Cart = () => {
   };
 
   const handleDecrementQuantity = (productId: any) => {
-    dispatch(decrementQuantity(productId));
+    const item = cartItems.find((item) => item.id === productId);
+
+    if (item) {
+      if (item.count === 1) {
+        // If the quantity is 1, remove the product from the cart
+        dispatch(removeProduct(productId));
+      } else {
+        // Decrement the quantity
+        dispatch(decrementQuantity(productId));
+      }
+    }
   };
 
   const handleIncrementQuantity = (productId: any) => {
@@ -44,7 +54,17 @@ const Cart = () => {
   };
   return (
     <>
-      <div className="md:flex justify-between my-20 md:mx-24">
+    {cartItems.length === 0 ? (
+        <div className="text-center mb-20">
+          <h1 className="font-bold text-[50px]">Your shopping cart is empty.</h1>
+          <button className="w-[245px] max-md:mx-[25%] h-[48px] text-[#B88E2F] text-[16px] mt-10 font-bold border-solid border-2 border-[#B88E2F] mx-[41%]">
+          <Link to="/" onClick={scrollToTop}>
+            Return to Homepage
+          </Link>
+          </button>
+        </div>
+      ) : (
+<div className="md:flex justify-between my-20 md:mx-24">
         <div className="relative overflow-x-auto">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase  bg-[#F9F1E7] dark:text-gray-400">
@@ -169,6 +189,7 @@ const Cart = () => {
           </div>
         </div>
       </div>
+      )}
     </>
   );
 };
