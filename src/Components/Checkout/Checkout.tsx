@@ -201,7 +201,7 @@ const [selectedWard, setSelectedWard] = useState("");
                 }}
                 render={({ field: { onChange, value } }:any) => (
                   <div>
-                  <label htmlFor="first_name" className="block tracking-wide text-[#000000] text-base text-[16px] font-medium mb-2">First Name</label>
+                  <label htmlFor="first_name" className="block tracking-wide text-[#000000] text-base text-[16px] font-medium mb-2">Tên</label>
                   <input type="text"  value={value}
                   onChange={onChange} className="appearance-none block w-full h-[75px] bg-[#FFFFFF] text-[#000000] border border-[#9F9F9F] rounded-[10px] py-3 px-4 mb-3 leading-tight focus:outline-none" required/>
               </div>
@@ -226,7 +226,7 @@ const [selectedWard, setSelectedWard] = useState("");
                 }}
                 render={({ field: { onChange, value } }:any) => (
                   <div>
-                  <label htmlFor="last_name" className="block tracking-wide text-[#000000] text-base text-[16px] font-medium mb-2">Last Name</label>
+                  <label htmlFor="last_name" className="block tracking-wide text-[#000000] text-base text-[16px] font-medium mb-2">Họ</label>
                   <input type="text" value={value}
                   onChange={onChange} className="appearance-none block w-full h-[75px] bg-[#FFFFFF] text-[#000000] border border-[#9F9F9F] rounded-[10px] py-3 px-4 mb-3 leading-tight focus:outline-none" required/>
               </div>
@@ -245,7 +245,7 @@ const [selectedWard, setSelectedWard] = useState("");
                   <div>
                   <label
                     className="block tracking-wide text-[#000000] text-[16px] text-base font-medium mb-2">
-                    Company Name (Optional)
+                    Tên công ty (không bắt buộc)
                   </label>
                   <input type="text" value={value}
                   onChange={onChange} className="appearance-none block w-full h-[75px] bg-[#FFFFFF] text-[#000000] border border-[#9F9F9F] rounded-[10px] py-3 px-4 mb-3 leading-tight focus:outline-none" required/>
@@ -254,26 +254,15 @@ const [selectedWard, setSelectedWard] = useState("");
               />
                 </div>
               </div>
-              <div className="inline-block relative w-full mb-6">
-              <label
-                    className="block tracking-wide text-[#000000] text-base text-[16px] font-medium mb-2">
-                    Country / Region
-                  </label>
-              <select className="block appearance-none w-full h-[75px] bg-[#FFFFFF] border border-[#9F9F9F] px-4 py-3 pr-8 mb-3 rounded-[10px] shadow leading-tight focus:outline-none focus:shadow-outline" >
-                <option value="" >Sri Lanka</option>
-                <option value="A">Option A</option>
-                <option value="B">Option B</option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-[#000000] mt-3">
-                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-              </div>
-              </div>
                 <div className="inline-block relative w-full mb-6">
                    <label
                     className="block tracking-wide text-[#000000] text-base text-[16px] font-medium mb-2">
-                    Town / City
+                    Tỉnh / Thành phố
                   </label>
               <select id="city" onChange={handleCityChange} className="block appearance-none w-full h-[75px] bg-[#FFFFFF] border border-[#9F9F9F] px-4 py-3 pr-8 mb-3 rounded-[10px] shadow leading-tight focus:outline-none focus:shadow-outline" >
+              <option value="">
+                  Chọn tỉnh / thành phố
+                </option>
                 {cities.map((city) => (
                   <option key={city.Id} value={city.Id}>
                     {city.Name}
@@ -287,9 +276,12 @@ const [selectedWard, setSelectedWard] = useState("");
                 <div className="inline-block relative w-full mb-6">
                 <label
                     className="block tracking-wide text-[#000000] text-base text-[16px] font-medium mb-2">
-                    District
+                    Quận / Huyện
                   </label>
               <select id="district" onChange={handleDistrictChange} className="block appearance-none w-full h-[75px] bg-[#FFFFFF] border border-[#9F9F9F] px-4 py-3 pr-8 mb-3 rounded-[10px] shadow leading-tight focus:outline-none focus:shadow-outline" >
+              <option value="">
+                  Chọn quận / huyện
+                </option>
                 {districts.map((district) => (
                   <option key={district.Id} value={district.Id}>
                     {district.Name}
@@ -303,11 +295,11 @@ const [selectedWard, setSelectedWard] = useState("");
                 <div className="inline-block relative w-full mb-6">
                 <label
                     className="block tracking-wide text-[#000000] text-base text-[16px] font-medium mb-2">
-                    Ward
+                    Phường / Xã
                   </label>
               <select id="ward" onChange={handleWardChange} className="block appearance-none w-full h-[75px] bg-[#FFFFFF] border border-[#9F9F9F] px-4 py-3 pr-8 mb-3 rounded-[10px] shadow leading-tight focus:outline-none focus:shadow-outline" >
                 <option value="">
-                  Select Ward
+                  Chọn phường / xã
                 </option>
                 {wards.map((ward) => (
                   <option key={ward.Id} value={ward.Id}>
@@ -333,7 +325,7 @@ const [selectedWard, setSelectedWard] = useState("");
                   <div>
                   <label
                     className="block tracking-wide text-[#000000] text-[16px] text-base font-medium mb-2">
-                    Street address
+                    Địa chỉ
                   </label>
                   <input type="text" value={value}
                   onChange={onChange} className="appearance-none block w-full h-[75px] bg-[#FFFFFF] text-[#000000] border border-[#9F9F9F] rounded-[10px] py-3 px-4 mb-3 leading-tight focus:outline-none" required/>
@@ -384,7 +376,7 @@ const [selectedWard, setSelectedWard] = useState("");
                     value: true,
                   },
                   pattern: {
-                    value: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
+                    value: /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/,
                     message: 'Invalid phone number',
                   },
                 }}
@@ -392,7 +384,7 @@ const [selectedWard, setSelectedWard] = useState("");
                   <div>
                   <label
                     className="block tracking-wide text-[#000000] text-[16px] text-base font-medium mb-2">
-                    Phone
+                    Số điện thoại
                   </label>
                   <input type="text" value={value}
                   onChange={onChange} className="appearance-none block w-full h-[75px] bg-[#FFFFFF] text-[#000000] border border-[#9F9F9F] rounded-[10px] py-3 px-4 mb-3 leading-tight focus:outline-none" required/>
@@ -422,7 +414,7 @@ const [selectedWard, setSelectedWard] = useState("");
                   <div>
                   <label
                     className="block tracking-wide text-[#000000] text-[16px] text-base font-medium mb-2">
-                    Email address
+                    Email
                   </label>
                   <input type="text" value={value}
                   onChange={onChange} className="appearance-none block w-full h-[75px] bg-[#FFFFFF] text-[#000000] border border-[#9F9F9F] rounded-[10px] py-3 px-4 mb-3 leading-tight focus:outline-none" required/>
