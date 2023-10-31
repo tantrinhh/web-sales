@@ -14,6 +14,7 @@ const Cart = () => {
 
   const removeFromCart = (productId: any) => {
     dispatch(removeProduct(productId));
+    window.alert("Xóa thành công");
   };
 
   const handleDecrementQuantity = (productId: any) => {
@@ -23,6 +24,7 @@ const Cart = () => {
       if (item.count === 1) {
         // If the quantity is 1, remove the product from the cart
         dispatch(removeProduct(productId));
+        window.alert("Xóa thành công");
       } else {
         // Decrement the quantity
         dispatch(decrementQuantity(productId));
@@ -55,11 +57,11 @@ const Cart = () => {
   return (
     <>
     {cartItems.length === 0 ? (
-        <div className="text-center mb-20">
-          <h1 className="font-bold text-[50px]">Your shopping cart is empty.</h1>
+        <div className="text-center mb-20 mt-10">
+          <h1 className="font-bold text-[50px]">Không có sản phẩm nào trong giỏ hàng</h1>
           <button className="w-[245px] max-md:mx-[25%] h-[48px] text-[#B88E2F] text-[16px] mt-10 font-bold border-solid border-2 border-[#B88E2F] mx-[41%]">
           <Link to="/" onClick={scrollToTop}>
-            Return to Homepage
+            Về trang chủ
           </Link>
           </button>
         </div>

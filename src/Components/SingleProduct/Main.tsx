@@ -62,7 +62,7 @@ const Main = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [count, setCount] = useState<number>(1);
-
+ 
   const handleCart = () => {
     const actionCart: any = {
       id: itemDetail[0].id,
@@ -79,6 +79,7 @@ const Main = () => {
     if (selectedSize !== null && selectedColor !== null) {
       navigate("/cart");
       dispatch(addProduct(actionCart));
+      window.alert("Thêm thành công");
     } else {
       alert("Vui lòng thêm kích cỡ và màu sắc của sản phẩm");
     }
