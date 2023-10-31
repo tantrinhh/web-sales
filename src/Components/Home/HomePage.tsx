@@ -55,7 +55,7 @@ const HomePage = () => {
     const daysDifference: number = Math.ceil(
       (today.getTime() - productAddedDate.getTime()) / (1000 * 60 * 60 * 24)
     );
-    return daysDifference <= 7;
+    return daysDifference < 15;
   }
 
   const scrollToTop = () => {
