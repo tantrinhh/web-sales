@@ -4,7 +4,7 @@ import Vector2 from "../../assets/shop/Vector2.png";
 import Vector3 from "../../assets/shop/Vector3.png";
 import { CiShare2 } from "react-icons/ci";
 import { BiGitCompare } from "react-icons/bi";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -15,12 +15,15 @@ import {
   removeFromComparison,
 } from "../../services/redux/slices/compare/compare";
 import { RootState } from "../../services/redux/RootReducer";
-
+import Slider from "@mui/material/Slider";
+import Typography from "@mui/material/Typography";
+import { addToFavorites, removeFromFavorites } from "../../services/redux/slices/favorite";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Main: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
-  // const [count, setCount] = useState<number>(1);
 
   const productsSelector = useSelector(productSelectors.selectAll);
 
@@ -41,15 +44,18 @@ const Main: React.FC = () => {
   const totalPages = Math.ceil(
     productsSelector.length / (+productPerPage || 1)
   );
-
-  // Cập nhật indexOfLastProduct và indexOfFirstProduct
-  const productPerPageNumber = +productPerPage || 1; // Chuyển đổi productPerPage thành số và mặc định là 1 nếu không hợp lệ
-  const indexOfLastProduct = currentPage * productPerPageNumber;
-  const indexOfFirstProduct = indexOfLastProduct - productPerPageNumber;
-  const currentdata = productsSelector.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
+    const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
+  const filteredProducts = productsSelector.filter(
+    (product) => product.price >= priceRange[0] && product.price <= priceRange[1]
   );
+  // Cập nhật indexOfLastProduct và indexOfFirstProduct
+  // const productPerPageNumber = +productPerPage || 1; // Chuyển đổi productPerPage thành số và mặc định là 1 nếu không hợp lệ
+  // const indexOfLastProduct = currentPage * productPerPageNumber;
+  // const indexOfFirstProduct = indexOfLastProduct - productPerPageNumber;
+  // const currentdata = productsSelector.slice(
+  //   indexOfFirstProduct,
+  //   indexOfLastProduct
+  // );
 
   // Xử lý khi người dùng chuyển trang
   const handlePageChange = (page: any) => {
@@ -73,6 +79,15 @@ const Main: React.FC = () => {
       behavior: "smooth", // Cuộn mượt lên đầu trang
     });
   };
+  const handlePriceRangeChange = (
+    event: Event,
+    newValue: number | number[]
+  ) => {
+    if (Array.isArray(newValue)) {
+      setPriceRange(newValue as [number, number]);
+    }
+  };
+  const favorites = useSelector((state: RootState) => state.favorite.list);
 
   return (
     <>
@@ -96,6 +111,22 @@ const Main: React.FC = () => {
               Showing 1–16 of 32 results
             </div>
           </div>
+          <div>
+      <Typography variant="h6" gutterBottom>
+        Price Range Selector
+      </Typography>
+      <Slider
+        value={priceRange}
+        onChange={handlePriceRangeChange}
+        valueLabelDisplay="auto"
+        min={15000}
+        max={15000000} // Set the maximum price value
+      />
+      <Typography>
+        Price Range: RP {priceRange[0].toLocaleString()} - RP {priceRange[1].toLocaleString()}
+      </Typography>
+
+    </div>
           <div className="flex gap-x-5 max-md:mt-4  ">
             <div className="flex items-center gap-x-2">
               <label className="  text-xl font-normal leading-[30px] text-[#000000]">
@@ -142,12 +173,13 @@ const Main: React.FC = () => {
       </div>
       <div className="my-20 container gap-x-5 gap-y-7 ">
         <div className="grid max-md: justify-center md:grid-cols-4  gap-y-14 ">
-          {currentdata.map((product: any) => {
+          {filteredProducts.map((product: any) => {
             const isProductInComparison = comparedProducts.some(
               (p: any) => p.id === product.id
             );
             const disableComparison =
               comparedProducts.length >= 2 && !isProductInComparison;
+              const isProductInFavorites = favorites.some((item) => item.id === product.id);
             return (
               <div key={product.id}>
                 <div className="relative z-10 cursor-pointer">
@@ -200,10 +232,20 @@ const Main: React.FC = () => {
                           {isProductInComparison ? "Remove" : "Compare"}
                         </div>
                       </div>
-                      <div className="flex">
-                        <div className="mt-1">
-                          <AiOutlineHeart />
-                        </div>
+                      <div className="flex cursor-pointer" onClick={() => {
+                        if (isProductInFavorites) {
+                          dispatch(removeFromFavorites(product));
+                          toast("Đã xóa khỏi danh sách yêu thích")
+                        } else {
+                          dispatch(addToFavorites(product));
+                          toast("Đã thêm vào danh sách yêu thích")
+                        }
+                      }}>
+                      {isProductInFavorites ? (
+          <AiFillHeart className="mt-1" />
+        ) : (
+          <AiOutlineHeart className="mt-1" />
+        )}
                         <div>Like</div>
                       </div>
                     </div>
@@ -296,6 +338,7 @@ const Main: React.FC = () => {
           Next
         </button>
       </div>
+      <ToastContainer autoClose={2000} />
     </>
   );
 };
