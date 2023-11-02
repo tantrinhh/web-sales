@@ -35,6 +35,7 @@ import {
   removeFromComparison,
 } from "../../services/redux/slices/compare/compare";
 import { RootState } from "../../services/redux/RootReducer";
+import { Product } from "../../services/redux/slices/product/type";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -45,10 +46,9 @@ const HomePage = () => {
 
   const productsSelector = useSelector(productSelectors.selectAll);
   const { comparedProducts } = useSelector((state: RootState) => state.compare);
-  const handleDetailProduct = (id: any) => {
+  const handleDetailProduct = (id: Product) => {
     navigate(`/product/${id}`);
   };
-
   const today: Date = new Date();
   function isProductNew(productsSelector: any): boolean {
     const productAddedDate: Date = new Date(productsSelector.dateAdded); // Chuyển đổi chuỗi thành Date
@@ -57,7 +57,7 @@ const HomePage = () => {
     );
     return daysDifference < 15;
   }
-
+  //const [comparisonDone, setComparisonDone] = useState(false);
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -125,10 +125,15 @@ const HomePage = () => {
             );
             const disableComparison =
               comparedProducts.length >= 2 && !isProductInComparison;
+            const opacityClass = disableComparison ? " opacity-50" : "";
+
             return (
-              <div key={product.id}>
+              <div key={product.id} className={`   ${opacityClass}`}>
                 <div className="relative z-10 cursor-pointer">
-                  <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
+                  <div
+                    key={product.id}
+                    className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300"
+                  >
                     <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
                       <button
                         onClick={(event: any) => {
@@ -186,7 +191,13 @@ const HomePage = () => {
                     </div>
                   </div>
 
-                  <div className="relative">
+                  <div
+                    className={`relative ${
+                      isProductInComparison
+                        ? "border-2 border-red-500 w-[288px] animate-pulse"
+                        : "opacity-100"
+                    }`}
+                  >
                     <img
                       src={product.image}
                       alt=""

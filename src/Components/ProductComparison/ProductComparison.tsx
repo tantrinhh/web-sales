@@ -1,4 +1,4 @@
-import { AiOutlineRight, AiTwotoneDelete } from "react-icons/ai";
+import { AiOutlineRight } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import stars from "../../assets/ProductComparison/stars.png";
 import Rectangle1 from "../../assets/shop/Rectangle1.png";
@@ -6,11 +6,17 @@ import { RootState } from "../../services/redux/RootReducer";
 import { removeFromComparison } from "../../services/redux/slices/compare/compare";
 import { useAppDispatch } from "../../hooks/redux";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import ModalAdd from "./ModalAdd";
+import { TiDeleteOutline } from "react-icons/ti";
+// import { Product } from "../../services/redux/slices/product/type";
 
 const ProductComparison = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
+  const [isShowModalAddNew, setIsShowModalAddNew] = useState(false);
+  // Sử dụng state để kiểm tra xem đã xóa ít nhất một sản phẩm chưa
+  const [hasDeletedProduct, setHasDeletedProduct] = useState(false);
   const { comparedProducts } = useSelector((state: RootState) => state.compare);
   console.log(comparedProducts, "comparedProducts");
 
@@ -24,6 +30,15 @@ const ProductComparison = () => {
       // Xử lý khi chọn "Choose a Product"
     }
   };
+
+  const handleAddBackToComparison = () => {
+    setIsShowModalAddNew(true);
+  };
+
+  const handleClose = () => {
+    setIsShowModalAddNew(false);
+  };
+
   return (
     <>
       <div className="">
@@ -45,101 +60,135 @@ const ProductComparison = () => {
         </div>
       </div>
       <div className="divide-y divide-[#E8E8E8] container mb-20">
-        <div className="flex flex-row mt-10">
-          <div className=" basis-1/3">
-            <h1 className="w-[223px] h-[105px] text-[28px] font-medium leading-9">
-              Go to Product page for more Products
-            </h1>
-            <p className="text-[#727272] text-[20px] mt-7 leading-[30px] font-medium">
-              View More
-            </p>
-            <div className="w-28 mb-16">
-              <div className="border-b-2 border-b-[#727272]"></div>
-            </div>
-            <div className="mt-48 space-y-10">
-              <h1 className="font-medium text-3xl">General</h1>
-              <ul className="space-y-14">
-                <li className="text-xl font-normal ">Price</li>
-                <li className="text-xl font-normal ">Sizes</li>
-                <li className="text-xl font-normal ">Colors</li>
-              </ul>
-            </div>
-          </div>
-          <div className=""></div>
-          {comparedProducts.map((item: any) => {
-            const colors = item.colors;
-            const sizes = item.sizes;
-
-            return (
-              <div className="basis-1/2 ">
-                <AiTwotoneDelete
-                  onClick={() => {
-                    dispatch(removeFromComparison(item));
-                  }}
-                  style={{
-                    width: "20px",
-                    height: "20px",
-                    color: "#B88E2F",
-                    cursor: "pointer",
-                  }}
-                />
-                <img
-                  src={item.image}
-                  alt=""
-                  className="rounded-lg w-56 h-56 "
-                />
-                <h1 className="text-[24px] font-medium leading-[30px] mt-3">
-                  {item.name}
+        <div className=" mt-10 flex">
+          <div className="basis-9/12">
+            <div className="flex basis-2/3 border  border-gray-200 mr-28 ml-14 ">
+              <div className="basis-3/12 p-4 my-auto ">
+                <h1 className="w-[191px] h-[105px] text-[28px] font-medium leading-9">
+                  Go to Product page for more Products
                 </h1>
-                <p className="text-[18px] font-medium leading-[27px]">
-                  Rs. {item.price.toLocaleString()}
+                <p className="text-[#727272] text-[20px] mt-7 leading-[30px] font-medium">
+                  View More
                 </p>
-                <div className="flex gap-1">
-                  <p className="text-18px font-medium leading-[27px]">4.7</p>
-                  <img
-                    src={stars}
-                    alt=""
-                    className="w-[124px] h-[20px] top-[718px] left-[428px] mt-1"
-                  />
-                  <div className="border-l-[1px] border-[#9F9F9F] text-[13px] text-[#9F9F9F] leading-[30px] font-normal">
-                    <p className="ml-2">204 Review</p>
-                  </div>
-                </div>
-                <div>
-                  <div className="mt-28 ">
-                    <ul>
-                      <li className="text-xl font-normal mt-9">
-                        Rs. {item.price.toLocaleString()}
-                      </li>
-                      <li className="text-xl font-normal mt-10 flex flex-row space-x-2">
-                        {sizes?.map((item: any, index: any) => (
-                          <div
-                            key={index}
-                            className={`cursor-pointer w-10 h-10 border rounded-full shadow-lg font-bold text-center uppercase p-2`}
-                          >
-                            {item}
-                          </div>
-                        ))}
-                      </li>
-                      <li className="text-xl font-normal mt-10 flex flex-row">
-                        {colors?.map((item: any, index: any) => (
-                          <div
-                            style={{
-                              backgroundColor: item,
-                            }}
-                            key={index}
-                            className={`cursor-pointer w-10 h-10 border rounded-full `}
-                          ></div>
-                        ))}
-                      </li>
-                    </ul>
-                  </div>
+                <div className="w-28 ">
+                  <div className="border-b-2 border-b-[#727272]"></div>
                 </div>
               </div>
-            );
-          })}
+              <div className="flex justify-between basis-9/12">
+                {" "}
+                {comparedProducts.map((item: any) => {
+                  return (
+                    <div className="flex justify-between gap-32">
+                      <div className="border border-gray-200 p-3">
+                        {comparedProducts.length === 2 && (
+                          <div className="flex justify-end">
+                            <TiDeleteOutline
+                              onClick={() => {
+                                dispatch(removeFromComparison(item));
+                                setHasDeletedProduct(true);
+                              }}
+                              style={{
+                                width: "20px",
+                                height: "20px",
+                                color: "#B88E2F",
+                                cursor: "pointer",
+                              }}
+                            />
+                          </div>
+                        )}
+                        <img
+                          src={item.image}
+                          alt=""
+                          className="rounded-lg w-56 h-56 "
+                        />
+                        <h1 className="text-[24px] font-medium leading-[30px] mt-3">
+                          {item.name}
+                        </h1>
+                        <p className="text-[18px] font-medium leading-[27px]">
+                          Rs. {item.price.toLocaleString()}
+                        </p>
+                        <div className="flex gap-1">
+                          <p className="text-18px font-medium leading-[27px]">
+                            4.7
+                          </p>
+                          <img
+                            src={stars}
+                            alt=""
+                            className="w-[124px] h-[20px] top-[718px] left-[428px] mt-1"
+                          />
+                          <div className="border-l-[1px] border-[#9F9F9F] text-[13px] text-[#9F9F9F] leading-[30px] font-normal">
+                            <p className="ml-2">204 Review</p>
+                          </div>
+                        </div>
+                      </div>
+                      {comparedProducts.length === 1 && (
+                        <button
+                          className="  w-56 h-full text-xl  border border-solib "
+                          onClick={() => handleAddBackToComparison()}
+                        >
+                          Add to compare
+                        </button>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="flex mr-28 ml-14 mt-20 border   border-gray-200 basis-2/3 ">
+              {" "}
+              <div className="basis-3/12 space-y-4 p-4">
+                <h1 className="font-medium text-3xl">General</h1>
+                <ul className="space-y-6">
+                  <li className="text-xl font-normal ">Price</li>
+                  <li className="text-xl font-normal ">Sizes</li>
+                  <li className="text-xl font-normal ">Colors</li>
+                </ul>
+              </div>
+              <div className="flex justify-between  ml-5 gap-14 basis-9/12">
+                {" "}
+                {comparedProducts.map((item: any) => {
+                  const colors = item.colors;
+                  const sizes = item.sizes;
 
-          <div className=" basis-1/3">
+                  return (
+                    <div className="flex  ">
+                      <div className="border  pl-3 pr-4   border-gray-200 ">
+                        <div className="mt-14 flex gap-10 w-56">
+                          <ul>
+                            <li className="text-xl font-normal mt-2">
+                              Rs. {item.price.toLocaleString()}
+                            </li>
+                            <li className="text-xl font-normal mt-5 flex flex-row space-x-2">
+                              {sizes?.map((item: any, index: any) => (
+                                <div
+                                  key={index}
+                                  className={`cursor-pointer w-10 h-10 border rounded-full shadow-lg font-bold text-center uppercase p-2`}
+                                >
+                                  {item}
+                                </div>
+                              ))}
+                            </li>
+                            <li className="text-xl font-normal mt-4 flex flex-row">
+                              {colors?.map((item: any, index: any) => (
+                                <div
+                                  style={{
+                                    backgroundColor: item,
+                                  }}
+                                  key={index}
+                                  className={`cursor-pointer w-10 h-10 border rounded-full `}
+                                ></div>
+                              ))}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+          <div className=" basis-3/12">
             <h1 className="text-[24px] font-bold leading-[30px]">
               Add A Product
             </h1>
@@ -150,6 +199,7 @@ const ProductComparison = () => {
                   onChange={handleSelectChange}
                 >
                   <option value={"select"}>Choose a Product</option>
+
                   <option value={"home"}>
                     Select a product on the home page
                   </option>
@@ -169,6 +219,12 @@ const ProductComparison = () => {
           </div>
         </div>
       </div>
+      {isShowModalAddNew && (
+        <div className="fixed top-0 left-0 w-full h-full z-50 bg-black opacity-90" />
+      )}
+      {isShowModalAddNew && (
+        <ModalAdd show={isShowModalAddNew} handleClose={handleClose} />
+      )}
     </>
   );
 };

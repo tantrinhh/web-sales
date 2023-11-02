@@ -29,3 +29,16 @@ body {
   height: 100%;
   object-fit: cover;
 }
+@keyframes pulse {
+  0%,
+  100% {
+    border-color: #ff0000;
+  }
+  50% {
+    border-color: transparent;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 1s linear infinite;
+}

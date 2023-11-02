@@ -139,10 +139,13 @@ const Header = () => {
                     {" "}
                     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                       <tbody>
-                        {cartItems.map((item) => {
+                        {cartItems.map((item, index) => {
                           const totalPrice = item.price * item.count;
                           return (
-                            <tr className="bg-white border-b dark:border-gray-700 overflow-y-auto h-32 ">
+                            <tr
+                              className="bg-white border-b dark:border-gray-700 overflow-y-auto h-32 "
+                              key={index}
+                            >
                               <th
                                 scope="row"
                                 className="px-6 py-4 font-medium whitespace-nowrap dark:text-white"
