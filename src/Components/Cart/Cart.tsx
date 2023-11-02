@@ -8,13 +8,16 @@ import {
   removeProduct,
 } from "../../services/redux/slices/cart";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Cart = () => {
   const { cartItems } = useSelector((state: RootState) => state.cart);
   const dispatch = useAppDispatch();
 
   const removeFromCart = (productId: any) => {
     dispatch(removeProduct(productId));
-    window.alert("Xóa thành công");
+    toast("Xóa thành công");
   };
 
   const handleDecrementQuantity = (productId: any) => {
@@ -24,7 +27,7 @@ const Cart = () => {
       if (item.count === 1) {
         // If the quantity is 1, remove the product from the cart
         dispatch(removeProduct(productId));
-        window.alert("Xóa thành công");
+        toast("Xóa thành công");
       } else {
         // Decrement the quantity
         dispatch(decrementQuantity(productId));
@@ -192,6 +195,7 @@ const Cart = () => {
         </div>
       </div>
       )}
+      <ToastContainer autoClose={3000} />
     </>
   );
 };

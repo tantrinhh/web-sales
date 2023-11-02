@@ -26,6 +26,8 @@ import {
   removeFromComparison,
 } from "../../services/redux/slices/compare/compare";
 import { RootState } from "../../services/redux/RootReducer";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Main = () => {
   const productsSelector = useSelector(productSelectors.selectAll);
@@ -77,11 +79,13 @@ const Main = () => {
       colors: selectedColor,
     };
     if (selectedSize !== null && selectedColor !== null) {
-      navigate("/cart");
       dispatch(addProduct(actionCart));
-      window.alert("Thêm thành công");
+      setTimeout(() => {
+        navigate("/cart");
+      }, 2000)  
+      toast("Thêm thành công");
     } else {
-      alert("Vui lòng thêm kích cỡ và màu sắc của sản phẩm");
+      toast("Vui lòng thêm kích cỡ và màu sắc của sản phẩm");
     }
   };
   const scrollToTop = () => {
@@ -424,6 +428,7 @@ const Main = () => {
           </div>
           <div></div>
         </div>
+        <ToastContainer autoClose={3000} />
       </div>
     </>
   );
