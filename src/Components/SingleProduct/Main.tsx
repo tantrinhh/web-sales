@@ -64,7 +64,7 @@ const Main = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [count, setCount] = useState<number>(1);
- 
+
   const handleCart = () => {
     const actionCart: any = {
       id: itemDetail[0].id,
