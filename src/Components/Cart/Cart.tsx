@@ -61,7 +61,7 @@ const Cart = () => {
     <>
     {cartItems.length === 0 ? (
         <div className="text-center mb-20 mt-10">
-          <h1 className="font-bold text-[50px]">Không có sản phẩm nào trong giỏ hàng</h1>
+          <h1 className="font-bold text-[30px]">Không có sản phẩm nào trong giỏ hàng</h1>
           <button className="w-[245px] max-md:mx-[25%] h-[48px] text-[#B88E2F] text-[16px] mt-10 font-bold border-solid border-2 border-[#B88E2F] mx-[41%]">
           <Link to="/" onClick={scrollToTop}>
             Về trang chủ

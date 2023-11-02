@@ -191,12 +191,12 @@ const [selectedWard, setSelectedWard] = useState("");
                 control={control}
                 rules={{
                   required: {
-                    message: 'First name is required',
+                    message: 'Trường này không được để trống',
                     value: true,
                   },
                   pattern: {
                     value: /^[A-Za-z]+$/i,
-                    message: 'Invalid first name',
+                    message: 'Không hợp lệ',
                   },
                 }}
                 render={({ field: { onChange, value } }:any) => (
@@ -216,12 +216,12 @@ const [selectedWard, setSelectedWard] = useState("");
                 control={control}
                 rules={{
                   required: {
-                    message: 'Last name is required',
+                    message: 'Trường này không được để trống',
                     value: true,
                   },
                   pattern: {
                     value: /^[A-Za-z]+$/i,
-                    message: 'Invalid last name',
+                    message: 'Không hợp lệ',
                   },
                 }}
                 render={({ field: { onChange, value } }:any) => (
@@ -317,7 +317,7 @@ const [selectedWard, setSelectedWard] = useState("");
                 control={control}
                 rules={{
                   required: {
-                    message: 'Street address is required',
+                    message: 'Trường này không được để trống',
                     value: true,
                   },
                 }}
@@ -341,12 +341,12 @@ const [selectedWard, setSelectedWard] = useState("");
                 control={control}
                 rules={{
                   required: {
-                    message: 'ZIP code is required',
+                    message: 'Trường này không được để trống',
                     value: true,
                   },
                   pattern: {
                     value: /(^\d{5}$)|(^\d{5}-\d{4}$)/,
-                    message: 'Invalid ZIP code',
+                    message: 'Không hợp lệ',
                   },
                 }}
                 render={({ field: { onChange, value } }:any) => (
@@ -372,12 +372,12 @@ const [selectedWard, setSelectedWard] = useState("");
                 control={control}
                 rules={{
                   required: {
-                    message: 'Phone is required',
+                    message: 'Trường này không được để trống',
                     value: true,
                   },
                   pattern: {
                     value: /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/,
-                    message: 'Invalid phone number',
+                    message: 'Không hợp lệ',
                   },
                 }}
                 render={({ field: { onChange, value } }:any) => (
@@ -402,12 +402,12 @@ const [selectedWard, setSelectedWard] = useState("");
                 control={control}
                 rules={{
                   required: {
-                    message: 'Email is required',
+                    message: 'Trường này không được để trống',
                     value: true,
                   },
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: 'Invalid email address',
+                    message: 'Không hợp lệ',
                   },
                 }}
                 render={({ field: { onChange, value } }:any) => (
