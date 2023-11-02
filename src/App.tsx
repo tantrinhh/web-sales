@@ -7,6 +7,7 @@ import ProductComparison from "./pages/productComparison";
 import SingleProduct from "./pages/singleProduct";
 import Cart from "./pages/cart";
 import Home from "./pages/home";
+import Favorite from "./pages/favorite";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/favorite" element={<Favorite />} />
         <Route path="/productcomparison" element={<ProductComparison />} />
         <Route path={`/product/:id`} element={<SingleProduct />} />
         <Route path="/checkout" element={<Checkout />} />

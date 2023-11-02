@@ -106,7 +106,10 @@ const Header = () => {
               <FiSearch style={{ width: "23px", height: "23px" }} />
             </div>
             <div>
-              <AiOutlineHeart style={{ width: "23px", height: "23px" }} />
+              <Link to="/favorite" onClick={scrollToTop}>
+              {" "}
+                <AiOutlineHeart style={{ width: "23px", height: "23px" }} />
+              </Link>
             </div>
             <div
               className="cart-container"
