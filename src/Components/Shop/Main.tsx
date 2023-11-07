@@ -7,7 +7,6 @@ import { BiGitCompare } from "react-icons/bi";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
 import { useAppDispatch } from "../../hooks/redux";
 import { productSelectors } from "../../services/redux/slices/product";
 import {
@@ -20,6 +19,7 @@ import Typography from "@mui/material/Typography";
 import { addToFavorites, removeFromFavorites } from "../../services/redux/slices/favorite";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 const Main: React.FC = () => {
   const dispatch = useAppDispatch();
 
@@ -44,7 +44,7 @@ const Main: React.FC = () => {
   const totalPages = Math.ceil(
     productsSelector.length / (+productPerPage || 1)
   );
-    const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
+    const [priceRange, setPriceRange] = useState<[number, number]>([15000, 15000000]);
   const filteredProducts = productsSelector.filter(
     (product) => product.price >= priceRange[0] && product.price <= priceRange[1]
   );
@@ -118,7 +118,7 @@ const Main: React.FC = () => {
       <Slider
         value={priceRange}
         onChange={handlePriceRangeChange}
-        valueLabelDisplay="auto"
+        valueLabelDisplay="off"
         min={15000}
         max={15000000} // Set the maximum price value
       />
@@ -179,7 +179,7 @@ const Main: React.FC = () => {
             );
             const disableComparison =
               comparedProducts.length >= 2 && !isProductInComparison;
-              const isProductInFavorites = favorites.some((item) => item.id === product.id);
+            const isProductInFavorites = favorites.some((item) => item.id === product.id);
             return (
               <div key={product.id}>
                 <div className="relative z-10 cursor-pointer">
