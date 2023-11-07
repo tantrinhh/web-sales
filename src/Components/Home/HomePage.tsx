@@ -1,4 +1,4 @@
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { BiGitCompare } from "react-icons/bi";
 import { CiShare2 } from "react-icons/ci";
 import { useSelector } from "react-redux";
@@ -36,6 +36,9 @@ import {
 } from "../../services/redux/slices/compare/compare";
 import { RootState } from "../../services/redux/RootReducer";
 import { Product } from "../../services/redux/slices/product/type";
+import { addToFavorites, removeFromFavorites } from "../../services/redux/slices/favorite";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -64,6 +67,7 @@ const HomePage = () => {
       behavior: "smooth", // Cuộn mượt lên đầu trang
     });
   };
+  const favorites = useSelector((state: RootState) => state.favorite.list);
   return (
     <>
       {/* Sub header */}
@@ -126,7 +130,7 @@ const HomePage = () => {
             const disableComparison =
               comparedProducts.length >= 2 && !isProductInComparison;
             const opacityClass = disableComparison ? " opacity-50" : "";
-
+            const isProductInFavorites = favorites.some((item) => item.id === product.id);
             return (
               <div key={product.id} className={`   ${opacityClass}`}>
                 <div className="relative z-10 cursor-pointer">
@@ -182,10 +186,20 @@ const HomePage = () => {
                           {isProductInComparison ? "Remove" : "Compare"}
                         </div>
                       </div>
-                      <div className="flex">
-                        <div className="mt-1">
-                          <AiOutlineHeart />
-                        </div>
+                      <div className="flex cursor-pointer" onClick={() => {
+                        if (isProductInFavorites) {
+                          dispatch(removeFromFavorites(product));
+                          toast("Đã xóa khỏi danh sách yêu thích")
+                        } else {
+                          dispatch(addToFavorites(product));
+                          toast("Đã thêm vào danh sách yêu thích")
+                        }
+                      }}>
+                      {isProductInFavorites ? (
+          <AiFillHeart className="mt-1" />
+        ) : (
+          <AiOutlineHeart className="mt-1" />
+        )}
                         <div>Like</div>
                       </div>
                     </div>
@@ -338,6 +352,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={2000} />
     </>
   );
 };

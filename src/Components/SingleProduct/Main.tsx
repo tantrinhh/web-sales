@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  AiFillHeart,
   AiFillInstagram,
   AiFillTwitterCircle,
   AiOutlineHeart,
@@ -28,6 +29,7 @@ import {
 import { RootState } from "../../services/redux/RootReducer";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { addToFavorites, removeFromFavorites } from "../../services/redux/slices/favorite";
 
 const Main = () => {
   const productsSelector = useSelector(productSelectors.selectAll);
@@ -95,6 +97,7 @@ const Main = () => {
     });
   };
   const { comparedProducts } = useSelector((state: RootState) => state.compare);
+  const favorites = useSelector((state: RootState) => state.favorite.list);
   return (
     <>
       <div className="product-content">
@@ -315,6 +318,7 @@ const Main = () => {
                   );
                   const disableComparison =
                     comparedProducts.length >= 2 && !isProductInComparison;
+                  const isProductInFavorites = favorites.some((item) => item.id === product.id);
                   return (
                     <div key={product.id}>
                       <div className="relative z-10 cursor-pointer">
@@ -367,10 +371,20 @@ const Main = () => {
                                 {isProductInComparison ? "Remove" : "Compare"}
                               </div>
                             </div>
-                            <div className="flex">
-                              <div className="mt-1">
-                                <AiOutlineHeart />
-                              </div>
+                            <div className="flex cursor-pointer" onClick={() => {
+                        if (isProductInFavorites) {
+                          dispatch(removeFromFavorites(product));
+                          toast("Đã xóa khỏi danh sách yêu thích")
+                        } else {
+                          dispatch(addToFavorites(product));
+                          toast("Đã thêm vào danh sách yêu thích")
+                        }
+                      }}>
+                      {isProductInFavorites ? (
+          <AiFillHeart className="mt-1" />
+        ) : (
+          <AiOutlineHeart className="mt-1" />
+        )}
                               <div>Like</div>
                             </div>
                           </div>
