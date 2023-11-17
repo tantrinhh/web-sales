@@ -1,16 +1,15 @@
+import { useEffect } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { BiGitCompare } from "react-icons/bi";
 import { CiShare2 } from "react-icons/ci";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Bedroom from "../../assets/home/Bedroom.png";
-import Dining from "../../assets/home/Dining.png";
-import Living from "../../assets/home/Image-living room.png";
-import MaskGroup from "../../assets/home/MaskGroup.jpg";
 import Rectangle36 from "../../assets/home/Rectangle36.png";
 import Rectangle37 from "../../assets/home/Rectangle37.png";
 import Rectangle38 from "../../assets/home/Rectangle38.png";
@@ -20,25 +19,23 @@ import Rectangle41 from "../../assets/home/Rectangle41.png";
 import Rectangle43 from "../../assets/home/Rectangle43.png";
 import Rectangle44 from "../../assets/home/Rectangle44.png";
 import Rectangle45 from "../../assets/home/Rectangle45.png";
-import image1 from "../../assets/home/image1.png";
-import image2 from "../../assets/home/image2.png";
 import { useAppDispatch } from "../../hooks/redux";
 import "../../index.css";
-import {
-  getProduct,
-  productSelectors,
-} from "../../services/redux/slices/product";
-import "./styles.css";
-import { useEffect } from "react";
+import { RootState } from "../../services/redux/RootReducer";
 import {
   addToComparison,
   removeFromComparison,
 } from "../../services/redux/slices/compare/compare";
-import { RootState } from "../../services/redux/RootReducer";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../../services/redux/slices/favorite";
+import {
+  getProduct,
+  productSelectors,
+} from "../../services/redux/slices/product";
 import { Product } from "../../services/redux/slices/product/type";
-import { addToFavorites, removeFromFavorites } from "../../services/redux/slices/favorite";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import "./styles.css";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -72,7 +69,12 @@ const HomePage = () => {
     <>
       {/* Sub header */}
       <div>
-        <img src={MaskGroup} className="w-screen" alt="" />
+        {/* <img src={MaskGroup} className="w-screen" alt="" /> */}
+        <img
+          src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/if_w_gt_1920,w_1920/originals_fw23_spezial_mainline_mh_d_476d0205fd.jpg"
+          className="w-screen"
+          alt=""
+        />
 
         <div className="absolute bg-[#FFF3E3] md:max-w-[643px]  md:px-5 px-3 md:py-10 py-5  rounded-md md:top-[253px] top-[84px] right-2 md:left-[739px] space-y-3 space-x-5">
           <p className="md:text-[16px] text-sm md:mt-7 font-bold mx-5">
@@ -106,15 +108,30 @@ const HomePage = () => {
         </p>
         <div className="md:flex gap-20 mt-20 max-md:mx-10">
           <div className="flex flex-col justify-center">
-            <img src={Dining} alt="" />
+            <img
+              src={
+                "https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/if_w_gt_400,w_400/originals_fw23_spezial_mainline_tcc_d_49746f84cc.jpg"
+              }
+              alt=""
+            />
             <p className="font-bold mt-5 text-[24px]">Dining</p>
           </div>
           <div className="flex flex-col justify-center">
-            <img src={Living} alt="" />
+            <img
+              src={
+                "https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/if_w_gt_400,w_400/football_ss23_arsenal_maharishi_onsite_tcc_1_d_7ecc4236c7.jpg"
+              }
+              alt=""
+            />
             <p className="font-bold mt-5 text-[24px]">Living</p>
           </div>
           <div className="flex flex-col justify-center">
-            <img src={Bedroom} alt="" />
+            <img
+              src={
+                "https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/if_w_gt_400,w_400/training_fw23_les_mills_always_on_hp_glp_teaser_carousel_d_ace430c003.jpg"
+              }
+              alt=""
+            />
             <p className="font-bold mt-5 text-[24px]">Bedroom</p>
           </div>
         </div>
@@ -130,7 +147,9 @@ const HomePage = () => {
             const disableComparison =
               comparedProducts.length >= 2 && !isProductInComparison;
             const opacityClass = disableComparison ? " opacity-50" : "";
-            const isProductInFavorites = favorites.some((item) => item.id === product.id);
+            const isProductInFavorites = favorites.some(
+              (item) => item.id === product.id
+            );
             return (
               <div key={product.id} className={`   ${opacityClass}`}>
                 <div className="relative z-10 cursor-pointer">
@@ -186,20 +205,23 @@ const HomePage = () => {
                           {isProductInComparison ? "Remove" : "Compare"}
                         </div>
                       </div>
-                      <div className="flex cursor-pointer" onClick={() => {
-                        if (isProductInFavorites) {
-                          dispatch(removeFromFavorites(product));
-                          toast("Đã xóa khỏi danh sách yêu thích")
-                        } else {
-                          dispatch(addToFavorites(product));
-                          toast("Đã thêm vào danh sách yêu thích")
-                        }
-                      }}>
-                      {isProductInFavorites ? (
-          <AiFillHeart className="mt-1" />
-        ) : (
-          <AiOutlineHeart className="mt-1" />
-        )}
+                      <div
+                        className="flex cursor-pointer"
+                        onClick={() => {
+                          if (isProductInFavorites) {
+                            dispatch(removeFromFavorites(product));
+                            toast("Đã xóa khỏi danh sách yêu thích");
+                          } else {
+                            dispatch(addToFavorites(product));
+                            toast("Đã thêm vào danh sách yêu thích");
+                          }
+                        }}
+                      >
+                        {isProductInFavorites ? (
+                          <AiFillHeart className="mt-1" />
+                        ) : (
+                          <AiOutlineHeart className="mt-1" />
+                        )}
                         <div>Like</div>
                       </div>
                     </div>
@@ -212,11 +234,7 @@ const HomePage = () => {
                         : "opacity-100"
                     }`}
                   >
-                    <img
-                      src={product.image}
-                      alt=""
-                      className="w-[285px] h-[200px]"
-                    />
+                    <img src={product.image} alt="" className="w-[285px] " />
                     {product.discount > 0 && (
                       <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2 bg-[#E97171]">
                         -{product.discount}%
@@ -287,20 +305,35 @@ const HomePage = () => {
         >
           {" "}
           <SwiperSlide>
-            <img src={image1} alt="" />
+            <img
+              src={
+                "https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/if_w_gt_730,w_730/fw23_brand_campaign_launch_hp_gender_visual_nav_womens_d_e31f24de86.jpg"
+              }
+              alt=""
+            />
           </SwiperSlide>
           <SwiperSlide>
+            <img
+              src={
+                "https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/if_w_gt_730,w_730/fw23_brand_campaign_launch_hp_gender_visual_nav_mens_d_db216f2797.jpg"
+              }
+              alt=""
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              src={
+                "https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/if_w_gt_730,w_730/fw23_brand_campaign_launch_hp_gender_visual_nav_kids_d_806511dc65.jpg"
+              }
+              alt=""
+            />
+          </SwiperSlide>
+          {/* <SwiperSlide>
             <img src={image2} alt="" />
           </SwiperSlide>
           <SwiperSlide>
             <img src={image2} alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src={image2} alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src={image2} alt="" />
-          </SwiperSlide>
+          </SwiperSlide> */}
         </Swiper>
       </div>
       <p className="text-center text-[20px] leading-7 font-semibold mt-20">
