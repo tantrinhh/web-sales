@@ -1,7 +1,8 @@
-const NEXT_PUBLIC_PRODUCTION_URL = "http://103.107.183.103:3000";
+// http://103.107.183.103:3000/
+const NEXT_PUBLIC_PRODUCTION_URL = "https://64c8ad34a1fe0128fbd60bba.mockapi.io";
 const NEXT_PUBLIC_DEVELOPMENT_URL =
   process.env.NEXT_PUBLIC_DEVELOPMENT_URL ||
-  "http://103.107.183.103:3000/";
+  "https://64c8ad34a1fe0128fbd60bba.mockapi.io";
 const currentUrl = typeof window !== "undefined" ? window.location.href : "";
 const developmentMode =
   currentUrl.includes("localhost") ||
