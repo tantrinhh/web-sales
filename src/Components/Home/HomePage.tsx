@@ -10,15 +10,6 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Rectangle36 from "../../assets/home/Rectangle36.png";
-import Rectangle37 from "../../assets/home/Rectangle37.png";
-import Rectangle38 from "../../assets/home/Rectangle38.png";
-import Rectangle39 from "../../assets/home/Rectangle39.png";
-import Rectangle40 from "../../assets/home/Rectangle40.png";
-import Rectangle41 from "../../assets/home/Rectangle41.png";
-import Rectangle43 from "../../assets/home/Rectangle43.png";
-import Rectangle44 from "../../assets/home/Rectangle44.png";
-import Rectangle45 from "../../assets/home/Rectangle45.png";
 import { useAppDispatch } from "../../hooks/redux";
 import "../../index.css";
 import { RootState } from "../../services/redux/RootReducer";
@@ -346,41 +337,75 @@ const HomePage = () => {
         <div className="flex flex-col gap-7">
           <div className="flex gap-7">
             <div>
-              <img src={Rectangle36} alt="" />
+              <img
+                src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/df109777-ac34-4ac1-bfed-2fb11177b19b/club-fleece-mens-patch-pullover-hoodie-sDQP5j.png"
+                alt=""
+              />
             </div>
             <div className=" flex items-end">
-              <img src={Rectangle38} alt="" />
+              <img
+                src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/c0a7ad05-82c8-40fd-b52c-114bdde21c32/club-fleece-mens-fleece-pants-76pmqC.png"
+                alt=""
+              />
             </div>
           </div>
           <div className="flex gap-7">
+            <div>{/* <img src={Rectangle37} alt="" /> */}</div>
             <div>
-              <img src={Rectangle37} alt="" />
-            </div>
-            <div>
-              <img src={Rectangle39} alt="" />
+              <img
+                src={
+                  "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/172b372c-6cf6-4af9-a0e0-d3e2283dbda8/sportswear-club-fleece-mens-crew-neck-holiday-sweatshirt-KdZ25W.png"
+                }
+                alt=""
+              />
             </div>
           </div>
         </div>
         <div className=" flex items-center">
           <div className="">
-            <img src={Rectangle40} alt="" />
+            <img
+              src={
+                "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/d00741a9-096a-48a3-861d-286b21ca1269/sportswear-club-fleece-holiday-pants-cBqrxB.png"
+              }
+              alt=""
+            />
           </div>
         </div>
         <div className="flex flex-col gap-7">
           <div className="flex gap-7">
             <div className=" flex items-end">
-              <img src={Rectangle43} alt="" />
+              <img
+                src={
+                  "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/d00741a9-096a-48a3-861d-286b21ca1269/sportswear-club-fleece-holiday-pants-cBqrxB.png"
+                }
+                alt=""
+              />
             </div>
             <div>
-              <img src={Rectangle45} alt="" />
+              <img
+                src={
+                  "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/382c56f3-6770-4035-a5bf-14f1a81ff454/primary-mens-dri-fit-short-sleeve-versatile-top-XK77j1.png"
+                }
+                alt=""
+              />
             </div>
           </div>
           <div className="flex gap-7">
             <div>
-              <img src={Rectangle41} alt="" />
+              <img
+                src={
+                  "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/dc7aaf0c-34cf-43b5-9c12-074a6fba2a9d/jordan-essentials-holiday-fleece-pants-cTR1jG.png"
+                }
+                alt=""
+              />
             </div>
             <div>
-              <img src={Rectangle44} alt="" />
+              <img
+                src={
+                  "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/f7aa16ea-1b77-4427-a4ba-849941261f28/jordan-essentials-holiday-fleece-pullover-hoodie-xvw5bV.png"
+                }
+                alt=""
+              />
             </div>
           </div>
         </div>
