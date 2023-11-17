@@ -1,24 +1,27 @@
+import Slider from "@mui/material/Slider";
+import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { BiGitCompare } from "react-icons/bi";
+import { CiShare2 } from "react-icons/ci";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Vector1 from "../../assets/shop/Vector1.png";
 import Vector2 from "../../assets/shop/Vector2.png";
 import Vector3 from "../../assets/shop/Vector3.png";
-import { CiShare2 } from "react-icons/ci";
-import { BiGitCompare } from "react-icons/bi";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../hooks/redux";
-import { productSelectors } from "../../services/redux/slices/product";
+import { RootState } from "../../services/redux/RootReducer";
 import {
   addToComparison,
   removeFromComparison,
 } from "../../services/redux/slices/compare/compare";
-import { RootState } from "../../services/redux/RootReducer";
-import Slider from "@mui/material/Slider";
-import Typography from "@mui/material/Typography";
-import { addToFavorites, removeFromFavorites } from "../../services/redux/slices/favorite";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../../services/redux/slices/favorite";
+import { productSelectors } from "../../services/redux/slices/product";
 
 const Main: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -44,9 +47,12 @@ const Main: React.FC = () => {
   const totalPages = Math.ceil(
     productsSelector.length / (+productPerPage || 1)
   );
-    const [priceRange, setPriceRange] = useState<[number, number]>([15000, 15000000]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([
+    15000, 15000000,
+  ]);
   const filteredProducts = productsSelector.filter(
-    (product) => product.price >= priceRange[0] && product.price <= priceRange[1]
+    (product) =>
+      product.price >= priceRange[0] && product.price <= priceRange[1]
   );
   // Cập nhật indexOfLastProduct và indexOfFirstProduct
   // const productPerPageNumber = +productPerPage || 1; // Chuyển đổi productPerPage thành số và mặc định là 1 nếu không hợp lệ
@@ -112,21 +118,21 @@ const Main: React.FC = () => {
             </div>
           </div>
           <div>
-      <Typography variant="h6" gutterBottom>
-        Price Range Selector
-      </Typography>
-      <Slider
-        value={priceRange}
-        onChange={handlePriceRangeChange}
-        valueLabelDisplay="off"
-        min={15000}
-        max={15000000} // Set the maximum price value
-      />
-      <Typography>
-        Price Range: RP {priceRange[0].toLocaleString()} - RP {priceRange[1].toLocaleString()}
-      </Typography>
-
-    </div>
+            <Typography variant="h6" gutterBottom>
+              Price Range Selector
+            </Typography>
+            <Slider
+              value={priceRange}
+              onChange={handlePriceRangeChange}
+              valueLabelDisplay="off"
+              min={15000}
+              max={15000000} // Set the maximum price value
+            />
+            <Typography>
+              Price Range: RP {priceRange[0].toLocaleString()} - RP{" "}
+              {priceRange[1].toLocaleString()}
+            </Typography>
+          </div>
           <div className="flex gap-x-5 max-md:mt-4  ">
             <div className="flex items-center gap-x-2">
               <label className="  text-xl font-normal leading-[30px] text-[#000000]">
@@ -179,7 +185,9 @@ const Main: React.FC = () => {
             );
             const disableComparison =
               comparedProducts.length >= 2 && !isProductInComparison;
-            const isProductInFavorites = favorites.some((item) => item.id === product.id);
+            const isProductInFavorites = favorites.some(
+              (item) => item.id === product.id
+            );
             return (
               <div key={product.id}>
                 <div className="relative z-10 cursor-pointer">
@@ -232,31 +240,30 @@ const Main: React.FC = () => {
                           {isProductInComparison ? "Remove" : "Compare"}
                         </div>
                       </div>
-                      <div className="flex cursor-pointer" onClick={() => {
-                        if (isProductInFavorites) {
-                          dispatch(removeFromFavorites(product));
-                          toast("Đã xóa khỏi danh sách yêu thích")
-                        } else {
-                          dispatch(addToFavorites(product));
-                          toast("Đã thêm vào danh sách yêu thích")
-                        }
-                      }}>
-                      {isProductInFavorites ? (
-          <AiFillHeart className="mt-1" />
-        ) : (
-          <AiOutlineHeart className="mt-1" />
-        )}
+                      <div
+                        className="flex cursor-pointer"
+                        onClick={() => {
+                          if (isProductInFavorites) {
+                            dispatch(removeFromFavorites(product));
+                            toast("Đã xóa khỏi danh sách yêu thích");
+                          } else {
+                            dispatch(addToFavorites(product));
+                            toast("Đã thêm vào danh sách yêu thích");
+                          }
+                        }}
+                      >
+                        {isProductInFavorites ? (
+                          <AiFillHeart className="mt-1" />
+                        ) : (
+                          <AiOutlineHeart className="mt-1" />
+                        )}
                         <div>Like</div>
                       </div>
                     </div>
                   </div>
 
                   <div className="relative">
-                    <img
-                      src={product.image}
-                      alt=""
-                      className="w-[285px] h-[200px]"
-                    />
+                    <img src={product.image} alt="" className="w-[285px] " />
                     {product.discount > 0 && (
                       <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2 bg-[#E97171]">
                         -{product.discount}%
