@@ -288,7 +288,7 @@ const HomePage = () => {
           </h1>
           <p className="w-[368px] h-[48px] font-medium leading-[24px] text-[16px] mt-1">
             Our designer already made a lot of beautiful prototipe of rooms that
-            inspire you
+            inspire
           </p>
           <button className="bg-[#B88E2F] text-[#FFFFFF] w-[176px] h-[48px] mt-10">
             Explore More
