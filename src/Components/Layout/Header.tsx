@@ -16,6 +16,7 @@ import {
 import { RootState } from "../../services/redux/RootReducer";
 import { BsBagX } from "react-icons/bs";
 import { TiDelete } from "react-icons/ti";
+import { FaUserCircle } from "react-icons/fa";
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -100,17 +101,15 @@ const Header = () => {
 
           <div className="hidden md:flex gap-x-8">
             <div>
-              <BiUserPlus style={{ width: "23px", height: "23px" }} />
-            </div>
-            <div>
               <FiSearch style={{ width: "23px", height: "23px" }} />
             </div>
             <div>
               <Link to="/favorite" onClick={scrollToTop}>
-              {" "}
+                {" "}
                 <AiOutlineHeart style={{ width: "23px", height: "23px" }} />
               </Link>
             </div>
+
             <div
               className="cart-container"
               onMouseEnter={handleCartHover}
@@ -246,6 +245,11 @@ const Header = () => {
                 </div>
               </div>
             </div>
+            <div>
+              <Link to="/user">
+                <FaUserCircle style={{ width: "23px", height: "23px" }} />
+              </Link>
+            </div>
           </div>
 
           <div className="md:hidden">
@@ -325,10 +329,10 @@ const Header = () => {
                   <FiSearch style={{ width: "23px", height: "23px" }} />
                 </div>
                 <div>
-                <Link to="/favorite" onClick={scrollToTop}>
-              {" "}
-                <AiOutlineHeart style={{ width: "23px", height: "23px" }} />
-              </Link>
+                  <Link to="/favorite" onClick={scrollToTop}>
+                    {" "}
+                    <AiOutlineHeart style={{ width: "23px", height: "23px" }} />
+                  </Link>
                 </div>
                 <div>
                   <Link to="/cart" onClick={scrollToTop}>

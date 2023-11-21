@@ -7,23 +7,31 @@ import ProductComparison from "./pages/productComparison";
 import SingleProduct from "./pages/singleProduct";
 import Cart from "./pages/cart";
 import Home from "./pages/home";
-import Favorite from "./pages/favorite";
+import { ToastContainer } from "react-toastify";
+import LogIn from "./pages/login/login";
+
+import User from "./pages/user/user";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/favorite" element={<Favorite />} />
-        <Route path="/productcomparison" element={<ProductComparison />} />
-        <Route path={`/product/:id`} element={<SingleProduct />} />
-        <Route path="/checkout" element={<Checkout />} />
-      </Routes>
-    </Router>
+    <>
+      {" "}
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/productcomparison" element={<ProductComparison />} />
+          <Route path={`/product/:id`} element={<SingleProduct />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/user" element={<User />} />
+        </Routes>
+      </Router>
+      <ToastContainer autoClose={2000} />
+    </>
   );
 }
 
