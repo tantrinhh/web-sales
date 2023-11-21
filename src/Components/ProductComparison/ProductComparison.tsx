@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ModalAdd from "./ModalAdd";
 import { TiDeleteOutline } from "react-icons/ti";
+import { BsPlusSquareDotted } from "react-icons/bs";
 // import { Product } from "../../services/redux/slices/product/type";
 
 const ProductComparison = () => {
@@ -122,12 +123,17 @@ const ProductComparison = () => {
                         </div>
                       </div>
                       {comparedProducts.length === 1 && (
-                        <button
-                          className="  w-56 h-full text-xl  border border-solib "
-                          onClick={() => handleAddBackToComparison()}
-                        >
-                          Add to compare
-                        </button>
+                        <div className="w-56 flex items-center text-center mx-auto h-full   border border-solib ">
+                          <div
+                            onClick={() => handleAddBackToComparison()}
+                            className=" cursor-pointer my-auto mx-auto flex flex-col items-center  "
+                          >
+                            <div>
+                              <BsPlusSquareDotted className="w-12 h-12" />
+                            </div>
+                            <div className="text-xl mt-2">Thêm sản phẩm</div>
+                          </div>
+                        </div>
                       )}
                     </div>
                   );

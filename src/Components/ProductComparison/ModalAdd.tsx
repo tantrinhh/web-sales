@@ -136,7 +136,7 @@ const ModalAdd = (props: any) => {
             </div>
           </div>
           <div className="text-center w-40 py-2 mx-auto mb-10  text-xl text-black mt-10 border-2 border-red-500">
-            <button className="" onClick={handleClose}>
+            <button className="text-center" onClick={handleClose}>
               Close
             </button>
           </div>

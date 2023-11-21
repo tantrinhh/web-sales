@@ -1,10 +1,9 @@
-import { useEffect } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { BiGitCompare } from "react-icons/bi";
 import { CiShare2 } from "react-icons/ci";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -21,21 +20,16 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from "../../services/redux/slices/favorite";
-import {
-  getProduct,
-  productSelectors,
-} from "../../services/redux/slices/product";
+import { productSelectors } from "../../services/redux/slices/product";
 import { Product } from "../../services/redux/slices/product/type";
 import "./styles.css";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  useEffect(() => {
-    dispatch(getProduct());
-  }, [dispatch]);
 
   const productsSelector = useSelector(productSelectors.selectAll);
+  console.log(productsSelector, "productsSelector");
   const { comparedProducts } = useSelector((state: RootState) => state.compare);
   const handleDetailProduct = (id: Product) => {
     navigate(`/product/${id}`);
@@ -60,7 +54,6 @@ const HomePage = () => {
     <>
       {/* Sub header */}
       <div>
-        {/* <img src={MaskGroup} className="w-screen" alt="" /> */}
         <img
           src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/if_w_gt_1920,w_1920/originals_fw23_spezial_mainline_mh_d_476d0205fd.jpg"
           className="w-screen"
@@ -144,10 +137,7 @@ const HomePage = () => {
             return (
               <div key={product.id} className={`   ${opacityClass}`}>
                 <div className="relative z-10 cursor-pointer">
-                  <div
-                    key={product.id}
-                    className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300"
-                  >
+                  <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
                     <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
                       <button
                         onClick={(event: any) => {
@@ -209,11 +199,15 @@ const HomePage = () => {
                         }}
                       >
                         {isProductInFavorites ? (
-                          <AiFillHeart className="mt-1" />
+                          <span className="mt-1 inline-block">
+                            <AiFillHeart className="text-red-500" />
+                          </span>
                         ) : (
-                          <AiOutlineHeart className="mt-1" />
+                          <span className="mt-1 inline-block animate-heartbeat">
+                            <AiOutlineHeart />
+                          </span>
                         )}
-                        <div>Like</div>
+                        <div className="ml-0.5">Like</div>
                       </div>
                     </div>
                   </div>
@@ -227,12 +221,24 @@ const HomePage = () => {
                   >
                     <img src={product.image} alt="" className="w-[285px] " />
                     {product.discount > 0 && (
-                      <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2 bg-[#E97171]">
+                      <div
+                        className={`absolute top-6  text-white rounded-full w-10 h-10 items-center text-center pt-2 bg-[#E97171] ${
+                          isProductInComparison
+                            ? "absolute right-8"
+                            : "absolute right-20"
+                        }`}
+                      >
                         -{product.discount}%
                       </div>
                     )}
                     {isProductNew(product) && (
-                      <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-2">
+                      <div
+                        className={`absolute top-6  text-white rounded-full w-10 h-10 items-center text-center pt-2 bg-[#E97171] ${
+                          isProductInComparison
+                            ? "absolute right-8"
+                            : "absolute right-20"
+                        }`}
+                      >
                         New
                       </div>
                     )}
@@ -410,7 +416,6 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <ToastContainer autoClose={2000} />
     </>
   );
 };

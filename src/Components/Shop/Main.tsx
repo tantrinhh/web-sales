@@ -6,30 +6,32 @@ import { BiGitCompare } from "react-icons/bi";
 import { CiShare2 } from "react-icons/ci";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Vector1 from "../../assets/shop/Vector1.png";
 import Vector2 from "../../assets/shop/Vector2.png";
 import Vector3 from "../../assets/shop/Vector3.png";
 import { useAppDispatch } from "../../hooks/redux";
-import { RootState } from "../../services/redux/RootReducer";
+
 import {
   addToComparison,
   removeFromComparison,
 } from "../../services/redux/slices/compare/compare";
+import { RootState } from "../../services/redux/RootReducer";
+
 import {
   addToFavorites,
   removeFromFavorites,
 } from "../../services/redux/slices/favorite";
 import { productSelectors } from "../../services/redux/slices/product";
+import "react-toastify/dist/ReactToastify.css";
+import "../Home/styles.css";
 
 const Main: React.FC = () => {
   const dispatch = useAppDispatch();
-
   const navigate = useNavigate();
-
   const productsSelector = useSelector(productSelectors.selectAll);
-
+  const [searchTerm, setSearchTerm] = useState("");
   const handleDetailProduct = (id: any) => {
     navigate(`/product/${id}`);
   };
@@ -40,29 +42,30 @@ const Main: React.FC = () => {
     const daysDifference: number = Math.ceil(
       (today.getTime() - productAddedDate.getTime()) / (1000 * 60 * 60 * 24)
     );
-    return daysDifference <= 7;
+    return daysDifference <= 30;
   }
-  const [productPerPage, setProductPerPage] = useState<number | string>(8); // Số sản phẩm trên mỗi trang
+  const [productPerPage, setProductPerPage] = useState<number | string>(10); // Số sản phẩm trên mỗi trang
   const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
   const totalPages = Math.ceil(
     productsSelector.length / (+productPerPage || 1)
   );
-  const [priceRange, setPriceRange] = useState<[number, number]>([
-    15000, 15000000,
-  ]);
-  const filteredProducts = productsSelector.filter(
-    (product) =>
-      product.price >= priceRange[0] && product.price <= priceRange[1]
-  );
-  // Cập nhật indexOfLastProduct và indexOfFirstProduct
-  // const productPerPageNumber = +productPerPage || 1; // Chuyển đổi productPerPage thành số và mặc định là 1 nếu không hợp lệ
-  // const indexOfLastProduct = currentPage * productPerPageNumber;
-  // const indexOfFirstProduct = indexOfLastProduct - productPerPageNumber;
-  // const currentdata = productsSelector.slice(
-  //   indexOfFirstProduct,
-  //   indexOfLastProduct
-  // );
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 25000000]);
+  // Sử dụng cả hai bộ lọc
 
+  const productPerPageNumber = +productPerPage || 1; // Chuyển đổi productPerPage thành số và mặc định là 1 nếu không hợp lệ
+  const indexOfLastProduct = currentPage * productPerPageNumber;
+  const indexOfFirstProduct = indexOfLastProduct - productPerPageNumber;
+
+  const filteredProducts = productsSelector
+    .filter(
+      (product) =>
+        product.price >= priceRange[0] &&
+        product.price <= priceRange[1] &&
+        (searchTerm
+          ? product.name.toLowerCase().includes(searchTerm.toLowerCase())
+          : true)
+    )
+    .slice(indexOfFirstProduct, indexOfLastProduct);
   // Xử lý khi người dùng chuyển trang
   const handlePageChange = (page: any) => {
     setCurrentPage(page);
@@ -95,6 +98,10 @@ const Main: React.FC = () => {
   };
   const favorites = useSelector((state: RootState) => state.favorite.list);
 
+  // Handle search term change
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
   return (
     <>
       <div className="bg-[#FAF3EA] py-5 md:px-16 mb-10">
@@ -125,8 +132,8 @@ const Main: React.FC = () => {
               value={priceRange}
               onChange={handlePriceRangeChange}
               valueLabelDisplay="off"
-              min={15000}
-              max={15000000} // Set the maximum price value
+              min={0}
+              max={25000000} // Set the maximum price value
             />
             <Typography>
               Price Range: RP {priceRange[0].toLocaleString()} - RP{" "}
@@ -171,6 +178,8 @@ const Main: React.FC = () => {
                 <input
                   className=" max-w-[188px] md:px-4 px-2 md:h-14 h-10 rounded-md border-0 py-1.5 text-[#000000] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-[#9F9F9F] placeholder:text-xl focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   placeholder="Default"
+                  value={searchTerm}
+                  onChange={handleSearchChange}
                 />
               </div>
             </div>
@@ -185,11 +194,14 @@ const Main: React.FC = () => {
             );
             const disableComparison =
               comparedProducts.length >= 2 && !isProductInComparison;
+            const opacityClass = disableComparison ? " opacity-50" : "";
+
             const isProductInFavorites = favorites.some(
               (item) => item.id === product.id
             );
+
             return (
-              <div key={product.id}>
+              <div key={product.id} className={`   ${opacityClass}`}>
                 <div className="relative z-10 cursor-pointer">
                   <div className="w-[285px] absolute inset-0 z-10 bg-[#3A3A3A] text-center flex flex-col gap-8 items-center justify-center opacity-0 hover:opacity-100 bg-opacity-50 duration-300">
                     <div className="px-8 py-2 rounded bg-[#FFFFFF] text-[#B88E2F] cursor-pointer">
@@ -253,24 +265,46 @@ const Main: React.FC = () => {
                         }}
                       >
                         {isProductInFavorites ? (
-                          <AiFillHeart className="mt-1" />
+                          <span className="mt-1 inline-block">
+                            <AiFillHeart className="text-red-500" />
+                          </span>
                         ) : (
-                          <AiOutlineHeart className="mt-1" />
+                          <span className="mt-1 inline-block animate-heartbeat">
+                            <AiOutlineHeart />
+                          </span>
                         )}
-                        <div>Like</div>
+                        <div className="ml-0.5">Like</div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="relative">
+                  <div
+                    className={`relative ${
+                      isProductInComparison
+                        ? "border-2 border-red-500 w-[288px] animate-pulse"
+                        : "opacity-100"
+                    }`}
+                  >
                     <img src={product.image} alt="" className="w-[285px] " />
                     {product.discount > 0 && (
-                      <div className="absolute top-6 right-20 text-white rounded-full w-10 h-10 items-center text-center pt-2 bg-[#E97171]">
+                      <div
+                        className={`absolute top-6  text-white rounded-full w-10 h-10 items-center text-center pt-2 bg-[#E97171] ${
+                          isProductInComparison
+                            ? "absolute right-8"
+                            : "absolute right-20"
+                        }`}
+                      >
                         -{product.discount}%
                       </div>
                     )}
                     {isProductNew(product) && (
-                      <div className="absolute top-6 right-20 bg-[#2EC1AC] text-white rounded-full w-10 h-10 items-center text-center pt-2">
+                      <div
+                        className={`absolute top-6  text-white rounded-full w-10 h-10 items-center text-center pt-2 bg-[#E97171] ${
+                          isProductInComparison
+                            ? "absolute right-8"
+                            : "absolute right-20"
+                        }`}
+                      >
                         New
                       </div>
                     )}
@@ -345,7 +379,6 @@ const Main: React.FC = () => {
           Next
         </button>
       </div>
-      <ToastContainer autoClose={2000} />
     </>
   );
 };
