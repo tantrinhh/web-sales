@@ -20,13 +20,20 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from "../../services/redux/slices/favorite";
-import { productSelectors } from "../../services/redux/slices/product";
+import {
+  getProduct,
+  productSelectors,
+} from "../../services/redux/slices/product";
 import { Product } from "../../services/redux/slices/product/type";
 import "./styles.css";
+import { useEffect } from "react";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  useEffect(() => {
+    dispatch(getProduct());
+  }, [dispatch]);
 
   const productsSelector = useSelector(productSelectors.selectAll);
   console.log(productsSelector, "productsSelector");

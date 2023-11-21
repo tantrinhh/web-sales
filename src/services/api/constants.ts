@@ -1,6 +1,7 @@
 const NEXT_PUBLIC_PRODUCTION_URL = process.env.NEXT_PUBLIC_PRODUCTION_URL;
 const NEXT_PUBLIC_DEVELOPMENT_URL =
-  process.env.NEXT_PUBLIC_DEVELOPMENT_URL || " http://103.107.183.103:3000";
+  process.env.NEXT_PUBLIC_DEVELOPMENT_URL ||
+  "https://5e9577a7f591cb0016d81aa8.mockapi.io";
 const currentUrl = typeof window !== "undefined" ? window.location.href : "";
 const developmentMode =
   currentUrl.includes("localhost") ||
@@ -9,7 +10,7 @@ const developmentMode =
   currentUrl.includes("staging");
 
 const URL = developmentMode
-  ? NEXT_PUBLIC_DEVELOPMENT_URL.replace(/^http:\/\//, "http://")
+  ? NEXT_PUBLIC_DEVELOPMENT_URL.replace(/^https:\/\//, "https://")
   : NEXT_PUBLIC_PRODUCTION_URL;
 
 // remove in production

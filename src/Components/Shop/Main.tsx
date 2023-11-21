@@ -1,6 +1,6 @@
 import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { BiGitCompare } from "react-icons/bi";
 import { CiShare2 } from "react-icons/ci";
@@ -23,13 +23,20 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from "../../services/redux/slices/favorite";
-import { productSelectors } from "../../services/redux/slices/product";
+import {
+  getProduct,
+  productSelectors,
+} from "../../services/redux/slices/product";
 import "react-toastify/dist/ReactToastify.css";
 import "../Home/styles.css";
 
 const Main: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  useEffect(() => {
+    dispatch(getProduct());
+  }, [dispatch]);
+
   const productsSelector = useSelector(productSelectors.selectAll);
   const [searchTerm, setSearchTerm] = useState("");
   const handleDetailProduct = (id: any) => {
