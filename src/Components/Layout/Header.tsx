@@ -270,7 +270,7 @@ const Header = () => {
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute z-50   right-0 flex flex-col items-end h-full">
+          <div className="md:hidden absolute z-50   right-0 flex flex-col items-end h-full max-h-full">
             <div className=" pb-5 pt-3 h-full w-64 rounded-l-lg text-white  bg-black">
               <div className="flex justify-between mx-2">
                 {" "}

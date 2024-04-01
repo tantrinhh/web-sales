@@ -49,7 +49,7 @@ const Main: React.FC = () => {
     const daysDifference: number = Math.ceil(
       (today.getTime() - productAddedDate.getTime()) / (1000 * 60 * 60 * 24)
     );
-    return daysDifference <= 30;
+    return daysDifference <= 300;
   }
   const [productPerPage, setProductPerPage] = useState<number | string>(10); // Số sản phẩm trên mỗi trang
   const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
